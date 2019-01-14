@@ -1,0 +1,61 @@
+<!doctype html>
+{% load static %}
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Smartcon System - Sistema de controle de Contratos Inteligentes" />
+    <title>SMARTCON SYSTEM</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/fontawesome-all.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+<body>                                                  
+    <div class="mainhead">
+        <nav class="navbar navbar-expand-lg navbar-light alert-dark">
+            <h2><i class="far fa-address-card"></i> SMARTCON SYSTEM </h2>
+            <div>__</div>
+            <a href="{% url 'home' %}">
+                <button class="btn  btn-primary">home</button>
+            </a>
+            <div>__</div>
+            <a href="#">
+                <button type="button" class="btn btn-primary">Conhecimento</button>
+            </a>
+            <div>__</div>
+            <a href="#">
+                <button type="button" class="btn btn-primary">Contratos</button>
+            </a>
+            <div>__</div>
+            <a href="#">
+                <button type="button" class="btn btn-dark">Contratos</button>
+            </a>
+            <div>__</div>
+            <a href="#">
+                <button type="button" class="btn btn-dark">Painel</button>
+            </a>
+            <div>__</div>
+            <a href="{% url 'sis:login' %}">
+                <button type="button" class="btn btn-dark">Login</button>
+            </a>
+        </nav>
+    </div>
+    <div class="mainbody">
+        {% block content %}{% endblock %}
+    </div>     
+    <div class="footer">
+        <nav class="navbar navbar-expand-lg navbar-light alert-dark">
+            <div class="footerline"> 
+            <i class="far fa-address-card"></i>          
+            Smartcon System - Sistema de controle de Contratos Inteligentes
+            <a href="https://www.servipec.com.br" target="Servipec">&copy;2019 By  Servipec</a>
+            </div>
+        </nav>
+    </div>
+    <script type="text/javascript" src="http://webpjs.appspot.com/js/webpjs-0.0.2.min.js"></script>
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+</body>
+</html>

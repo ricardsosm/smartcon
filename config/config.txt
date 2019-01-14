@@ -1,0 +1,24 @@
+INSTALLED_APPS = [
+    'usuario'
+    'smart',
+]
+
+// criar no banco de dados usuario smart e senha e passalas abaixo
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'servipec_bit',
+        'USER': 'smart',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',
+        'OPTIONS': {
+        'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
+    }
+}
+
+//configurando o mysql para uso no django
+
+python manage.py migrate
+python manage.py createsuperuser
