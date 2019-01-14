@@ -26,8 +26,4 @@ pip install django==2.1
 ```
 pip install mysqlclient
 ```
-
-
-
-
-
+# baixe o projeto
