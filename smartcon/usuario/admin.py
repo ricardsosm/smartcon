@@ -1,6 +1,5 @@
 from django.contrib import admin
-
-from .models import (Usuario)
+from cliente.models import (Usuario)
 
 class UsuarioAdmin(admin.ModelAdmin):
 	
