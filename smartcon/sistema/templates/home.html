@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="justificado">
+	<ul class="list-unstyled">
+	  <li class="media">
+	    <img src="{% static 'img/mao.png' %}" class="mr-3" alt="...">
+	    <div class="media-body">
+	    	<br /><br />
+	      <h4 class="d-flex justify-content-start">SmartCon System</h4>
+	      É uma ferramenta desenvolvida para facilitar o uso dos Smart Contracts (Contratos Inteligentes). Baseada na proposta do Ethereum, esta plataforma facilita o uso dos contratos e transferência de valores de forma fácil e objetiva.
+	    </div>
+	  </li>
+	  <li class="media my-4">
+	    <img src="{% static 'img/eu.jpeg' %}" class="mr-3" alt="...">
+	    <div class="media-body">
+	      <h5 class="mt-0 mb-1">Ricardo Martins</h5>
+	      CEO da empresa Servipec Informática,  Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+	    </div>
+	  </li>
+	  <li class="media">
+	    <img src="{% static 'img/contrato.webp' %}" class="mr-3" alt="...">
+	    <div class="media-body">
+	      <h5 class="mt-0 mb-1">List-based media object</h5>
+	      Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+	    </div>
+	  </li>
+	</ul>
+</div>
+{% endblock %}
