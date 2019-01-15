@@ -101,3 +101,7 @@
     top:25%;
     left:5%;
 }
+
+.erro_login {
+	color: red;
+}

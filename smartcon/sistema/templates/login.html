@@ -7,20 +7,24 @@
           <div class="col-sm-4 col-md-4 col-md-offset-6 content-login">
             
             <div class="account-wall col">
-              <h2 class="text-center ">LOGIN</h2>
-              <form class="form-signin" method="POST">
+              <h2 class="text-center">Smartcon</h2>
+              <form class="form-signin text-center" method="POST">
               	{% csrf_token %}
+                <div class="erro_login">
          		  	{{ form.non_field_errors }}
+              </div>
          		  	{% for field in form %}                 
-               <div class="form-group"> 
-                  {{ field.label_tag}}
-                  {{ field }}
+                <div class="{% cycle '' 'form-group' %} "> 
+                  {{ field.label_tag}}<br />
+                  {{ field }}<br />
                   {{ field.errors }}
                 </div>
            		  	{% endfor %}
-      		  		<button class="btn btn-lg btn-secondary btn-block"  >
-      		  			Entrar
-      		  		</button>   
+                  <div class="text-center">
+          		  		<button class="btn btn-lg btn-secondary "  >
+          		  			Entrar
+          		  		</button>   
+                  </div>
                 <p>
                   <a href="#">Cadastre-se</a>
                 <br>
