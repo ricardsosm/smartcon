@@ -1,4 +1,4 @@
-# sistema de clientes para smart contract em Python
+# Sistema de clientes para smart contract em Python
 com Django e Mysql(MariaDB)
 ## Pré-requisitos do sistema
 
