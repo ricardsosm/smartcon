@@ -127,3 +127,12 @@ LOGOUT_URL = '/'
 LOGIN_REDIRECT_URL = '/'
 #autera usuario padrão
 AUTH_USER_MODEL =  'usuario.Usuario'
+
+#configuração de email
+
+DEFAULT_FROM_EMAIL = 'Nome <ricardo@servipec.com.br>'
+EMAIL_USE_LTS = True
+EMAIL_HOST = 'sh1.spolucloud.com'
+EMAIL_HOST_USER = 'ricardo@servipec.com.br'
+EMAIL_HOST_PASSWORD = 'ricardo2402'
+EMAIL_PORT = 587

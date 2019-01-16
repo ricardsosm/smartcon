@@ -5,4 +5,5 @@ app_name = 'cli'
 urlpatterns = [
 	path('painel/',views.painel ,name='painel'),
 	path('contrato/',views.contrato ,name='contrato'),
+	path('editar/',views.editar ,name='editar'),
 ]

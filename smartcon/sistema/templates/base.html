@@ -13,7 +13,7 @@
 </head>
 <body>                                                  
     <div class="mainhead">
-        <nav class="navbar navbar-expand-lg navbar-light alert-dark">
+        <nav class="navbar navbar-expand-lg navbar-light alert-dark fixed-top">
             <h2><i class="far fa-address-card"></i> SMARTCON SYSTEM </h2>
             <div>__</div>
             <a href="{% url 'home' %}">
@@ -46,9 +46,11 @@
             </a>
             {% endif %}
         </nav>
+        <br /><br /><br />
     </div>
     <div class="mainbody">
-        {% block content %}{% endblock %}
+        {% block content %}
+        {% endblock %}
     </div>     
     <div class="footer">
         <nav class="navbar navbar-expand-lg navbar-light alert-dark">
