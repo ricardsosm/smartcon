@@ -1,0 +1,38 @@
+{% extends "painel.html" %}
+
+{% block breadcrumb %}
+{{ block.super }}
+<li><a href="#">Editar Conta</a></li>
+{% endblock %}
+
+{% block dash_content  %}
+<h2 class="text-center">Informe seus dados</h2>
+<form class="form-signin text-center " method="POST">
+	{% csrf_token %}
+	{% if success %}
+	<p style="color:green">Os dados foram auterados com sucesso</p>
+	{% endif %}
+	<fieldset>
+		<div class="account-wall col">
+			<div class="erro_login">
+		  		{{ form.non_field_errors }}
+		 	</div>
+		  		{% for field in form %}
+		  	<div class="control-group">
+		  		{{ field.label_tag }}<br />
+		  		{{ field }}
+		  	</div>
+		  	 <div class="erro_login">	
+		  		{{ field.errors }}
+		  	</div>
+		  	{% endfor %}
+		  	<div class="control-group">
+		  		<br />
+		  		<button type="submit" class="btn btn-lg btn-secondary">
+		  			Salvar Modificações
+		  		</button>
+		  	</div>
+		 </div>
+	</fieldset>
+</form>        
+{% endblock %}

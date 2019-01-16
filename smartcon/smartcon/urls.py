@@ -20,5 +20,6 @@ from sistema.views import home
 urlpatterns = [
 	path('', home, name='home'),
 	path('', include('sistema.urls',namespace='sis')),
+    path('', include('cliente.urls',namespace='cli')),
     path('admin/', admin.site.urls),
 ]
