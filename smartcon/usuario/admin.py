@@ -1,9 +1,9 @@
 from django.contrib import admin
-from cliente.models import (Usuario)
+from .models import Usuario
 
 class UsuarioAdmin(admin.ModelAdmin):
 	
-	list_display = ['name','slug','start_date','update_at']
-	search_field = ['name','slug']
+	list_display = ['username','update_at','is_staff']
+	search_field = ['name','access']
 
-admin.site.register(Usuario)
+admin.site.register(Usuario,UsuarioAdmin)

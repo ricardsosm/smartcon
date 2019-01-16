@@ -28,17 +28,23 @@
                 <button type="button" class="btn btn-primary">Contratos</button>
             </a>
             <div>__</div>
-            <a href="#">
+            {% if user.is_authenticated %}
+            <a href="{% url 'cli:contrato' %}">
                 <button type="button" class="btn btn-dark">Contratos</button>
             </a>
             <div>__</div>
-            <a href="#">
+            <a href="{% url 'cli:painel' %}">
                 <button type="button" class="btn btn-dark">Painel</button>
             </a>
             <div>__</div>
+            <a href="{% url 'sis:logout' %}">
+                <button type="button" class="btn btn-dark">Sair</button>
+            </a>
+            {% else %}
             <a href="{% url 'sis:login' %}">
                 <button type="button" class="btn btn-dark">Login</button>
             </a>
+            {% endif %}
         </nav>
     </div>
     <div class="mainbody">

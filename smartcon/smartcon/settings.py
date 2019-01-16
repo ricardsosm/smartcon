@@ -122,5 +122,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_URL = 'sis:painel'
+LOGIN_URL = 'sis:login'
+LOGOUT_URL = '/'
 LOGIN_REDIRECT_URL = '/'
+#autera usuario padrão
+AUTH_USER_MODEL =  'usuario.Usuario'

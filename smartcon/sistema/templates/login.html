@@ -14,19 +14,19 @@
          		  	{{ form.non_field_errors }}
               </div>
          		  	{% for field in form %}                 
-                <div class="{% cycle '' 'form-group' %} "> 
+                <div class="form-group"> 
                   {{ field.label_tag}}<br />
-                  {{ field }}<br />
+                  {{ field }}
                   {{ field.errors }}
                 </div>
            		  	{% endfor %}
                   <div class="text-center">
-          		  		<button class="btn btn-lg btn-secondary "  >
+          		  		<button class="btn btn-lg btn-secondary">
           		  			Entrar
           		  		</button>   
                   </div>
                 <p>
-                  <a href="#">Cadastre-se</a>
+                  <a href="{% url 'sis:registrar' %}">Cadastre-se</a>
                 <br>
                   <a href="#">Nova Senha</a>
                 </p>
