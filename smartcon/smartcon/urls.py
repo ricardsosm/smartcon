@@ -21,5 +21,6 @@ urlpatterns = [
 	path('', home, name='home'),
 	path('', include('sistema.urls',namespace='sis')),
     path('', include('cliente.urls',namespace='cli')),
+    path('', include('usuario.urls',namespace='usuario')),
     path('admin/', admin.site.urls),
 ]
