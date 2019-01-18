@@ -2,29 +2,46 @@
 {% block content %}
 
 <div class="row">
-
-        <div class="col-md-12">
-            <ul class="breadcrumb">
-                {% block breadcrumb %}
-                <li><a href="{% url 'cli:painel' %}">Meu Painel</a></li>
-                <li>&nbsp; / &nbsp;</li>
-                {% endblock %}
-            </ul>
-        </div>
+    <div class="col-md-12">
+        <ul class="breadcrumb">
+            {% block breadcrumb %}
+            <li><a href="{% url 'sis:painel' %}">Meu Painel</a></li>
+            <li>&nbsp; / &nbsp;</li>
+            {% endblock %}
+        </ul>
+    </div>
     <div class="col-sm-4">
         <div class="col-md-10">
+            {% block menu_options %}
+            <ul class="breadcrumb">Minhas Contas de Clientes</ul>
             <ul>
-                <li >
-                    Bem vindo, {{ user }}
-                </li>
-                {% block menu_options %}
-        	    <li href="" >Meus Clientes</li>
-                    <li><a href="#">
-                        <i class="fa fa-book"></i>
+               <li><a href="#">
+                    <i class="fa fa-address-book"></i>
+                    Criar Conta
                     </a></li>
-                <li>Nenhum curso encontrado</li>
+               <li><a href="#">
+                    <i class="fa fa-cog"></i>
+                    Editar Conta
+                    </a></li>
+               <li><a href="#">
+                    <i class="fa fa-lock"></i>
+                    Editar Senha
+                    </a>
+                </li>
             </ul>
-        	<ul class="breadcrumb">Minha Conta</ul>
+            <ul class="breadcrumb">Meus Contratos</ul>
+            <ul>
+               <li><a href="{% url 'usuario:editar' %}">
+                    <i class="fa fa-cog"></i>
+                    Editar Conta
+                    </a></li>
+               <li><a href="{% url 'usuario:editar_senha' %}">
+                    <i class="fa fa-lock"></i>
+                    Editar Senha
+                    </a>
+                </li>
+            </ul>
+        	<ul class="breadcrumb">Minha Conta de Usuario</ul>
             <ul>
         	   <li><a href="{% url 'usuario:editar' %}">
                     <i class="fa fa-cog"></i>
@@ -35,14 +52,14 @@
                     Editar Senha
                     </a>
                 </li>
-                {% endblock %}
-        	</ul>
+            </ul>
+            {% endblock %}        	
         </div>
     </div>
     <div class="col-sm-8 float-right">
         {% block dash_content %}
     	<div class="inner">
-            <h2>Meus Cursos</h2>
+            <h2>Meus Contratos</h2>
                 {% for enrollment in enrollments %}
                 <div class="well">
                     <h3>{{ enrollment.course }} ({{ enrollment.course.start_date|date:'d/m/Y'|default:'Sem data' }})

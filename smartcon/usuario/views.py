@@ -1,7 +1,8 @@
-from django.shortcuts import render
-from django.contrib.auth.forms import PasswordChangeForm
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm, SetPasswordForm
 from django.contrib.auth.decorators import login_required
 from .forms import EditarConta, PasswordResetForm
+from .models import PasswordReset
 
 @login_required
 def editar(request):
@@ -31,3 +32,25 @@ def edit_password(request):
 		form = PasswordChangeForm(user=request.user)
 	context['form'] = form
 	return render(request,template_name,context)
+
+def password_reset(request):
+	context ={}
+	template_name = "password_reset.html"
+	form = PasswordResetForm(request.POST or None)
+	if form.is_valid():
+		form.save()
+		context['success'] = True
+	context['form'] = form
+	return render(request, template_name,context)
+
+def password_reset_confirm(request,key):
+	template_name = 'password_reset_confirm.html'
+	context = {}
+	reset = get_object_or_404(PasswordReset,key=key)
+	print(reset)
+	form = SetPasswordForm(user=reset.user, data=request.POST or None)
+	if form.is_valid():
+		form.save()
+		context['success'] = True
+	context['form'] = form
+	return render(request, template_name,context)
