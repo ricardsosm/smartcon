@@ -1,0 +1,81 @@
+{% extends "base.html" %} 
+{% block content %}
+
+<div class="row">
+    <div class="col-md-12">
+        <ul class="breadcrumb">
+            {% block breadcrumb %}
+            <li><a href="{% url 'sis:painel' %}">Meu Painel</a></li>
+            <li>&nbsp; / &nbsp;</li>
+            {% endblock %}
+        </ul>
+    </div>
+    <div class="col-sm-4">
+        <div class="col-md-10">
+            {% block menu_options %}
+            <ul class="breadcrumb">Minhas Contas de Clientes</ul>
+            <ul>
+               <li><a href="#">
+                    <i class="fa fa-address-book"></i>
+                    Criar Conta
+                    </a></li>
+               <li><a href="#">
+                    <i class="fa fa-cog"></i>
+                    Editar Conta
+                    </a></li>
+               <li><a href="#">
+                    <i class="fa fa-lock"></i>
+                    Editar Senha
+                    </a>
+                </li>
+            </ul>
+            <ul class="breadcrumb">Meus Contratos</ul>
+            <ul>
+               <li><a href="{% url 'usuario:editar' %}">
+                    <i class="fa fa-cog"></i>
+                    Editar Conta
+                    </a></li>
+               <li><a href="{% url 'usuario:editar_senha' %}">
+                    <i class="fa fa-lock"></i>
+                    Editar Senha
+                    </a>
+                </li>
+            </ul>
+        	<ul class="breadcrumb">Minha Conta de Usuario</ul>
+            <ul>
+        	   <li><a href="{% url 'usuario:editar' %}">
+                    <i class="fa fa-cog"></i>
+                    Editar Conta
+                    </a></li>
+        	   <li><a href="{% url 'usuario:editar_senha' %}">
+                    <i class="fa fa-lock"></i>
+                    Editar Senha
+                    </a>
+                </li>
+            </ul>
+            {% endblock %}        	
+        </div>
+    </div>
+    <div class="col-sm-8 float-right">
+        {% block dash_content %}
+    	<div class="inner">
+            <h2>Meus Contratos</h2>
+                {% for enrollment in enrollments %}
+                <div class="well">
+                    <h3>{{ enrollment.course }} ({{ enrollment.course.start_date|date:'d/m/Y'|default:'Sem data' }})
+                    </h3>   
+                    {{ enrollment.course.description|linebreaks }}
+                    <div >
+                        <a href="#" >Acessar</a>
+                        <a href="#" >Cancelar</a>
+                    </div>
+                </div>
+
+                {% empty %}             
+                    <p>Nenhum curso encontrado</p>
+                {% endfor %}
+         {% endblock %}
+    </div>
+</div>
+
+{% endblock %}

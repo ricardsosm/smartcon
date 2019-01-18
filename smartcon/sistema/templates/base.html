@@ -14,7 +14,8 @@
 <body>                                                  
     <div class="mainhead">
         <nav class="navbar navbar-expand-lg navbar-light alert-dark fixed-top">
-            <h2><i class="far fa-address-card"></i> SMARTCON SYSTEM </h2>
+            <img src="{% static 'img/cliente.png' %}" class="mr-3" alt="...">
+            <h2> SMARTCON SYSTEM </h2>
             <div>__</div>
             <a href="{% url 'home' %}">
                 <button class="btn  btn-primary">home</button>
@@ -24,22 +25,26 @@
                 <button type="button" class="btn btn-primary">Conhecimento</button>
             </a>
             <div>__</div>
-            <a href="#">
-                <button type="button" class="btn btn-primary">Contratos</button>
+            {% if user.is_authenticated %}
+            <a href="{% url 'cli:cliente' %}">
+                <button type="button" class="btn btn-dark">Clientes</button>
             </a>
             <div>__</div>
-            {% if user.is_authenticated %}
-            <a href="{% url 'cli:contrato' %}">
+            <a href="#">
                 <button type="button" class="btn btn-dark">Contratos</button>
             </a>
             <div>__</div>
-            <a href="{% url 'cli:painel' %}">
+            <a href="{% url 'sis:painel' %}">
                 <button type="button" class="btn btn-dark">Painel</button>
             </a>
             <div>__</div>
             <a href="{% url 'sis:logout' %}">
                 <button type="button" class="btn btn-dark">Sair</button>
             </a>
+            <div>__</div>
+            <div class="btn btn-success">
+                 Bem vindo, {{ user }}
+            </div>
             {% else %}
             <a href="{% url 'sis:login' %}">
                 <button type="button" class="btn btn-dark">Login</button>
