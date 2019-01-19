@@ -14,3 +14,10 @@ class Cliente(models.Model):
 		'Atualizado em',auto_now=True
 	)
 	id_usuario = models.ForeignKey(Usuario,on_delete=models.CASCADE)
+
+	def set(self,pk):
+		self.id_usuario = pk
+		return  True
+
+	def __str__(self):
+		return self.name

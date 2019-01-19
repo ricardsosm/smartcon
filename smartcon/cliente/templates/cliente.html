@@ -1,12 +1,21 @@
 {% extends "base.html" %} 
 {% block content %}
+
 <div class="row">
+    <div class="col-md-12">
+        <ul class="breadcrumb">
+            {% block breadcrumb %}
+            <li><a href="{% url 'cli:cliente' %}">Painel Clientes</a></li>
+            <li>&nbsp; / &nbsp;</li>
+            {% endblock %}
+        </ul>
+    </div>
 	<div class="col-sm-4">
         <div class="col-md-10">
             {% block menu_options %}
             <ul class="breadcrumb">Contas de Clientes</ul>
             <ul>
-               <li><a href="#">
+               <li><a href="{% url 'cli:cliente-novo' %}">
                     <i class="fa fa-address-book"></i>
                     Criar Conta
                     </a></li>
@@ -26,7 +35,7 @@
     <div class="col-sm-8 float-right">
 	{% block dash_content %}
 	<div class="inner">
-	    <h2>Meus Contratos</h2>
+	    <h2>Meus Clientes</h2>
 	        {% for enrollment in enrollments %}
 	        <div class="well">
 	            <h3>{{ enrollment.course }} ({{ enrollment.course.start_date|date:'d/m/Y'|default:'Sem data' }})

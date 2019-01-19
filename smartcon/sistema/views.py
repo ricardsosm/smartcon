@@ -5,8 +5,6 @@ from django.contrib.auth.decorators import login_required
 from .forms import RegisterForm
 from django.conf import settings
 
-
-
 User = get_user_model()
 
 def home(request):
