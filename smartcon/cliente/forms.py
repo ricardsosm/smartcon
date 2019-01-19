@@ -12,7 +12,7 @@ class ClienteNovoForm(forms.ModelForm):
 	id_usuario = forms.ModelChoiceField (
 		queryset=Usuario.objects.all(),
 		widget=forms.HiddenInput()
-	)
+		)
 
 	class Meta:
 		model = Cliente

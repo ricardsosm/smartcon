@@ -36,20 +36,29 @@
 	{% block dash_content %}
 	<div class="inner">
 	    <h2>Meus Clientes</h2>
-	        {% for enrollment in enrollments %}
-	        <div class="well">
-	            <h3>{{ enrollment.course }} ({{ enrollment.course.start_date|date:'d/m/Y'|default:'Sem data' }})
-	            </h3>   
-	            {{ enrollment.course.description|linebreaks }}
-	            <div >
-	                <a href="#" >Acessar</a>
-	                <a href="#" >Cancelar</a>
-	            </div>
+            <div class="well">       
+                <table class="table">
+                    <thead class="thead-light">
+                      <th>Nome</th>
+                      <th >CPF</th>
+
+                    </thead>
+                </table>
+                {% for cliente in clientes %} 
+                <table class="table">
+
+                      <th><a href="">{{ cliente.name }}
+                      </th>
+                      <th>{{ cliente.cpf }}</a>
+                      </th>
+
+                </table>
+                {% empty %}             
+                <p>Nenhum cliente encontrado</p>
+            {% endfor %}               
 	        </div>
 
-	        {% empty %}             
-	            <p>Nenhum curso encontrado</p>
-	        {% endfor %}
+
 	 	{% endblock %}
 	</div>
 </div>
