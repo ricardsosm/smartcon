@@ -1,0 +1,37 @@
+{% extends "cliente.html" %}
+{% block breadcrumb %}
+{{ block.super }}
+<li><a href="{% url 'usuario:editar_senha' %}">Criar Conta</a></li>
+{% endblock %}
+{% block dash_content  %}
+<div class="container">
+    <div class="account-wall col">
+        <h2 class="text-center">Informe os dados do Cliente</h2>
+        <form class="form-signin text-center" method="POST">
+        	{% csrf_token %}
+        	<fieldset>
+            <div class="float-sm-center">
+              <div class="erro_login">
+        		  	{{ form.non_field_errors }}
+              </div>
+        		  	{% for field in form %}
+        		  	<div class="control-group ">
+        		  		{{ field.label_tag }}<br />
+        		  		{{ field }}
+                    </div>
+                <div class="erro_login">
+        		  		{{ field.errors }}
+                </div>
+        		  	
+        		  	{% endfor %}
+        		  	<div class="text-center">
+        		  		<button class="btn btn-lg btn-secondary">
+        		  			Cadastrar
+        		  		</button>
+        		  	</div>
+            </div>
+        	</fieldset>
+        </form>        
+    </div>
+</div>
+{% endblock %}

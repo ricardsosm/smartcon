@@ -1,12 +1,21 @@
 {% extends "base.html" %} 
 {% block content %}
+
 <div class="row">
+    <div class="col-md-12">
+        <ul class="breadcrumb">
+            {% block breadcrumb %}
+            <li><a href="{% url 'cli:cliente' %}">Painel Clientes</a></li>
+            <li>&nbsp; / &nbsp;</li>
+            {% endblock %}
+        </ul>
+    </div>
 	<div class="col-sm-4">
         <div class="col-md-10">
             {% block menu_options %}
             <ul class="breadcrumb">Contas de Clientes</ul>
             <ul>
-               <li><a href="#">
+               <li><a href="{% url 'cli:cliente-novo' %}">
                     <i class="fa fa-address-book"></i>
                     Criar Conta
                     </a></li>
@@ -26,21 +35,30 @@
     <div class="col-sm-8 float-right">
 	{% block dash_content %}
 	<div class="inner">
-	    <h2>Meus Contratos</h2>
-	        {% for enrollment in enrollments %}
-	        <div class="well">
-	            <h3>{{ enrollment.course }} ({{ enrollment.course.start_date|date:'d/m/Y'|default:'Sem data' }})
-	            </h3>   
-	            {{ enrollment.course.description|linebreaks }}
-	            <div >
-	                <a href="#" >Acessar</a>
-	                <a href="#" >Cancelar</a>
-	            </div>
+	    <h2>Meus Clientes</h2>
+            <div class="well">       
+                <table class="table">
+                    <thead class="thead-light">
+                      <th>Nome</th>
+                      <th >CPF</th>
+
+                    </thead>
+                </table>
+                {% for cliente in clientes %} 
+                <table class="table">
+
+                      <th><a href="">{{ cliente.name }}
+                      </th>
+                      <th>{{ cliente.cpf }}</a>
+                      </th>
+
+                </table>
+                {% empty %}             
+                <p>Nenhum cliente encontrado</p>
+            {% endfor %}               
 	        </div>
 
-	        {% empty %}             
-	            <p>Nenhum curso encontrado</p>
-	        {% endfor %}
+
 	 	{% endblock %}
 	</div>
 </div>
