@@ -15,17 +15,13 @@
             {% block menu_options %}
             <ul class="breadcrumb">Contas de Clientes</ul>
             <ul>
-               <li><a href="{% url 'cli:cliente-novo' %}">
+               <li><a href="{% url 'cli:cliente' %}">
                     <i class="fa fa-address-book"></i>
-                    Criar Conta
+                    Listar Clientes
                     </a></li>
-               <li><a href="#">
-                    <i class="fa fa-cog"></i>
-                    Editar Conta
-                    </a></li>
-               <li><a href="#">
+               <li><a href="{% url 'cli:cliente-novo' %}">
                     <i class="fa fa-lock"></i>
-                    Editar Senha
+                    Novo Cliente
                     </a>
                 </li>
             </ul>
@@ -41,21 +37,29 @@
                     <thead class="thead-light">
                       <th>Nome</th>
                       <th >CPF</th>
-
+                      <th > </th>
+                      <th > </th>
+                    </thead>
+                    {% for cliente in clientes %} 
+                    <thead>
+                      <th><a href="">{{ cliente.name }}</a></th>
+                      <th>{{ cliente.cpf }}</th>
+                      <th><a href="{% url 'cli:cliente_editar' cliente.pk %}">
+                        <i class="fa fa-cog"></i>
+                        Edita
+                        </a>
+                    </th>
+                    <th><a href="{% url 'cli:cliente-novo' %}">
+                    <i class="fa fa-lock"></i>
+                    Excluir
+                    </a>
+                    </th>
+                    {% empty %}             
+                    <p>Nenhum cliente encontrado</p>
+                    {% endfor %} 
                     </thead>
                 </table>
-                {% for cliente in clientes %} 
-                <table class="table">
-
-                      <th><a href="">{{ cliente.name }}
-                      </th>
-                      <th>{{ cliente.cpf }}</a>
-                      </th>
-
-                </table>
-                {% empty %}             
-                <p>Nenhum cliente encontrado</p>
-            {% endfor %}               
+              
 	        </div>
 
 
