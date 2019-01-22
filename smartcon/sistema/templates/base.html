@@ -54,6 +54,13 @@
         <br /><br /><br />
     </div>
     <div class="mainbody">
+            {% if messages %}
+            <aside class="erro_login">
+            {% for message in messages %}
+               <p>{{ message }}</p>
+            {% endfor %}
+            </aside>
+            {% endif %}
         {% block content %}
         {% endblock %}
     </div>     
