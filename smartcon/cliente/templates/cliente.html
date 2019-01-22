@@ -42,7 +42,7 @@
                     </thead>
                     {% for cliente in clientes %} 
                     <thead>
-                      <th><a href="">{{ cliente.name }}</a></th>
+                      <th><a href="{% url 'cli:cliente_mostrar' cliente.pk  %}">{{ cliente.name }}</a></th>
                       <th>{{ cliente.cpf }}</th>
                       <th><a href="{% url 'cli:cliente_editar' cliente.pk %}">
                         <i class="fa fa-cog"></i>

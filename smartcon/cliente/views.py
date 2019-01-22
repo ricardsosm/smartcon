@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from .forms import ClienteNovoForm, EditarCliente
 from .models  import Cliente
+from .decorators import permition_required
 
 User = get_user_model()
 
@@ -15,7 +16,7 @@ def cliente(request):
 	}
 	return render(request, template_name, context)
 
-@login_required	
+@login_required
 def cliente_novo(request):
 	template_name = 'cliente_register.html'
 	context = {}
@@ -33,7 +34,8 @@ def cliente_novo(request):
 	}
 	return render(request, template_name, context)
 
-@login_required	
+@login_required
+@permition_required
 def cliente_editar(request,pk):
 	template_name = 'cliente_editar.html'
 	cliente = Cliente.objects.get(pk=pk)
@@ -48,3 +50,14 @@ def cliente_editar(request,pk):
 		form = EditarCliente(instance=cliente)
 	context['form'] = form
 	return render(request, template_name, context)			
+
+
+@login_required
+@permition_required
+def cliente_mostrar(request,pk):
+	template_name = 'cliente_mostrar.html'
+	cliente = Cliente.objects.get(pk=pk)
+	context = {}
+	form = EditarCliente(instance=cliente)
+	context['form'] = form
+	return render(request, template_name, context)
