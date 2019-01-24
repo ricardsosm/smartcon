@@ -14,26 +14,31 @@
                     <h5> Dados alterados com sucesso</h5>
                 </div>
             {% endif %}
-            <fieldset>
+            <fieldset class="resset">
             <div class="float-sm-center">
-              <div class="erro_login">
+                <div class="erro_login">
                     {{ form.non_field_errors }}
-              </div>
+                </div>
                     {% for field in form %}
-                    <div class="control-group ">
+                <div class="control-group ">
                         {{ field.label_tag }}
                         {{ field }}
-                    </div>
+                </div>
                 <div class="erro_login">
                         {{ field.errors }}
                 </div>
                     {% endfor %}
                     <br />
-                    <div class="text-center">
-                        <button onclick="Enviar()" class="btn btn-lg btn-secondary">
-                            Cadastrar
-                        </button>
-                    </div>
+                <div class="text-center">
+                    <button onclick="Enviar()" class="btn btn-lg btn-secondary">
+                        Cadastrar
+                    </button>
+                    <a href="{% url 'cli:cliente' %}">
+                    <button type="button"  class="btn btn-lg btn-danger">
+                        Cancelar
+                    </button>
+                    </a>
+                </div>
             </div>
             </fieldset>
         </form>        

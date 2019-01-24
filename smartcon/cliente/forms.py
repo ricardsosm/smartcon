@@ -7,7 +7,7 @@ class ClienteNovoForm(forms.ModelForm):
 
 	name = forms.CharField(label='Nome',widget=forms.TextInput(attrs={'placeholder':'Digite seu Nome'}))
 	cpf = forms.IntegerField(label='CPF',widget=forms.TextInput(attrs={'placeholder':'Digite seu CPF'}))
-	tel = forms.IntegerField(label='Telefone',widget=forms.TextInput(attrs={'placeholder':'Digite seu CPF','class':'tel'})) 
+	tel = forms.IntegerField(label='Telefone',widget=forms.TextInput(attrs={'placeholder':'Digite seu Telefone','class':'tel'})) 
 	id_carteira = forms.IntegerField(label='Carteira',widget=forms.TextInput(attrs={'class':'carteira'})) 
 	id_usuario = forms.ModelChoiceField (
 		queryset=Usuario.objects.all(),

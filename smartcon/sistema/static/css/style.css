@@ -1,10 +1,27 @@
 @charset "UTF-8";
 
+.painel-editar-texto{
+	padding-left: 150px;
+}
 
-.control-group {
-
+.painel-editar {
+	width: 400px;
 	float: right;
+}
+.resset {
+	width: 320px;
+}
 
+.login button{
+	width: 120px;
+}
+.control-cadastro input{
+
+	width: 320px;
+	float: left;
+}
+.control-group {
+	float: right;
 }
 .mainbody {
     width:1050px;

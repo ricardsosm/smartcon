@@ -6,9 +6,12 @@ User = get_user_model()
 
 class RegisterForm(forms.ModelForm):
 
-	email = forms.EmailField(label='E-mail')
+	username = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Digite seu Nome'}))
+	email = forms.EmailField(label='E-mail',widget=forms.TextInput(attrs={'placeholder':'Digite seu CPF'}))
 	password1 = forms.CharField(label='Senha',widget=forms.PasswordInput)
+	password1 = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Digite uma Senha'}))
 	password2 = forms.CharField(label='Confirma senha',widget=forms.PasswordInput)
+	password2 = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Repita a Senha'}))
 
 	def clean_password2(self):
 		password1 = self.cleaned_data.get("password1")

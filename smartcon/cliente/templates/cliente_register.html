@@ -15,7 +15,7 @@
         		  	{{ form.non_field_errors }}
               </div>
         		  	{% for field in form %}
-        		  	<div class="control-group ">
+        		  	<div class="control-group">
         		  		{{ field.label_tag }}
         		  		{{ field }}
                     </div>
@@ -27,6 +27,11 @@
         		  		<button class="btn btn-lg btn-secondary">
         		  			Cadastrar
         		  		</button>
+                    <a href="{% url 'cli:cliente' %}">
+                        <button type="button"  class="btn btn-lg btn-danger">
+                            Cancelar
+                        </button>
+                    </a>
         		  	</div>
             </div>
         	</fieldset>
