@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="row">
-    <div class="col-md-12">
+    <div  class="col-md-12">
         <ul class="breadcrumb">
             {% block breadcrumb %}
             <li><a href="{% url 'cli:cliente' %}">Painel Clientes</a></li>
@@ -43,7 +43,7 @@
                     {% for cliente in clientes %} 
                     <thead>
                       <th><a href="{% url 'cli:cliente_mostrar' cliente.pk  %}">{{ cliente.name }}</a></th>
-                      <th>{{ cliente.cpf }}</th>
+                      <th><input style="border:0;" type="" class="id_cpf" value="{{ cliente.cpf }}"></th>
                       <th><a href="{% url 'cli:cliente_editar' cliente.pk %}">
                         <i class="fa fa-cog"></i>
                         Edita

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from .forms import ClienteNovoForm, EditarCliente
+from .forms import ClienteNovoForm, EditarCliente, MostrarCliente
 from .models  import Cliente
 from .decorators import permition_required
 
@@ -58,6 +58,8 @@ def cliente_mostrar(request,pk):
 	template_name = 'cliente_mostrar.html'
 	cliente = Cliente.objects.get(pk=pk)
 	context = {}
-	form = EditarCliente(instance=cliente)
+	form = MostrarCliente(instance=cliente)
+	if request.method == 'POST':
+		return redirect('cli:cliente')
 	context['form'] = form
 	return render(request, template_name, context)

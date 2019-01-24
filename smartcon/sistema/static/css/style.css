@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+
+.control-group {
+
+	float: right;
+
+}
 .mainbody {
     width:1050px;
     margin: 0 auto 0 auto;
