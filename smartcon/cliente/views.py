@@ -63,3 +63,10 @@ def cliente_mostrar(request,pk):
 		return redirect('cli:cliente')
 	context['form'] = form
 	return render(request, template_name, context)
+
+@login_required
+@permition_required
+def cliente_apagar(request,pk):
+	cliente = Cliente.objects.get(pk=pk)
+	cliente.delete()
+	return redirect('cli:cliente')
