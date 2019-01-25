@@ -6,7 +6,7 @@
         <ul class="breadcrumb">
             {% block breadcrumb %}
             <li><a href="{% url 'cli:cliente' %}">Painel Clientes</a></li>
-            <li>&nbsp; / &nbsp;</li>
+            <!--<li>&nbsp; / &nbsp;</li>-->
             {% endblock %}
         </ul>
     </div>
@@ -49,7 +49,7 @@
                         Edita
                         </a>
                     </th>
-                    <th><a href="{% url 'cli:cliente-novo' %}">
+                    <th><a href="{% url 'cli:cliente_apagar' cliente.pk %}">
                     <i class="fa fa-lock"></i>
                     Excluir
                     </a>

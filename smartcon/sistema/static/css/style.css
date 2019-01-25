@@ -1,10 +1,46 @@
 @charset "UTF-8";
 
+.mainbody{
+	background-image:url("matriz.jpg");
+}
+.mr-3 {
+	float: left;
+   max-width:300px;
+    max-height:250px;
+    width: auto;
+    height: auto;
 
-.control-group {
-
+}
+.mr-4 {
 	float: right;
+   max-width:300px;
+    max-height:250px;
+    width: auto;
+    height: auto;
+}
 
+.painel-editar-texto{
+	padding-left: 150px;
+}
+
+.painel-editar {
+	width: 400px;
+	float: right;
+}
+.resset {
+	width: 320px;
+}
+
+.login button{
+	width: 120px;
+}
+.control-cadastro input{
+
+	width: 320px;
+	float: left;
+}
+.control-group {
+	float: right;
 }
 .mainbody {
     width:1050px;

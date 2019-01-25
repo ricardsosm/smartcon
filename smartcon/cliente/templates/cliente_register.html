@@ -1,8 +1,5 @@
 {% extends "cliente.html" %}
-{% block breadcrumb %}
-{{ block.super }}
-<li><a href="{% url 'usuario:editar_senha' %}">Criar Conta</a></li>
-{% endblock %}
+
 {% block dash_content  %}
 <div class="container">
     <div class="account-wall col">
@@ -15,7 +12,7 @@
         		  	{{ form.non_field_errors }}
               </div>
         		  	{% for field in form %}
-        		  	<div class="control-group ">
+        		  	<div class="control-group">
         		  		{{ field.label_tag }}
         		  		{{ field }}
                     </div>
@@ -27,6 +24,11 @@
         		  		<button class="btn btn-lg btn-secondary">
         		  			Cadastrar
         		  		</button>
+                    <a href="{% url 'cli:cliente' %}">
+                        <button type="button"  class="btn btn-lg btn-danger">
+                            Cancelar
+                        </button>
+                    </a>
         		  	</div>
             </div>
         	</fieldset>

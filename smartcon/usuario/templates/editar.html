@@ -4,31 +4,40 @@
 <li><a href="#">Editar Conta</a></li>
 {% endblock %}
 {% block dash_content  %}
-<h2 class="text-center">Informe seus dados</h2>
+	<div class="painel-editar-texto">
+		<h2 >Informe seus dados</h2>
+	</div>
 <form class="form-signin text-center" method="POST">
 	{% csrf_token %}
 	{% if success %}
-	<p style="color:green">Os dados foram auterados com sucesso</p>
+	<p style="color:green" >Os dados foram auterados com sucesso</p>
 	{% endif %}
-	<fieldset>
+	<fieldset class="painel-editar">
 		<div class="account-wall col">
-			<div class="erro_login">
-		  		{{ form.non_field_errors }}
-		 	</div>
-		  		{% for field in form %}
-		  	<div class="control-group">
-		  		{{ field.label_tag }}<br />
-		  		{{ field }}
-		  	</div>
-		  	 <div class="erro_login">	
-		  		{{ field.errors }}
-		  	</div>
-		  	{% endfor %}
-		  	<div class="control-group">
+			<div class="">
+				<div class="erro_login">
+			  		{{ form.non_field_errors }}
+			 	</div>
+			  		{% for field in form %}
+			  	<div class="">
+			  		{{ field.label_tag }}<br />
+			  		{{ field }}
+			  	</div>
+			  	 <div class="erro_login">	
+			  		{{ field.errors }}
+			  	</div>
+			  	{% endfor %}
+			 </div>
+		  	<div class="">
 		  		<br />
 		  		<button type="submit" class="btn btn-lg btn-secondary">
 		  			Salvar Modificações
 		  		</button>
+                    <a href="{% url 'sis:painel' %}">
+                        <button type="button"  class="btn btn-lg btn-danger">
+                            Cancelar
+                        </button>
+                    </a>
 		  	</div>
 		 </div>
 	</fieldset>
