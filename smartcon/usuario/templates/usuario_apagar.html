@@ -1,0 +1,43 @@
+{% extends "painel.html" %}
+{% block breadcrumb %}
+{{ block.super }}
+<li><a href="#">Editar Conta</a></li>
+{% endblock %}
+{% block dash_content  %}
+	<div class="painel-editar-texto">
+		<h2 >Exclusão de Conta</h2>
+	</div>
+<form class="form-signin text-center" method="POST">
+	{% csrf_token %}
+	{% if success %}
+	<p style="color:green" >Os dados foram auterados com sucesso</p>
+	{% endif %}
+	<fieldset class="painel-editar">
+		<div class="account-wall col">
+			<div class="">
+			<p>
+				Isso irá apagar totalmente a conta
+			</p>
+			 </div>
+			{% if success %}
+			<div class="text-success text-center">
+				<p style="color:green" >Os dados foram auterados com sucesso</p>
+			</div>
+			{% endif %}
+		  	<div class="">
+		  		<br />
+		  		<a href="{% url 'usuario:usuario_del' user.pk %}">
+			  		<button type="button"  class="btn btn-lg btn-secondary">
+			  			Apagar Conta
+			  		</button>
+			  	</a>
+                <a href="{% url 'sis:painel' %}">
+                    <button type="button"  class="btn btn-lg btn-danger">
+                        Cancelar
+                    </button>
+                </a>
+	  	</div>
+		 </div>
+	</fieldset>
+</form>        
+{% endblock %}

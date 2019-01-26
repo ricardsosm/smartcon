@@ -6,9 +6,9 @@ from usuario.models import Usuario
 class ClienteNovoForm(forms.ModelForm):
 
 	name = forms.CharField(label='Nome',widget=forms.TextInput(attrs={'placeholder':'Digite seu Nome'}))
-	cpf = forms.IntegerField(label='CPF',widget=forms.TextInput(attrs={'placeholder':'Digite seu CPF'}))
-	tel = forms.IntegerField(label='Telefone',widget=forms.TextInput(attrs={'placeholder':'Digite seu Telefone','class':'tel'})) 
-	id_carteira = forms.IntegerField(label='Carteira',widget=forms.TextInput(attrs={'class':'carteira'})) 
+	cpf = forms.CharField(label='CPF',widget=forms.TextInput(attrs={'placeholder':'Digite seu CPF'}))
+	tel = forms.CharField(label='Telefone',widget=forms.TextInput(attrs={'placeholder':'Digite seu Telefone','class':'tel'})) 
+	id_carteira = forms.CharField(label='Carteira',widget=forms.TextInput(attrs={'class':'carteira'})) 
 	id_usuario = forms.ModelChoiceField (
 		queryset=Usuario.objects.all(),
 		widget=forms.HiddenInput(),
@@ -22,9 +22,9 @@ class ClienteNovoForm(forms.ModelForm):
 class EditarCliente(forms.ModelForm):
 
 	name = forms.CharField(label='Nome')
-	cpf = forms.IntegerField(label='CPF',widget=forms.TextInput(attrs={'class':'cpf'}))
-	tel = forms.IntegerField(label='Telefone',widget=forms.TextInput(attrs={'class':'tel'})) 
-	id_carteira = forms.IntegerField(label='Carteira',widget=forms.TextInput(attrs={'class':'carteira'}))
+	cpf = forms.CharField(label='CPF',widget=forms.TextInput(attrs={'class':'cpf'}))
+	tel = forms.CharField(label='Telefone',widget=forms.TextInput(attrs={'class':'tel'})) 
+	id_carteira = forms.CharField(label='Carteira',widget=forms.TextInput(attrs={'class':'carteira'}))
 
 	class Meta:
 		model = Cliente
@@ -32,7 +32,7 @@ class EditarCliente(forms.ModelForm):
 
 class MostrarCliente(forms.ModelForm):
 
-	cpf = forms.IntegerField(label='CPF',widget=forms.TextInput(attrs={'class':'cpf'}))
+	cpf = forms.CharField(label='CPF',widget=forms.TextInput(attrs={'class':'cpf'}))
 	id_carteira = forms.IntegerField(label='Carteira',widget=forms.TextInput(attrs={'class':'carteira'}))
 
 	class Meta:

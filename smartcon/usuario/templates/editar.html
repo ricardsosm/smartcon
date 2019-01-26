@@ -7,11 +7,14 @@
 	<div class="painel-editar-texto">
 		<h2 >Informe seus dados</h2>
 	</div>
+	{% if success %}
+	<div class="text-success painel-editar-texto">
+		<p style="color:green" >Os dados foram auterados com sucesso</p>
+	</div>
+	{% endif %}
 <form class="form-signin text-center" method="POST">
 	{% csrf_token %}
-	{% if success %}
-	<p style="color:green" >Os dados foram auterados com sucesso</p>
-	{% endif %}
+
 	<fieldset class="painel-editar">
 		<div class="account-wall col">
 			<div class="">
