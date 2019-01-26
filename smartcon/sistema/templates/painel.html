@@ -13,6 +13,24 @@
     <div class="col-sm-4">
         <div class="col-md-10">
             {% block menu_options %}
+            <ul class="breadcrumb">Minha Conta de Usuario</ul>
+            <ul>
+                <li><a href="{% url 'usuario:editar' %}">
+                    <i class="fa fa-cog"></i>
+                    Editar Conta
+                    </a>
+                </li>
+                <li><a href="{% url 'usuario:editar_senha' %}">
+                    <i class="fa fa-lock"></i>
+                    Editar Senha
+                    </a>
+                </li>
+                <li><a href="{% url 'usuario:usuario_apagar' user.pk %}">
+                    <i class="fa fa-lock"></i>
+                    Excluir Conta
+                    </a>
+                </li>
+            </ul>
             <ul class="breadcrumb">Minhas Contas de Clientes</ul>
             <ul>
                <li><a href="#">
@@ -36,18 +54,6 @@
                     Editar Conta
                     </a></li>
                <li><a href="{% url 'usuario:editar_senha' %}">
-                    <i class="fa fa-lock"></i>
-                    Editar Senha
-                    </a>
-                </li>
-            </ul>
-        	<ul class="breadcrumb">Minha Conta de Usuario</ul>
-            <ul>
-        	   <li><a href="{% url 'usuario:editar' %}">
-                    <i class="fa fa-cog"></i>
-                    Editar Conta
-                    </a></li>
-        	   <li><a href="{% url 'usuario:editar_senha' %}">
                     <i class="fa fa-lock"></i>
                     Editar Senha
                     </a>

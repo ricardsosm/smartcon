@@ -41,3 +41,9 @@ class EditarConta(forms.ModelForm):
 	class Meta:
 		model = User
 		fields = ['username','name','email']
+
+class ApagarConta(forms.ModelForm):
+
+	class Meta:
+		model = User
+		fields = ['id']

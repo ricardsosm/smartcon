@@ -25,7 +25,7 @@ def register(request):
 	context = {
 		'form': form,
 	}
-	return render(request, template_name,context)
+	return render(request, template_name, context)
 
 @login_required
 def painel(request):
