@@ -32,8 +32,10 @@ class EditarCliente(forms.ModelForm):
 
 class MostrarCliente(forms.ModelForm):
 
-	cpf = forms.CharField(label='CPF',widget=forms.TextInput(attrs={'class':'cpf'}))
-	id_carteira = forms.IntegerField(label='Carteira',widget=forms.TextInput(attrs={'class':'carteira'}))
+	name = forms.CharField(widget=forms.TextInput(attrs={'readonly':'True'}))
+	cpf = forms.CharField(label='CPF',widget=forms.TextInput(attrs={'class':'cpf','readonly':'True'}))
+	tel = forms.CharField(widget=forms.TextInput(attrs={'readonly':'True'}))
+	id_carteira = forms.IntegerField(label='Carteira',widget=forms.TextInput(attrs={'class':'carteira','readonly':'True'}))
 
 	class Meta:
 		model = Cliente

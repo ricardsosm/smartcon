@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .forms import RegisterForm
+from cliente.models import Cliente
 from django.conf import settings
 
 User = get_user_model()
@@ -29,8 +30,11 @@ def register(request):
 
 @login_required
 def painel(request):
+	cliente = Cliente.objects.filter(id_usuario=request.user.pk)
 	template_name = 'painel.html'
-	context = {}
+	context = {
+		'cliente':cliente
+	}
 	return render(request, template_name,context)
 
 @login_required

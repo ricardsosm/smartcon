@@ -1,11 +1,19 @@
 @charset "UTF-8";
 
-.mainbody{
-	background-image:url("matriz.jpg");
+body {
+    background-image: url("../img/contract.jpg");
+    background-position: center;
+    background-size:cover;
+    margin: 0 auto 0 auto;
+    padding:0;
+}
+
+.moldeura {
+    padding:10;
 }
 .mr-3 {
 	float: left;
-   max-width:300px;
+    max-width:300px;
     max-height:250px;
     width: auto;
     height: auto;
@@ -43,9 +51,16 @@
 	float: right;
 }
 .mainbody {
+    background-color: white;
     width:1050px;
+    height: auto;
+    min-height: 520px;
     margin: 0 auto 0 auto;
-    padding:0;
+    padding: 25px;
+    opacity: 0.93;
+}
+.mainbody img{
+    opacity: 1;
 }
 .justificado {
 	font-size: 20;

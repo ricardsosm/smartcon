@@ -11,9 +11,14 @@ User = get_user_model()
 def cliente(request):
 	cliente = Cliente.objects.filter(id_usuario=request.user.pk)
 	template_name = 'cliente.html'
+	pesquisa =''
+	if request.method == 'POST':
+		pesquisa = request.POST.get("pescli")
+		cliente = Cliente.objects.filter(id_usuario=request.user.pk).filter(name__icontains=pesquisa)
 	context = {
 		'clientes': cliente
-	}
+	}		
+	print(pesquisa)
 	return render(request, template_name, context)
 
 @login_required
@@ -51,7 +56,6 @@ def cliente_editar(request,pk):
 	context['form'] = form
 	return render(request, template_name, context)			
 
-
 @login_required
 @permition_required
 def cliente_mostrar(request,pk):
@@ -70,3 +74,10 @@ def cliente_apagar(request,pk):
 	cliente = Cliente.objects.get(pk=pk)
 	cliente.delete()
 	return redirect('cli:cliente')
+
+@login_required
+def cliente_pesquisa(request):
+	template_name = 'cliente.html'
+	context = {}
+	cliente = Cliente.objects.filter(id_usuario=request.user.pk)
+

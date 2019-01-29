@@ -1,6 +1,5 @@
 {% extends "base.html" %} 
 {% block content %}
-
 <div class="row">
     <div  class="col-md-12">
         <ul class="breadcrumb">
@@ -29,41 +28,48 @@
         </div>
     </div>
     <div class="col-sm-8 float-right">
-	{% block dash_content %}
-	<div class="inner">
-	    <h2>Meus Clientes</h2>
-            <div class="well">       
-                <table class="table">
-                    <thead class="thead-light">
-                      <th>Nome</th>
-                      <th >CPF</th>
-                      <th > </th>
-                      <th > </th>
-                    </thead>
-                    {% for cliente in clientes %} 
-                    <thead>
-                      <th><a href="{% url 'cli:cliente_mostrar' cliente.pk  %}">{{ cliente.name }}</a></th>
-                      <th><input style="border:0;" type="" class="id_cpf" value="{{ cliente.cpf }}"></th>
-                      <th><a href="{% url 'cli:cliente_editar' cliente.pk %}">
-                        <i class="fa fa-cog"></i>
-                        Edita
-                        </a>
-                    </th>
-                    <th><a onclick = "if (! confirm('Excluir Cliente ?')) { return false; }"class="confirmation" href="{% url 'cli:cliente_apagar' cliente.pk %}">
-                    <i class="fa fa-lock"></i>
-                    Excluir
-                    </a>
-                    </th>
-                    {% empty %}             
-                    <p>Nenhum cliente encontrado</p>
-                    {% endfor %} 
-                    </thead>
-                </table>
+	   {% block dash_content %}
+	   <div class="inner">
+	       <h2>Meus Clientes</h2>
+            <form class="" method="POST">
+                {% csrf_token %}
+                <input name="pescli" type=""></th>
               
-	        </div>
-
-
-	 	{% endblock %}
-	</div>
+                <button method="POST" class="btn btn-primary"> 
+                Pesquizar</button>
+            </form>
+                <div class="well">       
+                    <table class="table">
+                        <thead class="thead-light">
+                          <th >Nome</th>
+                          <th >CPF</th>
+                          <th ></th>
+                          <th ></th>
+                        </thead>
+                        {% for cliente in clientes %} 
+                        <thead>
+                          <th><a href="{% url 'cli:cliente_mostrar' cliente.pk  %}">{{ cliente.name }}</a></th>
+                          <th><input style="border:0;" type="" class="id_cpf" value="{{ cliente.cpf }}"></th>
+                          <th><a href="{% url 'cli:cliente_editar' cliente.pk %}">
+                            <i class="fa fa-cog"></i>
+                            Editar
+                            </a>
+                        </th>
+                        <th><a onclick = "if (! confirm('Excluir Cliente ?')) { return false; }"class="confirmation" href="{% url 'cli:cliente_apagar' cliente.pk %}">
+                        <i class="fa fa-lock"></i>
+                        Excluir
+                        </a>
+                        </th>
+                        </thead>
+                        {% empty %} 
+                        <thead>            
+                        <th><p>Nenhum cliente encontrado</p></th>
+                        {% endfor %} 
+                        </thead>
+                    </table>              
+    	       </div>
+        </div>         
+        {% endblock %}
+    </div>
 </div>
 {% endblock %}
