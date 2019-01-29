@@ -2,8 +2,8 @@
 
 body {
     background-image: url("../img/contract.jpg");
-    background-size:cover;
     background-position: center;
+    background-size:cover;
     margin: 0 auto 0 auto;
     padding:0;
 }
