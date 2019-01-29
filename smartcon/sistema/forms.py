@@ -22,6 +22,14 @@ class RegisterForm(forms.ModelForm):
 			)
 		return password2 
 
+	def clean_email(self):
+		email= self.cleaned_data['email']
+		queryset = User.objects.filter(email=email).exclude(pk=self.instance.pk)
+		if queryset.exists():
+			raise forms.ValidationError('Email já existe')
+		return email
+
+
 	def save(self,commit=True):
 		user = super(RegisterForm, self).save(commit=False)
 		user.set_password(self.cleaned_data['password1'])

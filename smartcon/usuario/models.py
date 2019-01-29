@@ -9,7 +9,6 @@ class Usuario(AbstractBaseUser,PermissionsMixin):
 	email = models.EmailField('Email',default='')
 	is_active = models.BooleanField('Esta ativo',blank=True,default=True)
 	is_staff = models.BooleanField('Master',blank=True,default=False)
-	salt = models.CharField('Salt',max_length=10)
 	access = models.IntegerField(null=True, blank=True)
 	ip_last = models.GenericIPAddressField(null=True, blank=True)
 	date_joined = models.DateTimeField(
