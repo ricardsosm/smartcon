@@ -10,7 +10,8 @@ def permition_required(view_func):
 		if not has_permition:
 			try:
 				cliente = Cliente.objects.get(
-					id_usuario=request.user.pk
+					id_usuario=request.user.pk,
+					pk=pk
 				)
 			except cliente.DoesNotExist:
 				message = 'Desculpe, mas voce não tem permissão'

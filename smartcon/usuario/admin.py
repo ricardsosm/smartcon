@@ -5,5 +5,6 @@ class UsuarioAdmin(admin.ModelAdmin):
 	
 	list_display = ['username','update_at','is_staff']
 	search_field = ['name','access']
+	exclude = ('password',)
 
 admin.site.register(Usuario,UsuarioAdmin)

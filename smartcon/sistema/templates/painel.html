@@ -39,6 +39,7 @@
                 </ul> 
                 <ul class="breadcrumb">Minha Conta de Usuario</ul>
                 <ul>
+                    <li class="text-success">Ultimo IP {{ user.ip_last }}</li>
                     <li><a href="{% url 'usuario:editar' %}">
                         <i class="fa fa-cog"></i>
                         Editar Conta

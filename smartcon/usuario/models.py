@@ -11,6 +11,7 @@ class Usuario(AbstractBaseUser,PermissionsMixin):
 	is_staff = models.BooleanField('Master',blank=True,default=False)
 	access = models.IntegerField(null=True, blank=True)
 	ip_last = models.GenericIPAddressField(null=True, blank=True)
+	ip_actual = models.GenericIPAddressField(null=True, blank=True)
 	date_joined = models.DateTimeField(
 		'Criando em',auto_now_add=True
 	)
@@ -37,8 +38,7 @@ class Usuario(AbstractBaseUser,PermissionsMixin):
 		verbose_name = 'Usuário'
 		verbose_name_plural = 'Usuários'
 		ordering = ['name']
-
-		
+					
 class PasswordReset(models.Model):
 
 	user = models.ForeignKey(

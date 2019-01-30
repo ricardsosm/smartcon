@@ -11,5 +11,4 @@ urlpatterns = [
 	path('confirmar_nova_senha/<key>/',views.password_reset_confirm ,name='reset_senha'),
 	path('apagar-conta/<int:pk>',views.usuario_apagar ,name='usuario_apagar'),
 	path('apagar-user/<int:pk>',views.usuario_del ,name='usuario_del'),
-
 ]
