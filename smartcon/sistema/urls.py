@@ -9,6 +9,5 @@ urlpatterns = [
 	path('sair/',LogoutView.as_view(template_name= 'home.html' ),name='logout'),
 	path('registro/',views.register ,name='registrar'),
 	path('painel/',views.painel ,name='painel'),
-	path('contrato/',views.contrato ,name='contrato'),
 	path('ip/',views.ip_cliente ,name='ip_cliente'),
 ]

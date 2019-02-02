@@ -49,9 +49,5 @@ def painel(request):
 	}
 	return render(request, template_name,context)
 
-@login_required
-def contrato(request):
-	template_name = 'contrato.html'
-	context = {}
-	return render(request, template_name,context)
+
 	

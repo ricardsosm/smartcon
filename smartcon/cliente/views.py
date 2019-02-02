@@ -1,11 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from .forms import ClienteNovoForm, EditarCliente, MostrarCliente
 from .models  import Cliente
 from .decorators import permition_required
 
-User = get_user_model()
 
 @login_required	
 def cliente(request):

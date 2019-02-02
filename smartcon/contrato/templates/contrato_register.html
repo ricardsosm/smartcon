@@ -1,0 +1,42 @@
+{% extends "contrato.html" %}
+
+{% block dash_content  %}
+<div class="container">
+    <div class="account-wall col">
+        <h2 class="text-center">Informe os dados do Contrato</h2>
+        <form class="form-signin text-center" method="POST">
+        	{% csrf_token %}
+        	<fieldset>
+            <div class="float-sm-center">
+              <div class="erro_login">
+        		  	{{ form.non_field_errors }}
+              </div>
+        		  	{% for field in form %}
+        		  	<div class="control-group">
+        		  		{{ field.label_tag }}
+        		  		{{ field }}
+                        {% if fild.choice %}
+                        foi
+                        {% endif%}
+                    </div>
+                <div class="erro_login">
+        		  		{{ field.errors }}
+                </div>
+        		  	{% endfor %}
+        		  	<div class="text-center">
+        		  		<button onclick="Enviar()" class="btn btn-lg btn-secondary">
+        		  			Cadastrar
+        		  		</button>
+                    <a href="#">
+                        <button type="button"  class="btn btn-lg btn-danger">
+                            Cancelar
+                        </button>
+                    </a>
+        		  	</div>
+            </div>
+        	</fieldset>
+        </form>        
+    </div>
+    <br>
+</div>
+{% endblock %}
