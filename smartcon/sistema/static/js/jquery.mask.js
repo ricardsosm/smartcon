@@ -1,5 +1,3 @@
-$('.close').alert();
-
 $(document).ready(function(){
     $('.id_cpf').mask('000.000.000-00' , { reverse : true});
 });
@@ -20,20 +18,8 @@ function Enviar() {
     $('#id_cpf').mask(cpf , { reverse : true}); 
     $('#id_tel').mask(tel, { reverse : true}); 
 }
-function Perigo() {
-var x;
-var r=confirm("Tem certeza!");
-if (r==true)
-  {
-  x="você pressionou OK!";
-  }
-else
-  {
-  x="Você pressionou Cancelar!";
-  }
-document.getElementById("demo").innerHTML=x;
-}
-}
+
+$('.close').alert();
 /**
  * jquery.mask.js
  * @version: v1.14.15

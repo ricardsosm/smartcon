@@ -25,7 +25,7 @@ SECRET_KEY = 'r0rb+js96$*$(36txf!u=si51(mm^^)i3_ha@y*_1yhy%#vtdw'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -118,7 +118,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
+
+USE_TZ = True
 
 USE_I18N = True
 
@@ -133,7 +135,7 @@ STATIC_URL = '/static/'
 
 LOGIN_URL = 'sis:login'
 LOGOUT_URL = '/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/ip'
 #autera usuario padrão
 AUTH_USER_MODEL =  'usuario.Usuario'
 

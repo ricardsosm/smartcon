@@ -29,6 +29,18 @@ def register(request):
 	return render(request, template_name, context)
 
 @login_required
+def ip_cliente(request):
+	ip = request.META.get('X_FORWARDED_FOR')
+	if ip is None:
+		ip = request.META.get('REMOTE_ADDR')
+	user = User.objects.get(id = request.user.pk)
+	user.ip_last = user.ip_actual
+	user.ip_actual = ip
+	user.save()
+	return redirect('sis:painel') 
+
+
+@login_required
 def painel(request):
 	cliente = Cliente.objects.filter(id_usuario=request.user.pk)
 	template_name = 'painel.html'
@@ -37,9 +49,5 @@ def painel(request):
 	}
 	return render(request, template_name,context)
 
-@login_required
-def contrato(request):
-	template_name = 'contrato.html'
-	context = {}
-	return render(request, template_name,context)
+
 	

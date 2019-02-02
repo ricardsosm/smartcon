@@ -25,16 +25,12 @@
                 <button class="btn  btn-primary">home</button>
             </a>
             <div>__</div>
-            <a href="#">
-                <button type="button" class="btn btn-primary">Conhecimento</button>
-            </a>
-            <div>__</div>
             {% if user.is_authenticated %}
             <a href="{% url 'cli:cliente' %}">
                 <button type="button" class="btn btn-dark">Clientes</button>
             </a>
             <div>__</div>
-            <a href="#">
+            <a href="{% url 'con:contrato' %}">
                 <button type="button" class="btn btn-dark">Contratos</button>
             </a>
             <div>__</div>
@@ -47,9 +43,13 @@
             </a>
             <div>__</div>
             <div class="btn btn-success">
-                 Bem vindo, {{ user }}
+                 Bem vindo, {{ user }} 
             </div>
             {% else %}
+            <a href="#">
+                <button type="button" class="btn btn-primary">Conhecimento</button>
+            </a>
+            <div>__</div>
             <a href="{% url 'sis:login' %}">
                 <button type="button" class="btn btn-dark">Login</button>
             </a>
