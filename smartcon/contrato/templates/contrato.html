@@ -5,7 +5,7 @@
     <div class="col-md-12">
         <ul class="breadcrumb">
             {% block breadcrumb %}
-            <li><a href="{% url 'sis:painel' %}">Meu Painel</a></li>
+            <li><a href="{% url 'con:contrato' %}">Contrato Painel</a></li>
             <li>&nbsp; / &nbsp;</li>
             {% endblock %}
         </ul>
@@ -15,20 +15,20 @@
             {% block menu_options %}
             <ul class="breadcrumb">painel de Contratos</ul>
             <ul>
-               <li><a href="#">
+               <li><a href="{% url 'con:contrato' %}">
                     <i class="fa fa-address-book"></i>
                     Listar Contratos
                     </a></li>
                <li><a href="{% url 'con:contrato_novo' %}">
                     <i class="fa fa-lock"></i>
-                    Novo Cliente
+                    Novo Contrato
                     </a>
                 </li>
             </ul>
             <ul class="breadcrumb">Minhas Contas de Clientes</ul>
             <ul>
                 {% for cli in cliente %}
-               <li><a href="{% url 'cli:cliente_mostrar' cli.pk %}">
+               <li><a href="#">
                     <i class="fa fa-address-book"></i>
                     {{ cli.name }}
                     </a>
@@ -37,19 +37,7 @@
                 </li>
                 {% endfor %}
             </ul>
-            <ul class="breadcrumb">Meus Contratos</ul>
-            <ul>
-                {% for con in contrato %}
-               <li><a href="{% url 'cli:cliente_mostrar' cli.pk %}">
-                    <i class="fa fa-address-book"></i>
-                    {{ con.name }}
-                    </a>
-                 {% empty %}
-                 <p>Nenhum contrato</p>
-                </li>
-                {% endfor %}
-            </ul> 
-            <ul class="breadcrumb">Minha Conta de Usuario</ul>
+            <ul class="breadcrumb"></ul>
             <ul>
                 <li class="text-success">Ultimo IP {{ user.ip_last }}</li>
             </ul> 
@@ -75,16 +63,16 @@
                           <th ></th>
                           <th ></th>
                         </thead>
-                        {% for cliente in clientes %} 
+                         {% for con in contrato %}
                         <thead>
-                          <th><a href="{% url 'cli:cliente_mostrar' cliente.pk  %}">{{ cliente.name }}</a></th>
+                          <th><a href="#">{{ con.name }}</a></th>
                           <th><input style="border:0;" type="" class="id_cpf" value="{{ cliente.cpf }}"></th>
-                          <th><a href="{% url 'cli:cliente_editar' cliente.pk %}">
+                          <th><a href="#">
                             <i class="fa fa-cog"></i>
                             Editar
                             </a>
                         </th>
-                        <th><a onclick = "if (! confirm('Excluir Cliente ?')) { return false; }"class="confirmation" href="{% url 'cli:cliente_apagar' cliente.pk %}">
+                        <th><a onclick = "if (! confirm('Excluir Contrato ?')) { return false; }"class="confirmation" href="#">
                         <i class="fa fa-lock"></i>
                         Excluir
                         </a>
@@ -92,7 +80,7 @@
                         </thead>
                         {% empty %} 
                         <thead>            
-                        <th><p>Nenhum cliente encontrado</p></th>
+                        <th><p>Nenhum contrato encontrado</p></th>
                         {% endfor %} 
                         </thead>
                     </table>              
