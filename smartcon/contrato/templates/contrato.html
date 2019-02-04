@@ -59,20 +59,20 @@
                     <table class="table">
                         <thead class="thead-light">
                           <th >Nome</th>
-                          <th ></th>
+                          <th >Cliente</th>
                           <th ></th>
                           <th ></th>
                         </thead>
                          {% for con in contrato %}
                         <thead>
                           <th><a href="#">{{ con.name }}</a></th>
-                          <th><input style="border:0;" type="" class="id_cpf" value="{{ cliente.cpf }}"></th>
+                          <th><input style="border:0;" type="" class="id_con" value="{{ con.id_cliente.name }}"></th>
                           <th><a href="#">
                             <i class="fa fa-cog"></i>
                             Editar
                             </a>
                         </th>
-                        <th><a onclick = "if (! confirm('Excluir Contrato ?')) { return false; }"class="confirmation" href="#">
+                        <th><a onclick = "if (! confirm('Excluir Contrato ?')) { return false; }"class="confirmation" href="{% url 'con:delcon' con.id %}">
                         <i class="fa fa-lock"></i>
                         Excluir
                         </a>

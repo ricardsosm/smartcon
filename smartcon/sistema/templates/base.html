@@ -59,9 +59,9 @@
     </div>
     <div class="mainbody">
             {% if messages %}
-            <aside class="erro_login">
             {% for message in messages %}
-               <p>{{ message }}</p>
+            <aside class="{{ message.tags }} text-center">
+            <h3>{{ message }}</h3>
             {% endfor %}
             </aside>
             {% endif %}
