@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import ClienteNovoForm, EditarCliente, MostrarCliente
 from .models  import Cliente
 from .decorators import permition_required
-
+from django.contrib import messages
 
 @login_required	
 def cliente(request):
@@ -21,20 +21,19 @@ def cliente(request):
 
 @login_required
 def cliente_novo(request):
-	template_name = 'cliente_register.html'
 	context = {}
+	template_name = 'cliente_register.html'
 	if request.method == 'POST':
 		form = ClienteNovoForm(request.POST)
 		if form.is_valid():
 			form.save()
+			messages.success(request,"Cliente cadastrado com sucesso",extra_tags='text-success')
 			return redirect('cli:cliente')
 	else:
 		form = ClienteNovoForm(
 			initial={'id_usuario': request.user},
 		)	
-	context = {
-		'form': form,
-	}
+	context['form'] = form
 	return render(request, template_name, context)
 
 @login_required
@@ -47,8 +46,8 @@ def cliente_editar(request,pk):
 		form = EditarCliente(request.POST or None, instance=cliente)
 		if form.is_valid():
 			form.save()
-			form = EditarCliente(instance=cliente)
-			context['success'] = True
+			messages.success(request,"Cliente salvo com sucesso",extra_tags='text-success')
+			redirect('cli:cliente')
 	else:
 		form = EditarCliente(instance=cliente)
 	context['form'] = form
@@ -71,6 +70,7 @@ def cliente_mostrar(request,pk):
 def cliente_apagar(request,pk):
 	cliente = Cliente.objects.get(pk=pk)
 	cliente.delete()
+	messages.success(request,"Cliente apagado com sucesso",extra_tags='text-success')
 	return redirect('cli:cliente')
 
 @login_required

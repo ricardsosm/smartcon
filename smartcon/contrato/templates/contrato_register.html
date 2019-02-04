@@ -12,22 +12,19 @@
         		  	{{ form.non_field_errors }}
               </div>
         		  	{% for field in form %}
-        		  	<div class="control-group">
+        		  	
         		  		{{ field.label_tag }}
         		  		{{ field }}
-                        {% if fild.choice %}
-                        foi
-                        {% endif%}
-                    </div>
-                <div class="erro_login">
+                    
+                    <div class="erro_login">
         		  		{{ field.errors }}
-                </div>
+                    </div>
         		  	{% endfor %}
         		  	<div class="text-center">
-        		  		<button onclick="Enviar()" class="btn btn-lg btn-secondary">
+        		  		<button class="btn btn-lg btn-secondary">
         		  			Cadastrar
         		  		</button>
-                    <a href="#">
+                    <a href="{% url 'con:contrato' %}">
                         <button type="button"  class="btn btn-lg btn-danger">
                             Cancelar
                         </button>

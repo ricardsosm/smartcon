@@ -12,12 +12,11 @@ def user_permition_required(view_func):
 			if cliente.count() == 0:
 				has_permition = True
 			else:
-				message = 'apague os Clientes antes de excluir a conta'
-				messages.error(request,message)
+				messages.error(request,'Apague os Clientes antes de excluir a conta',extra_tags='text-danger')
 				return redirect('sis:painel')
 
 		if not has_permition:
-			message = 'Desculpe, mas voce não tem permissão'
+			messages.success(request, 'Desculpe, mas voce não tem permissão',extra_tags='text-danger')
 			messages.error(request,message)
 			return redirect('sis:painel')
 		return view_func(request, *args,**kwargs)
