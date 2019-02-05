@@ -6,9 +6,11 @@ from usuario.models import Usuario
 class ClienteNovoForm(forms.ModelForm):
 
 	name = forms.CharField(label='Nome',widget=forms.TextInput(attrs={'placeholder':'Digite seu Nome'}))
+	name.widget.attrs.update({'size':'21'}) 
 	cpf = forms.CharField(label='CPF',widget=forms.TextInput(attrs={'placeholder':'Digite seu CPF'}))
 	tel = forms.CharField(label='Telefone',widget=forms.TextInput(attrs={'placeholder':'Digite seu Telefone','class':'tel'})) 
 	id_carteira = forms.CharField(label='Carteira',widget=forms.TextInput(attrs={'class':'carteira'})) 
+	id_carteira.widget.attrs.update({'size':'35'}) 
 	id_usuario = forms.ModelChoiceField (
 		queryset=Usuario.objects.all(),
 		widget=forms.HiddenInput(),
@@ -22,9 +24,11 @@ class ClienteNovoForm(forms.ModelForm):
 class EditarCliente(forms.ModelForm):
 
 	name = forms.CharField(label='Nome')
+	name.widget.attrs.update({'size':'30'}) 
 	cpf = forms.CharField(label='CPF',widget=forms.TextInput(attrs={'class':'cpf'}))
 	tel = forms.CharField(label='Telefone',widget=forms.TextInput(attrs={'class':'tel'})) 
 	id_carteira = forms.CharField(label='Carteira',widget=forms.TextInput(attrs={'class':'carteira'}))
+	id_carteira.widget.attrs.update({'size':'35'}) 
 
 	class Meta:
 		model = Cliente
@@ -36,6 +40,7 @@ class MostrarCliente(forms.ModelForm):
 	cpf = forms.CharField(label='CPF',widget=forms.TextInput(attrs={'class':'cpf','readonly':'True'}))
 	tel = forms.CharField(widget=forms.TextInput(attrs={'readonly':'True'}))
 	id_carteira = forms.IntegerField(label='Carteira',widget=forms.TextInput(attrs={'class':'carteira','readonly':'True'}))
+	id_carteira.widget.attrs.update({'size':'35'}) 
 
 	class Meta:
 		model = Cliente

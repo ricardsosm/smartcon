@@ -7,6 +7,7 @@ class Cliente(models.Model):
 	cpf = models.CharField(null=True, blank=True, unique=True,max_length=14)
 	tel = models.CharField('Telefone',max_length=20,null=True, blank=True)
 	id_carteira= models.CharField(null=True, blank=True,max_length=100, unique=True)
+	saldo_carteira = models.FloatField(null=True, blank=True)
 	create_at = models.DateTimeField(
 		'Criando em',auto_now_add=True
 	)
