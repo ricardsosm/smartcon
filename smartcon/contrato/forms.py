@@ -12,7 +12,7 @@ class ContratoNovoForm(forms.ModelForm):
 
 	name = forms.CharField(label='Nome')
 	wallet_address = forms.CharField(label='Carteira',widget=forms.TextInput(attrs={'placeholder':'Numero da carteira'}))
-	wallet_address.widget.attrs.update({'size':'35'}) 
+	wallet_address.widget.attrs.update({'size':'40'}) 
 	solidity_version = forms.CharField(widget=forms.HiddenInput(),label='')
 	solidity_version.widget.attrs.update({'value':'0.4.21'})  
 
@@ -29,6 +29,7 @@ class EditarContrato(forms.ModelForm):
 
 	name = forms.CharField(label='Nome')
 	wallet_address = forms.CharField(label='Carteira')
+	wallet_address.widget.attrs.update({'size':'40'}) 
 	solidity_version = forms.CharField(label='Versão Software')
 	
 	class Meta:

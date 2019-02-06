@@ -4,6 +4,7 @@ from .forms import ClienteNovoForm, EditarCliente, MostrarCliente
 from .models  import Cliente
 from .decorators import permition_required
 from django.contrib import messages
+from eth_account import Account
 
 @login_required	
 def cliente(request):
