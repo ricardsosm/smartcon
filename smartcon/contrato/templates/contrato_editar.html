@@ -1,0 +1,42 @@
+{% extends "cliente.html" %}
+
+{% block dash_content  %}
+<div class="container">
+    <div class="account-wall col">
+        <h2 class="text-center">Editando os dados do Cliente</h2>
+        <form class="form-signin text-center" method="POST" >
+            {% csrf_token %}
+            <fieldset class="resset" >
+            
+                <div class="erro_login">
+                    {{ form.non_field_errors }}
+                </div>
+                    {% for field in form %}
+                <div class="contrato_field ">
+                        {{ field.label_tag }}
+                </div>
+                <div class="contrato_field ">
+                        {{ field }}
+                </div>
+                <div class="erro_login">
+                        {{ field.errors }}
+                </div>
+                    {% endfor %}
+                    <br />
+                <div class="text-center">
+                    <button onclick="Enviar()" class="btn btn-lg btn-secondary">
+                        Cadastrar
+                    </button>
+                    <a href="{% url 'con:contrato' %}">
+                    <button type="button"  class="btn btn-lg btn-danger">
+                        Cancelar
+                    </button>
+                    </a>
+                </div>
+            
+            </fieldset>
+        </form>        
+    </div>
+    <br>
+</div>
+{% endblock %}

@@ -25,3 +25,14 @@ class ContratoNovoForm(forms.ModelForm):
 		super(ContratoNovoForm, self).__init__(*args, **kwargs)
 		self.fields['id_cliente']=forms.ModelChoiceField(label='Cliente',queryset=Cliente.objects.filter(id_usuario=user))
 
+class EditarContrato(forms.ModelForm):
+
+	name = forms.CharField(label='Nome')
+	wallet_address = forms.CharField(label='Carteira')
+	solidity_version = forms.CharField(label='Versão Software')
+	
+	class Meta:
+		model = Contrato
+		fields = ['name','id_cliente','wallet_address','solidity_version']
+
+

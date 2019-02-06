@@ -67,7 +67,7 @@
                         <thead>
                           <th><a href="#">{{ con.name }}</a></th>
                           <th><input style="border:0;" type="" class="id_con" value="{{ con.id_cliente.name }}"></th>
-                          <th><a href="#">
+                          <th><a href="{% url 'con:edicon' con.id %}">
                             <i class="fa fa-cog"></i>
                             Editar
                             </a>
