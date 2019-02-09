@@ -1,9 +1,9 @@
-{% extends "contrato.html" %}
+{% extends "cliente.html" %}
 
 {% block dash_content  %}
 <div class="container">
     <div class="account-wall col">
-        <h2 class="text-center">Dados do Contrato</h2>
+        <h2 class="text-center">Carteira</h2>
         <form class="form-signin text-center" method="POST">
             {% csrf_token %}
             {% if success %}
@@ -12,26 +12,36 @@
                 </div>
             {% endif %}
             <fieldset class="resset" >
-            <div class="float-sm-center">
               <div class="erro_login">
                     {{ form.non_field_errors }}
               </div>
                     {% for field in form %}
-                    <div class="control-group ">
+                    <div class="carteira_field">
                         {{ field.label_tag }}
+                    </div>
+                    <div class="carteira_field">
                         {{ field }}
                     </div>
                 <div class="erro_login">
                         {{ field.errors }}
                 </div>
                     {% endfor %}
+                    {% if form.field is not empty %}
                     <br />
                     <div class="text-center login">
                         <button  class="btn btn-lg btn-secondary">
                             Fechar
                         </button>
                     </div>
-            </div>
+                    {% else %}
+                    <br />
+                    <div class="text-center login">
+                        <a href="{% url 'cli:cliente' %}">
+                        <button type="button"  class="btn btn-lg btn-secondary">
+                            Fechar
+                        </button></a>
+                    </div>                 
+                    {% endif %}
             </fieldset>
         </form>  
 

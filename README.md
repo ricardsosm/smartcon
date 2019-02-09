@@ -26,4 +26,8 @@ pip install django==2.1
 ```
 pip install mysqlclient
 ```
+# Instalando web3.py
+pip install web3
+pip install eth_account
+```
 # baixe o projeto

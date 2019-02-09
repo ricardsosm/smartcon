@@ -4,22 +4,34 @@
 <div class="container">
     <div class="account-wall col">
         <h2 class="text-center">Informe os dados do Contrato</h2>
-        <form class="form-signin text-center" method="POST">
+        <form class="form-signin text-center" method="POST" action="{% url 'cli:carteira_salvar' %}" >
         	{% csrf_token %}
-        	<fieldset>
-            <div class="float-sm-center">
+        	<fieldset class="resset" >
               <div class="erro_login">
         		  	{{ form.non_field_errors }}
               </div>
         		  	{% for field in form %}
-        		  	
+        		  	<div class="contrato_field">
         		  		{{ field.label_tag }}
+                    </div>
+                    <div class="contrato_field">
         		  		{{ field }}
-                    
+                        {% if field.html_name == 'id_cliente' %}
+                            {% for cli in cliente %}
+                            <input type="hidden" id="{{ cli.id }}" value="{{  cli.id_carteira }}">
+                            {% endfor %}
+
+                        {% endif %}
+                    </div>
                     <div class="erro_login">
         		  		{{ field.errors }}
                     </div>
+                    
+
         		  	{% endfor %}
+
+
+                    <br />
         		  	<div class="text-center">
         		  		<button class="btn btn-lg btn-secondary">
         		  			Cadastrar
@@ -30,7 +42,7 @@
                         </button>
                     </a>
         		  	</div>
-            </div>
+
         	</fieldset>
         </form>        
     </div>

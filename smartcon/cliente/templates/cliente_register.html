@@ -6,21 +6,24 @@
         <h2 class="text-center">Informe os dados do Cliente</h2>
         <form class="form-signin text-center" method="POST">
         	{% csrf_token %}
-        	<fieldset>
-            <div class="float-sm-center">
-              <div class="erro_login">
-        		  	{{ form.non_field_errors }}
-              </div>
-        		  	{% for field in form %}
-        		  	<div class="control-group">
-        		  		{{ field.label_tag }}
-        		  		{{ field }}
-                    </div>
+        	<fieldset class="resset" >
+            
                 <div class="erro_login">
-        		  		{{ field.errors }}
+                    {{ form.non_field_errors }}
+                </div>
+                    {% for field in form %}
+                <div class="cliente_field ">
+                        {{ field.label_tag }}
+                </div>
+                <div class="cliente_field ">
+                        {{ field }}
+                </div>
+                <div class="erro_login">
+                        {{ field.errors }}
                 </div>
         		  	{% endfor %}
-        		  	<div class="text-center">
+                    <br />
+        		  	<div class="cliente_field text-center">
         		  		<button onclick="Enviar()" class="btn btn-lg btn-secondary">
         		  			Cadastrar
         		  		</button>
@@ -30,7 +33,7 @@
                         </button>
                     </a>
         		  	</div>
-            </div>
+            
         	</fieldset>
         </form>        
     </div>

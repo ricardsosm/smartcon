@@ -10,8 +10,6 @@ w3 = Web3(HTTPProvider('https://ropsten.infura.io/v3/5b15a8a0ea6f4ba28356608cbac
 w3.eth.enable_unaudited_features ()
 contract = w3.eth.contract(address = contract_address, abi = contract_abi.abi)
 
-print (w3.eth.__dict__)
-
 
 def send_ether_to_contract(amount_in_ether):
 

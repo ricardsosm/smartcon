@@ -28,7 +28,7 @@
             <ul class="breadcrumb">Minhas Contas de Clientes</ul>
             <ul>
                 {% for cli in cliente %}
-               <li><a href="#">
+               <li><a href="{% url 'cli:cliente_mostrar' cli.pk  %}">
                     <i class="fa fa-address-book"></i>
                     {{ cli.name }}
                     </a>
@@ -67,7 +67,7 @@
                         <thead>
                           <th><a href="#">{{ con.name }}</a></th>
                           <th><input style="border:0;" type="" class="id_con" value="{{ con.id_cliente.name }}"></th>
-                          <th><a href="#">
+                          <th><a href="{% url 'con:edicon' con.id %}">
                             <i class="fa fa-cog"></i>
                             Editar
                             </a>

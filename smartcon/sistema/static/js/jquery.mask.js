@@ -18,6 +18,10 @@ function Enviar() {
     $('#id_cpf').mask(cpf , { reverse : true}); 
     $('#id_tel').mask(tel, { reverse : true}); 
 }
+function ver(elemento){
+    var num = document.getElementById(elemento.value).value;
+    document.getElementById('id_wallet_address').value = num;
+}
 
 $('.close').alert();
 /**

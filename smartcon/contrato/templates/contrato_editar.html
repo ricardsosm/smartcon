@@ -12,10 +12,10 @@
                     {{ form.non_field_errors }}
                 </div>
                     {% for field in form %}
-                <div class="cliente_field ">
+                <div class="contrato_field ">
                         {{ field.label_tag }}
                 </div>
-                <div class="cliente_field ">
+                <div class="contrato_field ">
                         {{ field }}
                 </div>
                 <div class="erro_login">
@@ -27,7 +27,7 @@
                     <button onclick="Enviar()" class="btn btn-lg btn-secondary">
                         Cadastrar
                     </button>
-                    <a href="{% url 'cli:cliente' %}">
+                    <a href="{% url 'con:contrato' %}">
                     <button type="button"  class="btn btn-lg btn-danger">
                         Cancelar
                     </button>

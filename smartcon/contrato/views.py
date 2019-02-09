@@ -4,8 +4,9 @@ from django.contrib.auth.decorators import login_required
 from .decorators import permition_required
 from cliente.models import Cliente
 from .models import Contrato
-from .forms import ContratoNovoForm
+from .forms import ContratoNovoForm, EditarContrato
 from itertools import chain
+from .arquivo import Grava
 
 @login_required
 def contrato(request):
@@ -31,7 +32,7 @@ def contrato_novo(request):
 	cliente = Cliente.objects.filter(id_usuario = request.user.id)
 	if request.method == 'POST':
 		form = ContratoNovoForm(request.POST,user=request.user.id)
-		print(request.POST)
+		Grava(request)
 		if form.is_valid():
 			form.save()
 			messages.success(request,"Contrato criado com sucesso",extra_tags='text-success')
@@ -56,3 +57,22 @@ def contrato_apaga(request,pk):
 	contrato.delete()
 	messages.success(request,"Contrato apagado com sucesso",extra_tags='text-success')
 	return redirect('con:contrato')
+
+@login_required
+@permition_required
+def contrato_editar(request,pk):
+	template_name = 'contrato_editar.html'
+	contrato = Contrato.objects.get(pk=pk)
+	if request.method == 'POST':
+		form = EditarContrato(request.POST or None, instance=contrato)
+		Grava(request)
+		if form.is_valid():
+			form.save()
+			messages.success(request,"Contrato salvo com sucesso",extra_tags='text-success')
+			redirect('con:contrato')	
+	else:
+		form = EditarContrato(instance=contrato)
+	context = {
+		'form': form
+	}
+	return render(request, template_name, context)
