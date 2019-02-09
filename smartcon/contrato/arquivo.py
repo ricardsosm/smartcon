@@ -6,7 +6,7 @@ def Grava(form):
 	solidity_version = form.POST.get("solidity_version")
 	id_cliente = form.POST.get("id_cliente")
 	wallet_address = form.POST.get("wallet_address")
-	arq = open("arquivo.txt","w")
+	arq = open("contrato.sol","w")
 	linha = 'pragma solidity ' + solidity_version + ';\n\n'
 	main = 'contract contar {\n\n'
 	carteira = '\taddress owner '+wallet_address+';\n'

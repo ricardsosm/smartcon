@@ -62,7 +62,16 @@ body {
 }
 .contrato_field select{
     width: 212px;
-
+}
+.carteira_field{
+    text-align: left;
+}
+.carteira_field label{
+    float: left;
+    width: 120px;
+}
+.carteira_field select{
+    width: 212px;
 }
 .mainbody {
     background-color: white;

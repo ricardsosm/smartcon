@@ -23,7 +23,11 @@ class ContratoNovoForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		user = kwargs.pop('user','')
 		super(ContratoNovoForm, self).__init__(*args, **kwargs)
-		self.fields['id_cliente']=forms.ModelChoiceField(label='Cliente',queryset=Cliente.objects.filter(id_usuario=user))
+		self.fields['id_cliente']=forms.ModelChoiceField(
+			label='Cliente',
+			queryset=Cliente.objects.filter(id_usuario=user),
+			widget=forms.Select(attrs={'onchange':'javascript:ver(this);'})
+		)
 
 class EditarContrato(forms.ModelForm):
 

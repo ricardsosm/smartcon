@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import ClienteNovoForm, EditarCliente, MostrarCliente
+from .forms import ClienteNovoForm, EditarCliente, MostrarCliente, MostrarCarteira,CarteiraNovaForm
 from .models  import Cliente
+from carteira.models import Carteira
 from .decorators import permition_required
 from django.contrib import messages
 from eth_account import Account
+from itertools import chain
 
 @login_required	
 def cliente(request):
@@ -17,7 +19,6 @@ def cliente(request):
 	context = {
 		'clientes': cliente
 	}		
-	print(pesquisa)
 	return render(request, template_name, context)
 
 @login_required
@@ -49,6 +50,7 @@ def cliente_editar(request,pk):
 			form.save()
 			messages.success(request,"Cliente salvo com sucesso",extra_tags='text-success')
 			redirect('cli:cliente')
+		else:messages.success(request,"Erro",extra_tags='text-danger')
 	else:
 		form = EditarCliente(instance=cliente)
 	context['form'] = form
@@ -80,3 +82,50 @@ def cliente_pesquisa(request):
 	context = {}
 	cliente = Cliente.objects.filter(id_usuario=request.user.pk)
 
+@login_required
+def carteira_mostrar(request):
+	template_name = 'carteira_mostrar.html'
+	cliente = Cliente.objects.filter(id_usuario = request.user.pk)
+	carteira  = []
+	for cli in cliente:
+		carteira = list(chain(carteira , Carteira .objects.all().filter(id_cliente = cli.id)))
+
+	context = {}
+	form = MostrarCarteira()
+	if request.method == 'POST':
+		pesquisa = request.POST.get("pescli")
+		carteira = Carteira.objects.all().filter(name__icontains=pesquisa)
+	context['carteiras'] = carteira
+	return render(request, template_name, context)
+
+@login_required
+def carteira_gerar(request):
+	template_name = 'carteira_gerar.html'
+	context = {}
+	if request.method == 'POST':
+		form = CarteiraNovaForm(request.POST,user=request.user.id)
+		if form.is_valid():
+			form.save()
+			messages.success(request,"Carteira gerada com sucesso",extra_tags='text-success')
+			return redirect('cli:carteira')	
+		else:messages.success(request,"Erro ao gerar carteira",extra_tags='text-danger')
+
+	form = CarteiraNovaForm(user=request.user.id)
+	context['form'] = form
+	return render(request, template_name, context)
+
+@login_required
+def carteira_apagar(request,pk):
+	carteira = Carteira.objects.get(pk=pk)
+	carteira.delete()
+	messages.success(request,"Carteira apagado com sucesso",extra_tags='text-success')
+	return redirect('cli:carteira')
+
+@login_required
+def carteira_amostra(request,pk):
+	template_name = 'carteira_amostra.html'
+	carteira = Carteira .objects.get(pk=pk)
+	form = MostrarCarteira(instance=carteira)
+	context = {}
+	context['form'] = form
+	return render(request, template_name, context)

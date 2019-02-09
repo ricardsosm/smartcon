@@ -3,8 +3,10 @@ from cliente.models import Cliente
 
 class Carteira(models.Model):
 				
-	name = models.CharField('Nome',max_length=20)	
-	saldo_carteira = models.FloatField(null=True, blank=True)
+	name = models.CharField('Nome',max_length=20,null=True, blank=True)	
+	saldo = models.FloatField(null=True, blank=True)
+	private_key = models.CharField('Chave Privada',max_length=200,null=True, blank=True)
+	public_key = models.CharField('Chave Privada',max_length=200,null=True, blank=True)
 	create_at = models.DateTimeField(
 		'Criando em',auto_now_add=True
 	)
@@ -13,9 +15,4 @@ class Carteira(models.Model):
 	)
 	id_cliente = models.ForeignKey(Cliente,on_delete=models.CASCADE)
 
-	def set(self,pk):
-		self.cliente = pk
-		return  True
 
-	def __str__(self):
-		return self.name
