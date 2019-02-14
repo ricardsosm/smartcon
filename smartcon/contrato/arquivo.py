@@ -9,9 +9,9 @@ def Grava(form):
 	arq = open("contrato.sol","w")
 	linha = 'pragma solidity ' + solidity_version + ';\n\n'
 	main = 'contract contar {\n\n'
-	carteira = '\taddress owner '+wallet_address+';\n'
-	cliente = '\tuint cliente = '+ id_cliente + ';\n'
-	nome = '\tbytes32 name "'+ nome +'";\n\n'
+	carteira = '\taddress owner;\n'
+	cliente = '\tuint cliente;\n'
+	nome = '\tbytes32 name;\n\n'
 	arq.write(linha)
 	arq.write(main)
 	arq.write('\tint private count = 0;\n')
@@ -20,7 +20,7 @@ def Grava(form):
 	arq.write(nome)
 	arq.write('\tfunction incrementCounter() public {\n\t\tcount += 1;\n\t}\n')
 	arq.write('\tfunction decrementCounter() public {\n\t\tcount -= 1;\n\t}\n')
-	arq.write('\tfunction getCount() public constant returns (int) {\n\t\treturn count;\n\t}')
+	arq.write('\tfunction getCount() public view returns (int) {\n\t\treturn count;\n\t}')
 	main = '\n}'
 	arq.write(main)
 

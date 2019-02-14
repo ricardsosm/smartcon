@@ -38,9 +38,6 @@ body {
 .resset {
 	width: 480px;
 }
-.contrato {
-    width: 730px;
-}
 
 .login button{
 
@@ -67,15 +64,28 @@ body {
 .carteira-cli {
     width: 530px;
 }
-.contrato_field{
-    text-align: left;
+.contrato {
+
+    width: 590px;
 }
-.contrato_field label{
+.super-contrato{
+
+    width: 700px;
+}
+
+.contrato_label {
+    text-align: left;
     float: left;
     width: 70px;
 }
+.contrato_field {
+    text-align: left;
+    float: right;
+    width: 500px;
+}
 .contrato_field select{
-    width: 212px;
+ 
+    width: 300px;
 }
 .carteira {
     width: 730px;

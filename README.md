@@ -33,7 +33,10 @@ pip install django==2.1
 pip install mysqlclient
 ```
 # Instalando web3.py
+```
 pip install web3 
 pip install eth_account
+pip install py-solc
+python -m solc.install v0.4.25
 ```
 # baixe o projeto

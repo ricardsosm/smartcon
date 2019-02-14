@@ -10,11 +10,14 @@ User = get_user_model()
 
 class ContratoNovoForm(forms.ModelForm):
 
-	name = forms.CharField(label='Nome')
-	wallet_address = forms.CharField(label='Carteira',widget=forms.TextInput(attrs={'placeholder':'Numero da carteira'}))
+	name = forms.CharField(label='Nome',widget=forms.TextInput(attrs={'size':'40'}))
+	wallet_address = forms.CharField(
+		label='Carteira',
+		widget=forms.TextInput(attrs={'placeholder':'Numero da carteira'})
+	)
 	wallet_address.widget.attrs.update({'size':'40'}) 
 	solidity_version = forms.CharField(widget=forms.HiddenInput(),label='')
-	solidity_version.widget.attrs.update({'value':'0.4.21'})  
+	solidity_version.widget.attrs.update({'value':'>=0.4.21 <0.6.0'})  
 
 	class Meta:
 		model = Contrato
