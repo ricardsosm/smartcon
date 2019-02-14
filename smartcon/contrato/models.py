@@ -7,7 +7,7 @@ class Contrato(models.Model):
 	contract_address = models.CharField(blank=True, max_length=100, null=True, unique=True)
 	wallet_private_key = models.CharField(blank=True, max_length=100, null=True, unique=True)
 	wallet_address = models.CharField(blank=True, max_length=100, null=True, unique=True)
-	solidity_version  = models.CharField(blank=True, default='0.4.25', max_length=10, null=True)
+	solidity_version  = models.CharField(blank=True, default='>=0.4.21 <0.6.0', max_length=20, null=True)
 	create_at = models.DateTimeField(
 		'Criando em',auto_now_add=True
 	)

@@ -1,11 +1,11 @@
-pragma solidity 0.4.21;
+pragma solidity >=0.4.21 <0.6.0;
 
 contract contar {
 
 	int private count = 0;
-	address owner 0x1e09A112E4ed183aa3083082749383f209bb7785;
-	uint cliente = 1;
-	bytes32 name "Contrato";
+	address owner;
+	uint cliente;
+	bytes32 name;
 
 	function incrementCounter() public {
 		count += 1;
@@ -13,7 +13,7 @@ contract contar {
 	function decrementCounter() public {
 		count -= 1;
 	}
-	function getCount() public constant returns (int) {
+	function getCount() public view returns (int) {
 		return count;
 	}
 }
