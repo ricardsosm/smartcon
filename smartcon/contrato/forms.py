@@ -26,7 +26,7 @@ class ContratoNovoForm(forms.ModelForm):
 		self.fields['id_cliente']=forms.ModelChoiceField(
 			label='Cliente',
 			queryset=Cliente.objects.filter(id_usuario=user),
-			widget=forms.Select(attrs={'onchange':'javascript:ver(this);'})
+			#widget=forms.Select(attrs={'onchange':'javascript:ver(this);'})
 		)
 
 class EditarContrato(forms.ModelForm):

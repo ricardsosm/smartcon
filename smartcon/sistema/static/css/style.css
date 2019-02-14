@@ -38,13 +38,24 @@ body {
 .resset {
 	width: 480px;
 }
+.contrato {
+    width: 730px;
+}
 
 .login button{
+
 	width: 120px;
 }
-.control-cadastro input{
-	width: 320px;
-	float: left;
+.loginb{
+    width: 520px;
+    height: 40px;
+}
+.control-cadastro {
+	width: 520px;
+}
+.control-cadastro label{
+    width: 120px;
+    float: left;
 }
 .cliente_field{
     text-align: left;
@@ -52,6 +63,9 @@ body {
 .cliente_field label{
     float: left;
     width: 70px;
+}
+.carteira-cli {
+    width: 530px;
 }
 .contrato_field{
     text-align: left;
@@ -62,6 +76,9 @@ body {
 }
 .contrato_field select{
     width: 212px;
+}
+.carteira {
+    width: 730px;
 }
 .carteira_field{
     text-align: left;

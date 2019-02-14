@@ -18,8 +18,8 @@ function Enviar() {
     $('#id_cpf').mask(cpf , { reverse : true}); 
     $('#id_tel').mask(tel, { reverse : true}); 
 }
-function ver(elemento){
-    var num = document.getElementById(elemento.value).value;
+function ver(){   
+    var num = document.getElementById('id_car').value;
     document.getElementById('id_wallet_address').value = num;
 }
 

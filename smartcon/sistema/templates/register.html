@@ -7,31 +7,32 @@
         <form class="form-signin text-center" method="POST">
         	{% csrf_token %}
         	<fieldset>
-            <div class="float-sm-center">
                 <div class="erro_login">
         		  	{{ form.non_field_errors }}
                 </div>
         		  	{% for field in form %}
         		<div class="control-cadastro">
     		  	      {{ field.label_tag }}
+                </div>
+                <div class="control-cadastro">
     		  		  {{ field }}
                 </div>
                 <div class="erro_login">
         		  	  {{ field.errors }}
                 </div>	
         		  	{% endfor %}
-        		  	<div class="text-center">
-                        <br><br>
-        		  		<button onclick="Enviar()" class="btn btn-lg btn-secondary">
-        		  			Cadastrar
-        		  		</button>
-                        <a href="{% url 'sis:login' %}">
-                            <button type="button"  class="btn btn-lg btn-danger">
-                                Cancelar
-                            </button>
-                        </a>
-        		  	</div>        
-            </div>
+    		  	<div class="loginb">
+                    <br>
+    		  		<button onclick="Enviar()" class="btn btn-lg btn-secondary">
+    		  			Cadastrar
+    		  		</button>
+                    <a href="{% url 'sis:login' %}">
+                        <button type="button"  class="btn btn-lg btn-danger">
+                            Cancelar
+                        </button>
+                    </a>
+    		  	</div>
+                <br>        
         	</fieldset>
         </form>        
     </div>

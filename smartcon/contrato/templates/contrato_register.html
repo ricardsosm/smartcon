@@ -4,9 +4,9 @@
 <div class="container">
     <div class="account-wall col">
         <h2 class="text-center">Informe os dados do Contrato</h2>
-        <form class="form-signin text-center" method="POST" action="{% url 'cli:carteira_salvar' %}" >
+        <form class="form-signin text-center" method="POST">
         	{% csrf_token %}
-        	<fieldset class="resset" >
+        	<fieldset class="contrato" >
               <div class="erro_login">
         		  	{{ form.non_field_errors }}
               </div>
@@ -20,7 +20,12 @@
                             {% for cli in cliente %}
                             <input type="hidden" id="{{ cli.id }}" value="{{  cli.id_carteira }}">
                             {% endfor %}
-
+                             <select name="id_car" onchange="javascript:ver();" required id="id_car"> 
+                             <option value="" selected>---------</option>
+                            {% for car in carteira %}
+                              <option value="{{ car.public_key }}">{{ car.name }}</option>
+                            {% endfor %}
+                            </select>
                         {% endif %}
                     </div>
                     <div class="erro_login">
