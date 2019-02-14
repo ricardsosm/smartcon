@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .decorators import permition_required
 from cliente.models import Cliente
 from .models import Contrato
+from carteira.models import Carteira
 from .forms import ContratoNovoForm, EditarContrato
 from itertools import chain
 from .arquivo import Grava
@@ -30,6 +31,10 @@ def contrato(request):
 def contrato_novo(request):
 	template_name = 'contrato_register.html'
 	cliente = Cliente.objects.filter(id_usuario = request.user.id)
+	carteira = []
+	for cli in cliente:
+		carteira = list(chain(carteira, Carteira.objects.all().filter(id_cliente = cli.id)))
+
 	if request.method == 'POST':
 		form = ContratoNovoForm(request.POST,user=request.user.id)
 		Grava(request)
@@ -41,7 +46,8 @@ def contrato_novo(request):
 		form = ContratoNovoForm(user=request.user.id)	
 	context = {
 		'form': form,
-		'cliente': cliente
+		'cliente': cliente,
+		'carteira': carteira
 	}
 	return render(request, template_name, context)
 
