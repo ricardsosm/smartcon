@@ -75,7 +75,7 @@ def contrato_editar(request,pk):
 		if form.is_valid():
 			form.save()
 			messages.success(request,"Contrato salvo com sucesso",extra_tags='text-success')
-			redirect('con:contrato')	
+		redirect('con:contrato')		
 	else:
 		form = EditarContrato(instance=contrato)
 	context = {

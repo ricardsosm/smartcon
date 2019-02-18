@@ -5,6 +5,7 @@ class Contrato(models.Model):
 
 	name = models.CharField(blank=True, max_length=20, null=True)
 	contract_address = models.CharField(blank=True, max_length=100, null=True, unique=True)
+	abi = models.TextField(null=True, max_length=2000)
 	wallet_private_key = models.CharField(blank=True, max_length=100, null=True, unique=True)
 	wallet_address = models.CharField(blank=True, max_length=100, null=True, unique=True)
 	solidity_version  = models.CharField(blank=True, default='>=0.4.21 <0.6.0', max_length=20, null=True)

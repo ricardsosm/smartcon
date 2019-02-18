@@ -12,9 +12,7 @@ class ClienteNovoForm(forms.ModelForm):
 	name = forms.CharField(label='Nome',widget=forms.TextInput(attrs={'placeholder':'Digite seu Nome'}))
 	name.widget.attrs.update({'size':'21'}) 
 	cpf = forms.CharField(label='CPF',widget=forms.TextInput(attrs={'placeholder':'Digite seu CPF'}))
-	tel = forms.CharField(label='Telefone',widget=forms.TextInput(attrs={'placeholder':'Digite seu Telefone','class':'tel'})) 
-	id_carteira = forms.CharField(label='Carteira',widget=forms.TextInput(attrs={'class':'carteira-cli'})) 
-	id_carteira.widget.attrs.update({'size':'38'}) 
+	tel = forms.CharField(label='Telefone',widget=forms.TextInput(attrs={'placeholder':'Digite seu Telefone','class':'tel'}))  
 	id_usuario = forms.ModelChoiceField(
 		queryset=Usuario.objects.all(),
 		widget=forms.HiddenInput(),
@@ -23,7 +21,7 @@ class ClienteNovoForm(forms.ModelForm):
 
 	class Meta:
 		model = Cliente
-		fields = ['name','cpf','tel','id_carteira','id_usuario']
+		fields = ['name','cpf','tel','id_usuario']
 
 class EditarCliente(forms.ModelForm):
 
@@ -31,30 +29,28 @@ class EditarCliente(forms.ModelForm):
 	name.widget.attrs.update({'size':'25'}) 
 	cpf = forms.CharField(label='CPF',widget=forms.TextInput(attrs={'class':'cpf'}))
 	tel = forms.CharField(label='Telefone',widget=forms.TextInput(attrs={'class':'tel'})) 
-	id_carteira = forms.CharField(label='Carteira',widget=forms.TextInput(attrs={'class':'carteira-cli'}))
-	id_carteira.widget.attrs.update({'size':'38'}) 
+
 
 	class Meta:
 		model = Cliente
-		fields = ['name','cpf','tel','id_carteira']
+		fields = ['name','cpf','tel']
 
 class MostrarCliente(forms.ModelForm):
 
 	name = forms.CharField(widget=forms.TextInput(attrs={'readonly':'True'}))
 	cpf = forms.CharField(label='CPF',widget=forms.TextInput(attrs={'class':'cpf','readonly':'True'}))
 	tel = forms.CharField(widget=forms.TextInput(attrs={'readonly':'True'}))
-	id_carteira = forms.IntegerField(label='Carteira',widget=forms.TextInput(attrs={'class':'carteira-cli','readonly':'True'}))
-	id_carteira.widget.attrs.update({'size':'20'}) 
+
 
 	class Meta:
 		model = Cliente
-		fields = ['name','cpf','tel','id_carteira']
+		fields = ['name','cpf','tel']
 
 
 class MostrarCarteira(forms.ModelForm):
 
 	name = forms.CharField(widget=forms.TextInput(attrs={'readonly':'True'}))
-	saldo = forms.FloatField(widget=forms.TextInput(attrs={'readonly':'True'}))
+	saldo = forms.FloatField(widget=forms.TextInput(attrs={'readonly':'True','id':'id_saldo_carteira'}))
 	public_key = forms.CharField(label='Chave Pública',widget=forms.TextInput(attrs={'readonly':'True'}))
 	public_key.widget.attrs.update({'size':'42'})  
 	private_key = forms.CharField(label='Chave Privada',widget=forms.TextInput(attrs={'readonly':'True'}))

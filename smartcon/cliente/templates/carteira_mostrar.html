@@ -2,7 +2,7 @@
 
        {% block dash_content %}
        <div class="inner">
-           <h2>Meus Contratos</h2>
+           <h2>Minhas Carteiras</h2>
             <form class="" method="POST">
                 {% csrf_token %}
                 <input name="pescli" type=""></th>
@@ -22,12 +22,9 @@
                         <thead>
                           <th><a href="{% url 'cli:carteira_amostra' con.id %}">{{ con.name }}</a></th>
                           <th><input style="border:0;" type="" class="id_con" value="{{ con.id_cliente.name }}"></th>
-                          <th><a href="#">
-                            <i class="fa fa-cog"></i>
-                            Editar
-                            </a>
+                          <th>
                         </th>
-                        <th><a onclick = "if (! confirm('Excluir Contrato ?')) { return false; }"class="confirmation" href="{% url 'cli:carteira_apagar' con.id %}">
+                        <th><a onclick = "if (! confirm('Excluir Carteira ?')) { return false; }"class="confirmation" href="{% url 'cli:carteira_apagar' con.id %}">
                         <i class="fa fa-lock"></i>
                         Excluir
                         </a>
@@ -35,7 +32,7 @@
                         </thead>
                         {% empty %} 
                         <thead>            
-                        <th><p>Nenhum contrato encontrado</p></th>
+                        <th><p>Nenhuma carteira encontrada</p></th>
                         {% endfor %} 
                         </thead>
                     </table>              
