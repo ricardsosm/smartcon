@@ -5,8 +5,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .forms import RegisterForm
 from cliente.models import Cliente
+from contrato.models import Contrato
 from django.conf import settings
-
+from itertools import chain
 
 User = get_user_model()
 
@@ -45,10 +46,19 @@ def ip_cliente(request):
 
 @login_required
 def painel(request):
-	cliente = Cliente.objects.filter(id_usuario=request.user.pk)
+	cliente = Cliente.objects.filter(id_usuario = request.user.pk)
+	contrato = []
+	for cli in cliente:
+		contrato = list(chain(contrato, Contrato.objects.all().filter(id_cliente = cli.id)))
+
 	template_name = 'painel.html'
+	pesquisa =''
+	if request.method == 'POST':
+		pesquisa = request.POST.get("pescli")
+		contrato = Contrato.objects.all().filter(name__icontains=pesquisa)
 	context = {
-		'cliente':cliente
+		'cliente':cliente,
+		'contrato': contrato
 	}
 	return render(request, template_name,context)
 

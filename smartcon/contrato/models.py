@@ -15,7 +15,7 @@ class Contrato(models.Model):
 	update_at = models.DateTimeField(
 		'Atualizado em',auto_now=True
 	)
-	id_cliente = models.ForeignKey(Cliente,on_delete=models.CASCADE)
+	id_cliente = models.ForeignKey(Cliente,on_delete=models.CASCADE,verbose_name="Cliente")
 
 class ContratActions(models.Model):
 

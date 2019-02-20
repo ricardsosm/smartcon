@@ -10,7 +10,7 @@ import random
 class ClienteNovoForm(forms.ModelForm):
 
 	name = forms.CharField(label='Nome',widget=forms.TextInput(attrs={'placeholder':'Digite seu Nome'}))
-	name.widget.attrs.update({'size':'21'}) 
+	name.widget.attrs.update({'size':'25'}) 
 	cpf = forms.CharField(label='CPF',widget=forms.TextInput(attrs={'placeholder':'Digite seu CPF'}))
 	tel = forms.CharField(label='Telefone',widget=forms.TextInput(attrs={'placeholder':'Digite seu Telefone','class':'tel'}))  
 	id_usuario = forms.ModelChoiceField(
@@ -38,6 +38,7 @@ class EditarCliente(forms.ModelForm):
 class MostrarCliente(forms.ModelForm):
 
 	name = forms.CharField(widget=forms.TextInput(attrs={'readonly':'True'}))
+	name.widget.attrs.update({'size':'25'}) 
 	cpf = forms.CharField(label='CPF',widget=forms.TextInput(attrs={'class':'cpf','readonly':'True'}))
 	tel = forms.CharField(widget=forms.TextInput(attrs={'readonly':'True'}))
 

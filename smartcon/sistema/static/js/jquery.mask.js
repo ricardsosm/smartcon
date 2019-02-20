@@ -17,6 +17,12 @@ function Enviar() {
     $('#id_cpf').mask(cpf , { reverse : true}); 
     $('#id_tel').mask(tel, { reverse : true}); 
 }
+function vercli(cli){
+    num =cli.id_id_cliente
+    var num = document.getElementById('id_id_cliente').value;  
+    $("#id_car option[value2='' " + num + "']").remove();
+}
+
 function ver(){   
     var num = document.getElementById('id_car').value;
     document.getElementById('id_wallet_address').value = num;

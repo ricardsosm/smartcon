@@ -1,12 +1,18 @@
-
+import os 
+from django.conf import settings
 
 def Grava(form):
 
 	nome = form.POST.get("name")
+	nomearq = nome + ".sol"
 	solidity_version = form.POST.get("solidity_version")
 	id_cliente = form.POST.get("id_cliente")
-	wallet_address = form.POST.get("wallet_address")
-	arq = open("contrato.sol","w")
+	caminho = 'contract/'+id_cliente
+	if not os.path.exists(caminho):
+		os.mkdir(caminho)
+	gra = caminho + '/' + nomearq 	
+	#wallet_address = form.POST.get("wallet_address")
+	arq = open(gra,"a")
 	linha = 'pragma solidity ' + solidity_version + ';\n\n'
 	main = 'contract contar {\n\n'
 	carteira = '\taddress owner;\n'
@@ -25,3 +31,14 @@ def Grava(form):
 	arq.write(main)
 
 	arq.close
+
+def Apaga(con):
+
+	caminho = 'contract/'+ str(con.id_cliente.id)
+	arquivo = con.name + '.sol'
+	apaga = caminho + arquivo
+	print(caminho)
+	dir = os.listdir(caminho)
+	for file in dir:
+		if file == arquivo:
+			os.remove(caminho + '/'+ file)

@@ -1,7 +1,7 @@
 {% extends "cliente.html" %}
 
 {% block dash_content  %}
-<div class="carteira container">
+<div class="container">
     <div class="account-wall col">
         <h2 class="text-center">Carteira</h2>
         <form class="form-signin text-center" method="POST">
@@ -12,42 +12,43 @@
                 </div>
             {% endif %}
             <fieldset class="resset" >
-              <div class="erro_login">
+                <div class="erro_login">
                     {{ form.non_field_errors }}
-              </div>
+                </div>
                     {% for field in form %}
-                    <div class="carteira_field">
+                <div class="geral_lin">
+                    <div class="car_label">
                         {{ field.label_tag }}
                     </div>
-                    <div class="carteira_field">
+                    <div class="car_field">
                         {{ field }}
                     </div>
+                </div>
                 <div class="erro_login">
                         {{ field.errors }}
                 </div>
                     {% endfor %}
                     {% if form.field is not empty %}
-                    <br />
-                    <div class="text-center login">
-                        <button  class="btn btn-lg btn-secondary">
-                            Fechar
-                        </button>
-                    </div>
+                <br />
+                <div class="text-center login">
+                    <button  class="btn btn-lg btn-secondary">
+                        Fechar
+                    </button>
+                </div>
                     {% else %}
-                    <br />
-                    <div class="text-center login">
-                        <a href="{% url 'cli:cliente' %}">
-                        <button type="button"  class="btn btn-lg btn-danger">
-                            Cancela
-                        </button></a>
-                        <button  class="btn btn-lg btn-primary">
-                            Salvar
-                        </button>
-                    </div>                 
+                <br />
+                <div class="text-center login">
+                    <a href="{% url 'cli:carteira' %}">
+                    <button type="button"  class="btn btn-lg btn-danger">
+                        Cancela
+                    </button></a>
+                    <button  class="btn btn-lg btn-primary">
+                        Salvar
+                    </button>
+                </div>                 
                     {% endif %}
             </fieldset>
         </form>  
-
     </div>
     <br>
 </div>

@@ -1,6 +1,5 @@
 {% extends "base.html" %} 
 {% block content %}
-
 <div class="row">
     <div class="col-md-12">
         <ul class="breadcrumb">
@@ -13,7 +12,7 @@
     <div class="col-sm-3">
         <div class="col-md-12">
             {% block menu_options %}
-            <ul class="breadcrumb">painel de Contratos</ul>
+            <ul class="breadcrumb">Painel de Contratos</ul>
             <ul>
                <li><a href="{% url 'con:contrato' %}">
                     <i class="fa fa-address-book"></i>
@@ -26,9 +25,9 @@
                 </li>
             </ul>
             <ul class="breadcrumb">Minhas Contas de Clientes</ul>
-            <ul>
+            <ul><li>
                 {% for cli in cliente %}
-               <li><a href="{% url 'cli:cliente_mostrar' cli.pk  %}">
+               <a href="{% url 'cli:cliente_mostrar' cli.pk  %}">
                     <i class="fa fa-address-book"></i>
                     {{ cli.name }}
                     </a>
@@ -44,7 +43,7 @@
             {% endblock %}          
         </div>
     </div>
-    <div class="col-sm-8 float-right">
+    <div class="col-sm-9 float-right">
        {% block dash_content %}
        <div class="inner">
            <h2>Meus Contratos</h2>
@@ -65,7 +64,7 @@
                         </thead>
                          {% for con in contrato %}
                         <thead>
-                          <th><a href="#">{{ con.name }}</a></th>
+                          <th><a href="{% url 'con:moscon' con.id %}">{{ con.name }}</a></th>
                           <th><input style="border:0;" type="" class="id_con" value="{{ con.id_cliente.name }}"></th>
                           <th><a href="{% url 'con:edicon' con.id %}">
                             <i class="fa fa-cog"></i>

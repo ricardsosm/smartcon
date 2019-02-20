@@ -12,12 +12,14 @@
                     {{ form.non_field_errors }}
                 </div>
                     {% for field in form %}
-                <div class="cliente_field ">
+                <div class="geral_lin">
+                        <div class="geral_label">
                         {{ field.label_tag }}
-                </div>
-                <div class="cliente_field ">
-                        {{ field }}
-                </div>
+                        </div>
+                        <div class="geral_field">
+                            {{ field }}
+                        </div>
+                    </div>
                 <div class="erro_login">
                         {{ field.errors }}
                 </div>
