@@ -3,46 +3,48 @@
 {{ block.super }}
 <li><a href="#">Editar Conta</a></li>
 {% endblock %}
-{% block dash_content  %}
-	<div class="painel-editar-texto">
-		<h2 >Informe seus dados</h2>
-	</div>
-	{% if success %}
-	<div class="text-success painel-editar-texto">
-		<p style="color:green" >Os dados foram auterados com sucesso</p>
-	</div>
-	{% endif %}
-<form class="form-signin text-center" method="POST">
-	{% csrf_token %}
-
-	<fieldset class="painel-editar">
-		<div class="account-wall col">
-			<div class="">
+{% block dash_content %}
+<div class="container" >
+    <div class="account-wall col" >
+		<h2 class="text-center">Editando Conta</h2>
+		<form class="form-signin text-center" method="POST">
+			{% csrf_token %}
+			{% if success %}
+			<div class="text-success">
+	            <h5>Os dados foram auterados com sucesso</h5>
+			</div>
+			{% endif %}
+			<fieldset class="resset">		
 				<div class="erro_login">
 			  		{{ form.non_field_errors }}
 			 	</div>
 			  		{% for field in form %}
-			  	<div class="">
-			  		{{ field.label_tag }}<br />
-			  		{{ field }}
+			  	<div class="geral_lin">
+	                <div class="geral_label">
+			  			{{ field.label_tag }}
+			  		</div>
+	                <div class="geral_field ">
+			  			{{ field }}
+			  		</div>
 			  	</div>
 			  	 <div class="erro_login">	
 			  		{{ field.errors }}
 			  	</div>
-			  	{% endfor %}
-			 </div>
-		  	<div class="">
-		  		<br />
-		  		<button type="submit" class="btn btn-lg btn-secondary">
-		  			Salvar Modificações
-		  		</button>
-                    <a href="{% url 'sis:painel' %}">
-                        <button type="button"  class="btn btn-lg btn-danger">
-                            Cancelar
-                        </button>
-                    </a>
-		  	</div>
-		 </div>
-	</fieldset>
-</form>        
+				  	{% endfor %}
+
+			  	<div class="">
+			  		<br />
+			  		<button type="submit" class="btn btn-lg btn-secondary">
+			  			Salvar Modificações
+			  		</button>
+	                    <a href="{% url 'sis:painel' %}">
+	                        <button type="button"  class="btn btn-lg btn-danger">
+	                            Cancelar
+	                        </button>
+	                    </a>
+			  	</div>
+			</fieldset>
+		</form>  
+	</div>
+</div>      
 {% endblock %}

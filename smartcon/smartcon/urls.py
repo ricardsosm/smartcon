@@ -25,3 +25,5 @@ urlpatterns = [
     path('', include('contrato.urls',namespace='con')),
     path('admin/', admin.site.urls),
 ]
+
+

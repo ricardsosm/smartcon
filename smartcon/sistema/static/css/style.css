@@ -36,7 +36,8 @@ body {
 	float: right;
 }
 .resset {
-	width: 480px;
+
+	width: 670px;
 }
 
 .login button{
@@ -54,51 +55,42 @@ body {
     width: 120px;
     float: left;
 }
-.cliente_field{
-    text-align: left;
+.geral_lin{
+   
+    margin: 0 auto;   
+    height: 34px;
 }
-.cliente_field label{
-    float: left;
-    width: 70px;
+.geral_edit_lin{
+   
+    margin: 0 auto;   
+    height: 40px;
 }
-.carteira-cli {
-    width: 530px;
-}
-.contrato {
-
-    width: 590px;
-}
-.super-contrato{
-
-    width: 700px;
-}
-
-.contrato_label {
-    text-align: left;
-    float: left;
-    width: 70px;
-}
-.contrato_field {
-    text-align: left;
-    float: right;
-    width: 500px;
-}
-.contrato_field select{
+.geral_field{
  
-    width: 300px;
-}
-.carteira {
-    width: 730px;
-}
-.carteira_field{
+    float: right;
     text-align: left;
+    width: 64%;
 }
-.carteira_field label{
+.geral_label{
+
+    padding-right:10px;
+    text-align:right;
     float: left;
-    width: 120px;
+    width: 36%;
 }
-.carteira_field select{
-    width: 212px;
+.car_field{
+
+    float: right;
+    text-align: left;
+    font-size: 2;
+    width: 82%;
+}
+.car_label{
+
+    padding-right:10px;
+    text-align:right;
+    float: left;
+    width: 18%;
 }
 .mainbody {
     background-color: white;
@@ -125,8 +117,8 @@ body {
 }
 /* Personal css */
 .form-signin
-{
-    max-width: 550px;
+{   
+    max-width: 700px;
     padding: 15px;
     margin: 0 auto;
 }
@@ -140,6 +132,7 @@ body {
 }
 .form-signin .form-control
 {
+    
     position: relative;
     font-size: 16px;
     height: auto;

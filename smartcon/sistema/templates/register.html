@@ -6,22 +6,24 @@
         <h2 class="text-center">Informe seus dados</h2>
         <form class="form-signin text-center" method="POST">
         	{% csrf_token %}
-        	<fieldset>
+        	<fieldset class="resset">
                 <div class="erro_login">
         		  	{{ form.non_field_errors }}
                 </div>
         		  	{% for field in form %}
-        		<div class="control-cadastro">
+        		<dir class="geral_lin">
+                    <div class="geral_label" >
     		  	      {{ field.label_tag }}
-                </div>
-                <div class="control-cadastro">
+                    </div>
+                    <div class="geral_field">
     		  		  {{ field }}
-                </div>
+                    </div>
+                </dir>
                 <div class="erro_login">
         		  	  {{ field.errors }}
                 </div>	
         		  	{% endfor %}
-    		  	<div class="loginb">
+    		  	<div class="login">
                     <br>
     		  		<button onclick="Enviar()" class="btn btn-lg btn-secondary">
     		  			Cadastrar
@@ -31,8 +33,7 @@
                             Cancelar
                         </button>
                     </a>
-    		  	</div>
-                <br>        
+    		  	</div>       
         	</fieldset>
         </form>        
     </div>

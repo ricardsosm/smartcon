@@ -1,9 +1,8 @@
-$(document).ready(function(){
-    $('.id_cpf').mask('000.000.000-00' , { reverse : true});
-});
+
 $(document).ready(function(){
     $('#id_cpf').mask('000.000.000-00' , { reverse : true});
     $('#id_tel').mask('(00)00000.0000' );
+    $('#id_saldo_carteira').mask('0.0000000000000000');
 });
 function Enviar() {
     var cpf = id_cpf.value
@@ -18,6 +17,12 @@ function Enviar() {
     $('#id_cpf').mask(cpf , { reverse : true}); 
     $('#id_tel').mask(tel, { reverse : true}); 
 }
+function vercli(cli){
+    num =cli.id_id_cliente
+    var num = document.getElementById('id_id_cliente').value;  
+    $("#id_car option[value2='' " + num + "']").remove();
+}
+
 function ver(){   
     var num = document.getElementById('id_car').value;
     document.getElementById('id_wallet_address').value = num;

@@ -5,9 +5,9 @@ from .decorators import permition_required
 from cliente.models import Cliente
 from .models import Contrato
 from carteira.models import Carteira
-from .forms import ContratoNovoForm, EditarContrato
+from .forms import ContratoNovoForm, EditarContrato,MostrarContrato
 from itertools import chain
-from .arquivo import Grava
+from .arquivo import Grava, Apaga
 
 @login_required
 def contrato(request):
@@ -60,6 +60,7 @@ def contrato_pesquisa(request):
 @permition_required
 def contrato_apaga(request,pk):
 	contrato = Contrato.objects.get(pk=pk)
+	Apaga(contrato)
 	contrato.delete()
 	messages.success(request,"Contrato apagado com sucesso",extra_tags='text-success')
 	return redirect('con:contrato')
@@ -75,9 +76,22 @@ def contrato_editar(request,pk):
 		if form.is_valid():
 			form.save()
 			messages.success(request,"Contrato salvo com sucesso",extra_tags='text-success')
-			redirect('con:contrato')	
+		redirect('con:contrato')		
 	else:
 		form = EditarContrato(instance=contrato)
+	context = {
+		'form': form
+	}
+	return render(request, template_name, context)
+
+@login_required
+@permition_required
+def contrato_mostrar(request,pk):
+	template_name = 'contrato_mostrar.html'
+	contrato = Contrato.objects.get(pk=pk)
+	form = MostrarContrato(instance=contrato)
+	if request.method == 'POST':
+		return redirect('con:contrato')
 	context = {
 		'form': form
 	}

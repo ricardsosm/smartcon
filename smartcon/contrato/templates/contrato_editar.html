@@ -3,21 +3,23 @@
 {% block dash_content  %}
 <div class="container">
     <div class="account-wall col">
-        <h2 class="text-center">Editando os dados do Cliente</h2>
+        <h2 class="text-center">Editando os dados do Contrato</h2>
         <form class="form-signin text-center" method="POST" >
             {% csrf_token %}
-            <fieldset class="contrato" >
+            <fieldset class="resset" >
             
                 <div class="erro_login">
                     {{ form.non_field_errors }}
                 </div>
                     {% for field in form %}
-                <div class="contrato_field ">
+                <dir class="geral_lin">
+                    <div class="car_label" >
                         {{ field.label_tag }}
-                </div>
-                <div class="contrato_field ">
-                        {{ field }}
-                </div>
+                    </div>
+                    <div class="car_field">
+                            {{ field }}
+                    </div>
+                </dir>
                 <div class="erro_login">
                         {{ field.errors }}
                 </div>

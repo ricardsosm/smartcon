@@ -10,8 +10,8 @@
             {% endblock %}
         </ul>
     </div>
-    <div class="col-sm-4">
-        <div class="col-md-10">
+    <div class="col-sm-3">
+        <div class="col-md-12">
             {% block menu_options %}
                 <ul class="breadcrumb">Minhas Contas de Clientes</ul>
                 <ul>
@@ -28,7 +28,7 @@
                 <ul class="breadcrumb">Meus Contratos</ul>
                 <ul>
                     {% for con in contrato %}
-                   <li><a href="{% url 'cli:cliente_mostrar' cli.pk %}">
+                   <li><a href="{% url 'con:moscon' con.id %}">
                         <i class="fa fa-address-book"></i>
                         {{ con.name }}
                         </a>
@@ -59,24 +59,47 @@
             {% endblock %}      	
         </div>
     </div>
-    <div class="col-sm-8 float-right">
+    <div class="col-sm-9 float-right">
         {% block dash_content %}
     	<div class="inner">
-            <h2>Meus Contratos</h2>
-            {% for enrollment in enrollments %}
+           <h2>Meus Contratos</h2>
+            <form class="" method="POST">
+                {% csrf_token %}
+                <input name="pescli" type=""></th>
+              
+                <button method="POST" class="btn btn-primary"> 
+                Pesquizar</button>
+            </form>
             <div class="well">
-                <h3>{{ enrollment.course }} ({{ enrollment.course.start_date|date:'d/m/Y'|default:'Sem data' }})
-                </h3>   
-                {{ enrollment.course.description|linebreaks }}
-                <div >
-                    <a href="#" >Acessar</a>
-                    <a href="#" >Cancelar</a>
-                </div>
+                <table class="table">
+                    <thead class="thead-light">
+                      <th >Nome</th>
+                      <th >Cliente</th>
+                      <th ></th>
+                      <th ></th>
+                    </thead>
+                     {% for con in contrato %}
+                    <thead>
+                      <th><a href="{% url 'con:moscon' con.id %}">{{ con.name }}</a></th>
+                      <th><input style="border:0;" type="" class="id_con" value="{{ con.id_cliente.name }}"></th>
+                      <th><a href="{% url 'con:edicon' con.id %}">
+                        <i class="fa fa-cog"></i>
+                        Editar
+                        </a>
+                    </th>
+                    <th><a onclick = "if (! confirm('Excluir Contrato ?')) { return false; }"class="confirmation" href="{% url 'con:delcon' con.id %}">
+                    <i class="fa fa-lock"></i>
+                    Excluir
+                    </a>
+                    </th>
+                    </thead>
+                    {% empty %} 
+                    <thead>            
+                    <th><p>Nenhum contrato encontrado</p></th>
+                    {% endfor %} 
+                    </thead>
+                </table>  
             </div>
-
-            {% empty %}             
-                <p>Nenhum contrato encontrado</p>
-            {% endfor %}
         </div>               
         {% endblock %}
     </div>

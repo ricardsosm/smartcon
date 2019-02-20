@@ -1,7 +1,7 @@
 {% extends "cliente.html" %}
 
 {% block dash_content  %}
-<div class="carteira container">
+<div class="container">
     <div class="account-wall col">
         <h2 class="text-center">Carteira</h2>
         <form class="form-signin text-center" method="POST">
@@ -16,11 +16,13 @@
                     {{ form.non_field_errors }}
               </div>
                     {% for field in form %}
-                    <div class="carteira_field">
-                        {{ field.label_tag }}
-                    </div>
-                    <div class="carteira_field">
-                        {{ field }}
+                    <div class="geral_lin">
+                        <div class="car_label">
+                            {{ field.label_tag }}
+                        </div>
+                        <div class="car_field">
+                            {{ field }}
+                        </div>
                     </div>
                 <div class="erro_login">
                         {{ field.errors }}
@@ -36,7 +38,7 @@
                     {% else %}
                     <br />
                     <div class="text-center login">
-                        <a href="{% url 'cli:cliente' %}">
+                        <a href="{% url 'cli:carteira' %}">
                         <button type="button"  class="btn btn-lg btn-secondary">
                             Fechar
                         </button></a>
