@@ -8,6 +8,7 @@ from carteira.models import Carteira
 from .forms import ContratoNovoForm, EditarContrato,MostrarContrato
 from itertools import chain
 from .arquivo import Grava, Apaga
+from .fabrica import Fabrica
 
 @login_required
 def contrato(request):
@@ -96,3 +97,13 @@ def contrato_mostrar(request,pk):
 		'form': form
 	}
 	return render(request, template_name, context)
+
+@login_required
+@permition_required
+def contrato_puclicar(request,pk):
+	template_name = 'contrato_publicar.html'
+	contrato = Contrato.objects.get(pk=pk)
+	path = 'contract/'+str(contrato.id_cliente.id) +'/'+contrato.name+'.sol'
+	fab = Fabrica(path,contrato.wallet_private_key)
+	#print(fab)
+	return render(request,template_name)

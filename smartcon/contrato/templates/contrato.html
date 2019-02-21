@@ -57,24 +57,33 @@
                 <div class="well">       
                     <table class="table">
                         <thead class="thead-light">
+                          <th ></th>
                           <th >Nome</th>
                           <th >Cliente</th>
+                          <th ></th>
                           <th ></th>
                           <th ></th>
                         </thead>
                          {% for con in contrato %}
                         <thead>
-                          <th><a href="{% url 'con:moscon' con.id %}">{{ con.name }}</a></th>
+                          <th>
+                            <div class="{% if con.ativo %}led-green{% else %}led-red{% endif %}"></div></th>
+                          <th >   
+                            <a href="{% url 'con:moscon' con.id %}">{{ con.name }}</a></th>
                           <th><input style="border:0;" type="" class="id_con" value="{{ con.id_cliente.name }}"></th>
+                          <th ><a href="{% url 'con:pubcon' con.id %}">
+                            <i class="fa fa-book"></i>
+                                Publicar
+                            </a></th>
                           <th><a href="{% url 'con:edicon' con.id %}">
                             <i class="fa fa-cog"></i>
-                            Editar
+                                Editar
                             </a>
                         </th>
                         <th><a onclick = "if (! confirm('Excluir Contrato ?')) { return false; }"class="confirmation" href="{% url 'con:delcon' con.id %}">
-                        <i class="fa fa-lock"></i>
-                        Excluir
-                        </a>
+                            <i class="fa fa-lock"></i>
+                                Excluir
+                            </a>
                         </th>
                         </thead>
                         {% empty %} 

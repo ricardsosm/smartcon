@@ -19,11 +19,13 @@ function Enviar() {
 }
 function vercli(cli){
     num =cli.id_id_cliente
-    var num = document.getElementById('id_id_cliente').value;  
     $("#id_car option[value2='' " + num + "']").remove();
 }
 
-function ver(){   
+function ver(){ 
+
+    cha = $('#id_car option:selected').attr('value1');
+    document.getElementById('id_wallet_private_key').value = cha;
     var num = document.getElementById('id_car').value;
     document.getElementById('id_wallet_address').value = num;
 }
