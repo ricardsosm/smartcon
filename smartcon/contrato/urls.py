@@ -10,4 +10,5 @@ urlpatterns = [
 	path('contrato-apagar/<int:pk>',views.contrato_apaga ,name='delcon'),
 	path('contrato-editar/<int:pk>',views.contrato_editar ,name='edicon'),
 	path('contrato-mostrar/<int:pk>',views.contrato_mostrar ,name='moscon'),
+	path('contrato-pulicar/<int:pk>',views.contrato_puclicar,name='pubcon'),
 ]

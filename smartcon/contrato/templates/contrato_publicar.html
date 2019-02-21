@@ -1,0 +1,23 @@
+{% extends "contrato.html" %}
+{% block dash_content  %}
+<div class="container">
+    <div class="account-wall col">
+        <h2 class="text-center">Dados do Contrato</h2>
+        <form class="form-signin text-center" method="POST">
+            {% csrf_token %}
+            {% if success %}
+                <div class="text-success">
+                    <h5> Dados alterados com sucesso</h5>
+                </div>
+            {% endif %}
+            <fieldset class="resset" >
+                <div class="erro_login">
+                    {{ form.non_field_errors }}
+                </div>
+
+            </fieldset>
+        </form>  
+    </div>
+    <br>
+</div>
+{% endblock %}

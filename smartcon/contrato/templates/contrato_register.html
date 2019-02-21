@@ -23,7 +23,7 @@
                              <select  name="id_car" onchange="javascript:ver();" required id="id_car"> 
                              <option value="" selected>---------</option>
                             {% for car in carteira %}
-                              <option value="{{ car.public_key}}" value2="{{ car.id_cliente.id }}">{{ car.name }}</option>
+                              <option value="{{ car.public_key }}" value1="{{ car.private_key }}" value2="{{ car.id_cliente.id }}">{{ car.name }}</option>
                             {% endfor %}
                             </select>
                         {% endif %}

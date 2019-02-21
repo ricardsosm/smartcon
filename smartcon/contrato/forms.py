@@ -15,13 +15,14 @@ class ContratoNovoForm(forms.ModelForm):
 		label='Carteira',
 		widget=forms.TextInput(attrs={'placeholder':'Numero da carteira'})
 	)
+	wallet_private_key = forms.CharField(widget=forms.HiddenInput(),label='')
 	wallet_address.widget.attrs.update({'size':'42'}) 
 	solidity_version = forms.CharField(widget=forms.HiddenInput(),label='')
 	solidity_version.widget.attrs.update({'value':'>=0.4.21 <0.6.0'})  
 
 	class Meta:
 		model = Contrato
-		fields = ['name','id_cliente','wallet_address','solidity_version']
+		fields = ['name','id_cliente','wallet_address','solidity_version','wallet_private_key']
 
 	def __init__(self, *args, **kwargs):
 		user = kwargs.pop('user','')
