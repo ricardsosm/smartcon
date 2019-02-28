@@ -1,5 +1,6 @@
 {% extends "contrato.html" %}
 {% block dash_content  %}
+
 <div class="container">
     <div class="account-wall col">
         <h2 class="text-center">Dados do Contrato</h2>
@@ -14,7 +15,35 @@
                 <div class="erro_login">
                     {{ form.non_field_errors }}
                 </div>
-
+                        {% for field in form %}
+                <dir class="geral_lin">
+                    <div class="con_label" >
+                          {{ field.label_tag }}
+                    </div>
+                    <div class="con_field">
+                           {{ field }}
+                    </div>
+                </dir>
+                <div class="erro_login">
+                        {{ field.errors }}
+                </div>
+                        {% endfor %}
+                <br />
+                <dir class="geral_lin">
+                    <div class="obs">
+                    ATENÇÂO: A publicação deste contrato será inalterável após sua inserção na Blockchain 
+                    </div>                 
+                </dir>
+                <div class="text-center login">
+                    <button  class="btn btn-lg btn-secondary">
+                        Publicar
+                    </button>
+                    <a href="{% url 'con:contrato' %}">
+                    <button type="button"  class="btn btn-lg btn-danger">
+                        Cancelar
+                    </button>
+                    </a>
+                </div>
             </fieldset>
         </form>  
     </div>
