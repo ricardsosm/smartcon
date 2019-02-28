@@ -40,10 +40,18 @@ body {
 	float: right;
 }
 .resset {
-    color: blue;
+  color: blue;
 	width: 670px;
 }
-
+.obs {
+  position: relative;
+  background-color: yellow;
+  top: -50px;
+  left: -14px;
+  font-size: 20px;
+  color: red;
+  height: 60px;
+}
 .login button{
 
 	width: 120px;
@@ -60,7 +68,7 @@ body {
     float: left;
 }
 .geral_lin{
-   
+    
     margin: 0 auto;   
     height: 34px;
 }
@@ -95,6 +103,19 @@ body {
     text-align:right;
     float: left;
     width: 18%;
+}
+
+.con_field{
+    float: right;
+    text-align: left;
+    font-size: 2;
+    width: 75%;
+}
+.con_label{
+    padding-right:10px;
+    text-align:right;
+    float: left;
+    width: 25%;
 }
 .mainbody {
     background-color: white;

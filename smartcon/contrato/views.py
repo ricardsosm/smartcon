@@ -5,10 +5,12 @@ from .decorators import permition_required
 from cliente.models import Cliente
 from .models import Contrato
 from carteira.models import Carteira
-from .forms import ContratoNovoForm, EditarContrato,MostrarContrato
+from .forms import ContratoNovoForm, EditarContrato,MostrarContrato,PublicarContrato
 from itertools import chain
 from .arquivo import Grava, Apaga
 from .fabrica import Fabrica
+from web3 import Web3
+import json
 
 @login_required
 def contrato(request):
@@ -38,8 +40,8 @@ def contrato_novo(request):
 
 	if request.method == 'POST':
 		form = ContratoNovoForm(request.POST,user=request.user.id)
-		Grava(request)
 		if form.is_valid():
+			Grava(request)
 			form.save()
 			messages.success(request,"Contrato criado com sucesso",extra_tags='text-success')
 			return redirect('con:contrato')
@@ -73,7 +75,6 @@ def contrato_editar(request,pk):
 	contrato = Contrato.objects.get(pk=pk)
 	if request.method == 'POST':
 		form = EditarContrato(request.POST or None, instance=contrato)
-		Grava(request)
 		if form.is_valid():
 			form.save()
 			messages.success(request,"Contrato salvo com sucesso",extra_tags='text-success')
@@ -103,7 +104,37 @@ def contrato_mostrar(request,pk):
 def contrato_puclicar(request,pk):
 	template_name = 'contrato_publicar.html'
 	contrato = Contrato.objects.get(pk=pk)
-	path = 'contract/'+str(contrato.id_cliente.id) +'/'+contrato.name+'.sol'
-	fab = Fabrica(path,contrato.wallet_private_key)
-	#print(fab)
-	return render(request,template_name)
+	if contrato.ativo == True:
+		messages.success(request,"Este contrato ja esta publicado",extra_tags='text-danger')
+		return redirect('con:contrato')
+	cliente = Cliente.objects.filter(id_usuario = request.user.pk)
+	form = PublicarContrato(instance=contrato)
+	if request.method == 'POST':
+		request.POST = request.POST.copy()
+		path = 'contract/'+str(contrato.id_cliente.id) +'/'+contrato.name+'.sol'
+		fab = Fabrica(path,contrato.wallet_private_key)
+		numcontrato = fab.enviar()	
+		g = str(numcontrato)
+		if g[0] == 'b':
+			contratonum = Web3.toHex(numcontrato)
+			request.POST.update({'abi':fab.abi})
+			request.POST.update({'ativo':'True'})
+			request.POST.update({'contract_address':contratonum})			
+			form = PublicarContrato(request.POST or None, instance=contrato)	
+			if form.is_valid():							
+				form.save()
+				messages.success(request,"Contrato Publicado com sucesso",extra_tags='text-success')
+				return redirect('con:contrato')
+			else:
+				messages.success(request,"Erro de validação",extra_tags='text-danger')		
+		else:
+			g = g.replace("\'", "\"")
+			j = json.loads(g)
+			if (j.get("code")) == -32000:
+				messages.success(request,"Voce não tem saldo suficiente",extra_tags='text-danger')
+
+	context = {
+		'form': form,
+		'cliente': cliente,
+	}
+	return render(request, template_name, context)
