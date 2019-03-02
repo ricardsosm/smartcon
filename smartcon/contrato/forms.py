@@ -1,7 +1,7 @@
 from django import forms
 from django.forms.models import modelformset_factory
 from sistema.mail import send_mail_template
-from .models import Contrato
+from .models import Contrato, ContratActions
 from cliente.models  import Cliente
 from django.forms import modelformset_factory
 from django.contrib.auth import get_user_model
@@ -50,11 +50,11 @@ class MostrarContrato(forms.ModelForm):
 	wallet_address = forms.CharField(label='Carteira',widget=forms.TextInput(attrs={'readonly':'True'}))
 	wallet_address.widget.attrs.update({'size':'43'}) 
 	solidity_version = forms.CharField(label='Versão Software',widget=forms.TextInput(attrs={'readonly':'True'}))
-	contract_address = forms.CharField(label='Numero do contrato',widget=forms.TextInput(attrs={'readonly':'True'}))
-	contract_address.widget.attrs.update({'size':'43'}) 
+	hash_address = forms.CharField(label='Numero do contrato',widget=forms.TextInput(attrs={'readonly':'True'}))
+	hash_address.widget.attrs.update({'size':'57'}) 
 	class Meta:
 		model = Contrato
-		fields = ['name','id_cliente','wallet_address','solidity_version','contract_address']
+		fields = ['name','id_cliente','wallet_address','solidity_version','hash_address']
 
 class PublicarContrato(forms.ModelForm):
 
@@ -62,10 +62,10 @@ class PublicarContrato(forms.ModelForm):
 	wallet_address.widget.attrs.update({'size':'43'}) 
 	solidity_version = forms.CharField(widget=forms.HiddenInput(),label='')
 	abi = forms.CharField(widget=forms.HiddenInput(),label='')
-	contract_address = forms.CharField(widget=forms.HiddenInput(),label='')
-	ativo = forms.BooleanField(widget=forms.HiddenInput(),label='')
+	hash_address = forms.CharField(widget=forms.HiddenInput(),label='')
+
 	class Meta:
 		model = Contrato
 		
-		fields = ['name','id_cliente','wallet_address','contract_address','ativo','solidity_version','abi']
+		fields = ['name','id_cliente','wallet_address','hash_address','solidity_version','abi']
 		

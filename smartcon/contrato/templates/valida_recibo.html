@@ -1,0 +1,18 @@
+{% extends "contrato.html" %}
+{% block dash_content  %}
+<div class="container">
+    <div class="account-wall col">
+        <h2 class="text-center">Enviando Contrato para Blockchain</h2>
+        <form class="form-signin text-center" method="POST">
+            {% csrf_token %}
+            <fieldset class="carteira" >
+                <th ><center><div class="loader"></div></center></th>
+                <script language= "JavaScript">
+                    location.href="{% url 'con:recibo' pk %}"
+                </script>
+            </fieldset>
+        </form>  
+    </div>
+    <br>
+</div>
+{% endblock %}

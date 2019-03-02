@@ -8,8 +8,8 @@ from django.contrib import messages
 from eth_account import Account
 from itertools import chain
 from web3 import Web3, HTTPProvider
-w3 = Web3(HTTPProvider('https://ropsten.infura.io/v3/5b15a8a0ea6f4ba28356608cbac65c35')) 
- 
+from django.conf import settings
+
 @login_required	
 def cliente(request):
 	cliente = Cliente.objects.filter(id_usuario=request.user.pk)
@@ -51,7 +51,7 @@ def cliente_editar(request,pk):
 		if form.is_valid():
 			form.save()
 			messages.success(request,"Cliente salvo com sucesso",extra_tags='text-success')
-			redirect('cli:cliente')
+			return redirect('cli:cliente')
 		else:messages.success(request,"Erro",extra_tags='text-danger')
 	else:
 		form = EditarCliente(instance=cliente)
@@ -127,7 +127,9 @@ def carteira_apagar(request,pk):
 def carteira_amostra(request,pk):
 	template_name = 'carteira_amostra.html'
 	carteira = Carteira .objects.get(pk=pk)
+	w3 = Web3(HTTPProvider(settings.PROVEDOR))
 	bal = w3.eth.getBalance(carteira.public_key)
+	print(bal)
 	carteira.saldo = bal
 	form = MostrarCarteira(instance=carteira)
 	context = {}
