@@ -3,7 +3,7 @@ from usuario.models import Usuario
 
 class Cliente(models.Model):
 				
-	name = models.CharField('Nome',max_length=20)	
+	name = models.CharField('Nome',max_length=30)	
 	cpf = models.CharField(null=True, blank=True, unique=True,max_length=14)
 	tel = models.CharField('Telefone',max_length=20,null=True, blank=True)
 	id_carteira= models.CharField(null=True, blank=True,max_length=100, unique=True)

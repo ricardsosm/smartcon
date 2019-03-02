@@ -56,7 +56,7 @@ class MostrarCarteira(forms.ModelForm):
 	public_key = forms.CharField(label='Chave Pública',widget=forms.TextInput(attrs={'readonly':'True'}))
 	public_key.widget.attrs.update({'size':'42'})  
 	private_key = forms.CharField(label='Chave Privada',widget=forms.TextInput(attrs={'readonly':'True'}))
-	private_key.widget.attrs.update({'size':'60'}) 
+	private_key.widget.attrs.update({'size':'56'}) 
 
 	class Meta:
 		model = Carteira
@@ -71,7 +71,7 @@ class CarteiraNovaForm(forms.ModelForm):
 	public_key.widget.attrs.update({'size':'42'}) 
 	key = Web3.toHex(conta.privateKey)
 	private_key = forms.CharField(label='Chave Privada',widget=forms.TextInput(attrs={'value':key}))
-	private_key.widget.attrs.update({'size':'60'}) 
+	private_key.widget.attrs.update({'size':'56'}) 
 
 	def __init__(self, *args, **kwargs):
 		user = kwargs.pop('user','')

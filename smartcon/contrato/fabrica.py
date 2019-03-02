@@ -1,5 +1,6 @@
 import sys, time , pprint
 from web3 import Web3, HTTPProvider
+from django.conf import settings
 from solc import compile_source
 from eth_account import Account
 import string
@@ -14,8 +15,7 @@ class Fabrica:
 
   def __init__(self,file_path,key):
 
-    self.w3 = Web3(HTTPProvider('https://ropsten.infura.io/v3/5b15a8a0ea6f4ba28356608cbac65c35')) 
-
+    self.Web3(HTTPProvider(settings.PROVEDOR))
     compiled_sol = self.compile_source_file(file_path)
     contract_id, contract_interface = compiled_sol.popitem()
     self.myabi=contract_interface['abi']
@@ -45,6 +45,15 @@ class Fabrica:
       return e
 
   
+  def Recibo(self,tx_hash):
+
+    while True:
+      self.tx_receipt = self.w3.eth.getTransactionReceipt(tx_hash)
+      if self.tx_receipt:
+        return self.tx_receipt
+      time.sleep(20)
+
+   
 
 '''
 # com assinatura interna

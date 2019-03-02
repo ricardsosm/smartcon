@@ -4,12 +4,12 @@ from cliente.models import Cliente
 class Contrato(models.Model):
 
 	name = models.CharField(blank=True, max_length=20, null=True)
-	contract_address = models.CharField(blank=True, max_length=100, null=True, unique=True)
+	hash_address = models.CharField(blank=True, max_length=100, null=True, unique=True)
 	abi = models.TextField(null=True, max_length=2000)
-	wallet_private_key = models.CharField(blank=True, max_length=100, null=True, unique=True)
-	wallet_address = models.CharField(blank=True, max_length=100, null=True, unique=True)
+	wallet_private_key = models.CharField(blank=True, max_length=100, null=True)
+	wallet_address = models.CharField(blank=True, max_length=100, null=True)
 	solidity_version  = models.CharField(blank=True, default='>=0.4.21 <0.6.0', max_length=20, null=True)
-	ativo = models.BooleanField(null=True)
+	ativo = models.BooleanField(null=True,blank=True)
 	create_at = models.DateTimeField(
 		'Criando em',auto_now_add=True
 	)
@@ -20,7 +20,13 @@ class Contrato(models.Model):
 
 class ContratActions(models.Model):
 
-	number = models.CharField(blank=True, max_length=100, null=True, unique=True)
+	blocknumber = models.CharField(blank=True, max_length=30, null=True)
+	status = models.BooleanField(null=True)
+	contract_address = models.CharField(blank=True, max_length=100, null=True)
+	from_adress	= models.CharField(blank=True, max_length=100, null=True)
+	to_adress	= models.CharField(blank=True, max_length=100, null=True)
+	transactionHash = models.CharField(blank=True, max_length=100, null=True)
+	gasUsed = models.CharField(blank=True, max_length=30, null=True)
 	create_at = models.DateTimeField(
 		'Criando em',auto_now_add=True
 	)
