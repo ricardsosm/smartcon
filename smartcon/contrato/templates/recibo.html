@@ -2,7 +2,7 @@
 {% block dash_content  %}
 <div class="container">
     <div class="account-wall col">
-        <h2 class="text-center">Dados do Contrato</h2>
+        <h2 class="text-center">Recibo de Envio de Contrato para Blockchain</h2>
         <form class="form-signin text-center" method="POST">
             {% csrf_token %}
             <fieldset class="carteira" >
@@ -14,24 +14,16 @@
                 {% if recibo %}
                     <thead>
                         <th >Block Number</th>
-                        <th >{{ recibo.blocknumber }}</th>
+                        <th >{{ recibo.blockNumber }}</th>
                     </thead><thead>
                         <th >Contract Address</th>
-                        <th ><a href="https://ropsten.etherscan.io/address/{{ recibo.contract_address}}" target="_blank">
-                        {{ recibo.contract_address}}</a>
-                        </th>
+                        <th >{{ recibo.contractAddress}}</th>
                     </thead><thead>
                         <th >Carteira</th>
-                        <th ><a href="https://ropsten.etherscan.io/address/{{ recibo.from_adress }}" target="_blank">
-                        {{ recibo.from_adress }}</a></th>
+                        <th >{{ recibo.from}}</th>
                     </thead><thead>
                         <th >Gas Usado</th>
-                        <th >{{ recibo.gasUsed}}</th>                    </thead><thead>
-                        <th >Versão de Software</th>
-                        <th >{{ contrato.solidity_version}}</th>  
-                        </thead><thead>
-                        <th >Publicação</th>
-                        <th >{{ recibo.create_at }}</th>                     
+                        <th >{{ recibo.gasUsed}}</th>                       
                     </thead><thead>
                         <th >Status</th>
                         <th ><center><div class="{% if recibo.status %}led-green{% else %}led-red{% endif %}"></div></center></th>                                     
@@ -41,12 +33,13 @@
                 {% endif %} 
                     </thead>
                 </table>
-
+                <a href="{% url 'con:contrato' %}">
                 <div class="text-center login">
-                    <button  class="btn btn-lg btn-secondary">
+                   <button type="button" class="btn btn-lg btn-secondary">
                             Fechar
                     </button>
                 </div>
+                </a>
             </fieldset>
         </form>  
     </div>

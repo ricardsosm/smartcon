@@ -4,6 +4,7 @@ from .models  import Cliente
 from usuario.models import Usuario
 from carteira.models import Carteira
 from eth_account import Account
+from web3 import Web3
 import random
 
 
@@ -55,7 +56,7 @@ class MostrarCarteira(forms.ModelForm):
 	public_key = forms.CharField(label='Chave Pública',widget=forms.TextInput(attrs={'readonly':'True'}))
 	public_key.widget.attrs.update({'size':'42'})  
 	private_key = forms.CharField(label='Chave Privada',widget=forms.TextInput(attrs={'readonly':'True'}))
-	private_key.widget.attrs.update({'size':'60'}) 
+	private_key.widget.attrs.update({'size':'56'}) 
 
 	class Meta:
 		model = Carteira
@@ -63,12 +64,14 @@ class MostrarCarteira(forms.ModelForm):
 
 class CarteiraNovaForm(forms.ModelForm):
 
-	name = forms.CharField(label='Nome',widget=forms.TextInput(attrs={'size':'20'}))	
 	conta = Account.create(random.randint(1, 999999999))
+
+	name = forms.CharField(label='Nome',widget=forms.TextInput(attrs={'size':'20'}))	
 	public_key = forms.CharField(label='Chave Pública',widget=forms.TextInput(attrs={'value':conta.address}))
 	public_key.widget.attrs.update({'size':'42'}) 
-	private_key = forms.CharField(label='Chave Privada',widget=forms.TextInput(attrs={'value':conta.privateKey}))
-	private_key.widget.attrs.update({'size':'60'}) 
+	key = Web3.toHex(conta.privateKey)
+	private_key = forms.CharField(label='Chave Privada',widget=forms.TextInput(attrs={'value':key}))
+	private_key.widget.attrs.update({'size':'56'}) 
 
 	def __init__(self, *args, **kwargs):
 		user = kwargs.pop('user','')

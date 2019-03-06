@@ -7,7 +7,17 @@ body {
     margin: 0 auto 0 auto;
     padding:0;
 }
-
+.mainbody {
+    background-color: white;
+    height: auto;
+    min-height: 550px;
+    margin: 0 20 0 20;
+    padding: 25px;
+    opacity: 0.93;
+}
+.mainbody img{
+    opacity: 1;
+}
 .moldeura {
     padding:10;
 }
@@ -40,10 +50,18 @@ body {
 	float: right;
 }
 .resset {
-    color: blue;
+  color: blue;
 	width: 670px;
 }
-
+.obs {
+  position: relative;
+  background-color: yellow;
+  top: -50px;
+  left: -14px;
+  font-size: 20px;
+  color: red;
+  height: 60px;
+}
 .login button{
 
 	width: 120px;
@@ -60,7 +78,7 @@ body {
     float: left;
 }
 .geral_lin{
-   
+    
     margin: 0 auto;   
     height: 34px;
 }
@@ -96,18 +114,21 @@ body {
     float: left;
     width: 18%;
 }
-.mainbody {
-    background-color: white;
-    width:1050px;
-    height: auto;
-    min-height: 520px;
-    margin: 0 auto 0 auto;
-    padding: 25px;
-    opacity: 0.93;
+
+.con_field{
+
+    float: right;
+    text-align: left;
+    width: 78%;
 }
-.mainbody img{
-    opacity: 1;
+.con_label{
+ 
+    padding-right:10px;
+    text-align:right;
+    float: left;
+    width: 22%;
 }
+
 .justificado {
 	font-size: 20;
 	text-align: justify;
@@ -122,8 +143,8 @@ body {
 /* Personal css */
 .form-signin
 {   
-    max-width: 700px;
-    padding: 15px;
+    max-width: 710px;
+    padding: 2px;
     margin: 0 auto;
 }
 .form-signin .form-signin-heading, .form-signin .checkbox
@@ -256,4 +277,19 @@ body {
   background-color: #ABFF00;
   border-radius: 50%;
   box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #89FF00 0 2px 12px;
+}
+
+/* loaders  */
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

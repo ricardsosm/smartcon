@@ -2,7 +2,8 @@
 $(document).ready(function(){
     $('#id_cpf').mask('000.000.000-00' , { reverse : true});
     $('#id_tel').mask('(00)00000.0000' );
-    $('#id_saldo_carteira').mask('0.0000000000000000');
+    var val = id_saldo_carteira.value / 1000000000000000000
+    document.getElementById('id_saldo_carteira').value = val;
 });
 function Enviar() {
     var cpf = id_cpf.value

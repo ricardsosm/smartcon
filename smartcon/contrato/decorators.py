@@ -3,7 +3,7 @@ from django.contrib import messages
 from cliente.models import Cliente
 from .models import Contrato
 
-def permition_required(view_func):
+def permition_conrequired(view_func):
 	def _wrapper(request, *args,**kwargs):
 		pk = kwargs['pk']
 		contrato = get_object_or_404(Contrato,pk=pk)

@@ -18,7 +18,7 @@ Visual studio >= 2014
 - Django 2.1
 - Maria db 10.1
 
-# Instalando o virtalenv
+# Instalando o virtualenv
 ```
 sudo pip install virtualenv
 ```
