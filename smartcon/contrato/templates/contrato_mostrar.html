@@ -26,12 +26,15 @@
                         {{ recibo.from_adress }}</a></th>
                     </thead><thead>
                         <th >Gas Usado</th>
-                        <th >{{ recibo.gasUsed}}</th>                    </thead><thead>
+                        <th >{{ recibo.gasUsed}}</th>                  
+                    </thead><thead>
                         <th >Versão de Software</th>
                         <th >{{ contrato.solidity_version}}</th>  
-                        </thead><thead>
+                    </thead><thead>
                         <th >Publicação</th>
-                        <th >{{ recibo.create_at }}</th>                     
+                        <th >{{ recibo.create_at }}</th>                    </thead><thead>
+                        <th >Contagem</th>
+                        <th >{{ conta }}</th>                     
                     </thead><thead>
                         <th >Status</th>
                         <th ><center><div class="{% if recibo.status %}led-green{% else %}led-red{% endif %}"></div></center></th>                                     

@@ -15,7 +15,7 @@ class Fabrica:
 
   def __init__(self,file_path,key):
 
-    self.Web3(HTTPProvider(settings.PROVEDOR))
+    self.w3 = Web3(HTTPProvider(settings.PROVEDOR))
     compiled_sol = self.compile_source_file(file_path)
     contract_id, contract_interface = compiled_sol.popitem()
     self.myabi=contract_interface['abi']
@@ -51,7 +51,7 @@ class Fabrica:
       self.tx_receipt = self.w3.eth.getTransactionReceipt(tx_hash)
       if self.tx_receipt:
         return self.tx_receipt
-      time.sleep(20)
+      time.sleep(2)
 
    
 
