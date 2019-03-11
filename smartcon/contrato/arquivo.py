@@ -30,15 +30,27 @@ def Grava(form):
 	main = '\n}'
 	arq.write(main)
 
-	arq.close
+	arq.close()
 
 def Apaga(con):
 
 	caminho = 'contract/'+ str(con.id_cliente.id)
 	arquivo = con.name + '.sol'
 	apaga = caminho + arquivo
-	print(caminho)
 	dir = os.listdir(caminho)
 	for file in dir:
 		if file == arquivo:
 			os.remove(caminho + '/'+ file)
+
+def GravaAbi(con):
+
+	caminho = 'contract/'+ str(con.id_cliente.id)
+	if not os.path.exists(caminho):
+		os.mkdir(caminho)
+	nomearq = str(con.name) + "_abi.abi"
+	grava = caminho + '/' + nomearq 
+
+	arq = open(grava,"a")
+	arq.write("abi = "+con.abi)
+	arq.close()
+

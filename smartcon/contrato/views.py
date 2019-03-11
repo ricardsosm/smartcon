@@ -6,8 +6,8 @@ from cliente.models import Cliente
 from .models import Contrato, ContratActions
 from carteira.models import Carteira
 from .forms import ContratoNovoForm, EditarContrato,MostrarContrato,PublicarContrato
-from itertools import chain
-from .arquivo import Grava, Apaga
+from itertools import chain 
+from .arquivo import Grava, Apaga, GravaAbi
 from .fabrica import Fabrica
 from web3 import Web3, HTTPProvider
 from django.conf import settings
@@ -102,10 +102,19 @@ def contrato_mostrar(request,pk):
 		action = None
 	if request.method == 'POST':
 		return redirect('con:contrato')
+
+	w3 = Web3(HTTPProvider(settings.PROVEDOR))
+	cona = ContratActions.objects.get(id_contrato = contrato.pk)
+	conadress = cona.contract_address
+	myContract = w3.eth.contract(address=conadress, abi=contrato.abi)
+	one = myContract.functions.getCount().call()
+
 	context = {
 		'contrato':contrato,
-		'recibo': action
+		'recibo': action,
+		'conta': one
 	}
+
 	return render(request, template_name, context)
 
 @login_required
@@ -126,11 +135,12 @@ def contrato_puclicar(request,pk):
 		g = str(numcontrato)
 		if g[0] == 'b':
 			contratonum = Web3.toHex(numcontrato)
-			request.POST.update({'abi':fab.abi})
+			GravaAbi(contrato)	
 			request.POST.update({'hash_address':contratonum})			
 			form = PublicarContrato(request.POST or None, instance=contrato)	
 			if form.is_valid():							
 				form.save()
+				contrato.abi = json.dumps(fab.abi)
 				contrato.ativo = False
 				contrato.save()
 				return redirect('con:valrecibo', pk)
@@ -152,7 +162,7 @@ def contrato_puclicar(request,pk):
 @permition_conrequired
 def recibo(request,pk):
 	template_name = 'recibo.html'
-	contrato = Contrato.objects.get(pk=pk)	
+	contrato = Contrato.objects.get(pk=pk)
 	w3 = Web3(HTTPProvider(settings.PROVEDOR))
 	while True:
 		recibo = w3.eth.getTransactionReceipt(contrato.hash_address)
@@ -179,6 +189,13 @@ def recibo(request,pk):
 	
 	cliente = Cliente.objects.filter(id_usuario = request.user.pk)
 
+
+	cona = ContratActions.objects.get(id_contrato = contrato.pk)
+	conadress = cona.contract_address	
+	myContract = w3.eth.contract(address=conadress, abi=contrato.abi)
+	one = myContract.functions.getCount().call()
+	print(one)
+
 	context = {
 		'contrato': contrato,
 		'cliente':cliente,
@@ -190,7 +207,6 @@ def recibo(request,pk):
 @permition_conrequired
 def valrecibo(request,pk):
 	contrato = Contrato.objects.get(pk=pk)
-	print(contrato.ativo) 
 	if contrato.ativo == None:
 		messages.success(request,"Voce precisa Publicar o Comtrato antes",extra_tags='text-danger')
 		return redirect('con:contrato')
