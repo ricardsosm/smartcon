@@ -1,11 +1,10 @@
 {% extends "base.html" %} 
 {% block content %}
-
 <div class="row">
     <div class="col-md-12">
         <ul class="breadcrumb">
             {% block breadcrumb %}
-            <li><a href="{% url 'sis:painel' %}">Meu Painel</a></li>
+            <li><a href="{% url 'con:contrato' %}">Contrato Painel</a></li>
             <li>&nbsp; / &nbsp;</li>
             {% endblock %}
         </ul>
@@ -13,59 +12,44 @@
     <div class="col-sm-3">
         <div class="col-md-12">
             {% block menu_options %}
-                <ul class="breadcrumb">Minhas Contas de Clientes</ul>
-                <ul>
-                    {% for cli in cliente %}
-                   <li><a href="{% url 'cli:cliente_mostrar' cli.pk %}">
-                        <i class="fa fa-address-book"></i>
-                        {{ cli.name }}
-                        </a>
-                     {% empty %}
-                     <p>Nenhuma conta</p>
-                    </li>
-                    {% endfor %}
-                </ul>
-                <ul class="breadcrumb">Meus Contratos</ul>
-                <ul>
-                    {% for con in contrato %}
-                   <li><a href="{% url 'con:moscon' con.id %}">
-                        <i class="fa fa-address-book"></i>
-                        {{ con.name }}
-                        </a>
-                     {% empty %}
-                     <p>Nenhum contrato</p>
-                    </li>
-                    {% endfor %}
-                </ul> 
-                <ul class="breadcrumb">Minha Conta de Usuario</ul>
-                <ul>
-                    <li class="text-success">Ultimo IP {{ user.ip_last }}</li>
-                    <li><a href="{% url 'usuario:editar' %}">
-                        <i class="fa fa-cog"></i>
-                        Editar Conta
-                        </a>
-                    </li>
-                    <li><a href="{% url 'usuario:editar_senha' %}">
-                        <i class="fa fa-lock"></i>
-                        Editar Senha
-                        </a>
-                    </li>
-                    <li><a href="{% url 'usuario:usuario_apagar' user.pk %}">
-                        <i class="fa fa-times-circle"></i>
-                        Excluir Conta
-                        </a>
-                    </li>
-                </ul> 
-            {% endblock %}      	
+            <ul class="breadcrumb">Painel de Contratos</ul>
+            <ul>
+               <li><a href="{% url 'con:contrato' %}">
+                    <i class="fa fa-address-book"></i>
+                    Listar Contratos
+                    </a></li>
+               <li><a href="{% url 'con:contrato_novo' %}">
+                    <i class="fa fa-lock"></i>
+                    Novo Contrato
+                    </a>
+                </li>
+            </ul>
+            <ul class="breadcrumb">Contas de Clientes</ul>
+            <ul><li>
+                {% for cli in cliente %}
+               <a href="{% url 'cli:cliente_mostrar' cli.pk  %}">
+                    <i class="fa fa-address-book"></i>
+                    {{ cli.name }}
+                    </a>
+                 {% empty %}
+                 <p>Nenhuma conta</p>
+                </li>
+                {% endfor %}
+            </ul>
+            <ul class="breadcrumb"></ul>
+            <ul>
+                <li class="text-success">Ultimo IP {{ user.ip_last }}</li>
+            </ul> 
+            {% endblock %}          
         </div>
     </div>
     <div class="col-sm-9 float-right">
-        {% block dash_content %}
-      <div class="inner">
+       {% block dash_content %}
+       <div class="inner">
            <h2>Meus Contratos</h2>
             <form class="" method="POST">
                 {% csrf_token %}
-                <input name="pescli" type=""></th>
+                <input name="pescli" type="">
               
                 <button method="POST" class="btn btn-primary"> 
                 Pesquizar</button>
@@ -114,7 +98,7 @@
                         </thead>
                     </table>              
                </div>
-        </div>       
+        </div>         
         {% endblock %}
     </div>
 </div>
