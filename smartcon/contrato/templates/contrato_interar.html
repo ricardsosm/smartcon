@@ -1,0 +1,48 @@
+{% extends "contrato.html" %}
+{% block dash_content  %}
+<div class="container">
+    <div class="account-wall col">
+        <h2 class="text-center">Interação(s) com contrato {{ contrato.name }}</h2>
+        <form class="text-center" method="POST">
+            {% csrf_token %}
+            <fieldset class="carteira" >
+                <table class="table">
+                    <thead class="table-primary">
+                      <th >Nome : <font color="green">{{ contrato.name }}</font></th>
+                      <th >Cliente: <font color="green">{{ contrato.id_cliente.name }}</font></th>
+                    </thead>
+                {% if action %}
+                    <thead class="thead-light">
+                        <th >Bloco</th>
+                        <th >Identificação da Transação</th>
+                        <th >Data</th>
+                        <th >Custo</th>
+                        <th >tatus</th>
+                    </thead>
+                {% for act in action %}
+                  <th>{{ act.blocknumber }}</th>
+                  <th><a href="{% url 'con:moscon' contrato.id %}">{{ act.transactionHash}}</a></th>
+                  <th>{{ act.create_at}}</th>
+                  <th>{{ act.gasUsed}}</th>
+                  <th>{{ act.status}}</th>
+                
+                {% endfor %}
+                {% else %}                          
+                <th><p>Nenhuma ação encontrada</p></th>
+                {% endif %} 
+                    
+                </table>
+
+                <div class="text-center login">
+                  <a href="{% url 'con:contrato_listar' %}">
+                  <button type="button" class="btn btn-lg btn-secondary">
+                            Fechar
+                  </button>
+                  </a>
+                </div>
+            </fieldset>
+        </form>  
+    </div>
+    <br>
+</div>
+{% endblock %}

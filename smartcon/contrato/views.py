@@ -10,17 +10,27 @@ from itertools import chain
 from .arquivo import Grava, Apaga, GravaAbi
 from .fabrica import Fabrica
 from web3 import Web3, HTTPProvider
+from eth_account import Account
 from django.conf import settings
 import json, time
 
 @login_required
 def contrato(request):
 	cliente = Cliente.objects.filter(id_usuario = request.user.pk)
+	template_name = 'contrato.html'
+	context = {
+		'cliente':cliente,
+	}
+	return render(request, template_name,context)
+
+@login_required
+def contrato_listar(request):
+	cliente = Cliente.objects.filter(id_usuario = request.user.pk)
 	contrato = []
 	for cli in cliente:
 		contrato = list(chain(contrato, Contrato.objects.all().filter(id_cliente = cli.id)))
 
-	template_name = 'contrato.html'
+	template_name = 'contrato_listar.html'
 	pesquisa =''
 	if request.method == 'POST':
 		pesquisa = request.POST.get("pescli")
@@ -45,11 +55,11 @@ def contrato_novo(request):
 			Grava(request)
 			form.save()
 			messages.success(request,"Contrato criado com sucesso",extra_tags='text-success')
-			return redirect('con:contrato')
+			return redirect('con:contrato_listar')
 	else:
 		form = ContratoNovoForm(user=request.user.id)	
 	context = {
-		'form': form,
+		'form':form,
 		'cliente': cliente,
 		'carteira': carteira
 	}
@@ -67,7 +77,7 @@ def contrato_apaga(request,pk):
 	Apaga(contrato)
 	contrato.delete()
 	messages.success(request,"Contrato apagado com sucesso",extra_tags='text-success')
-	return redirect('con:contrato')
+	return redirect('con:contrato_listar')
 
 @login_required
 @permition_conrequired
@@ -76,14 +86,14 @@ def contrato_editar(request,pk):
 	contrato = Contrato.objects.get(pk=pk)
 	if contrato.ativo == True:
 		messages.success(request,"Este contrato não pode ser mais editado",extra_tags='text-danger')
-		return redirect('con:contrato')
+		return redirect('con:contrato_listar')
 
 	if request.method == 'POST':
 		form = EditarContrato(request.POST or None, instance=contrato)
 		if form.is_valid():
 			form.save()
 			messages.success(request,"Contrato salvo com sucesso",extra_tags='text-success')
-		return redirect('con:contrato')		
+		return redirect('con:contrato_listar')		
 	else:
 		form = EditarContrato(instance=contrato)
 	context = {
@@ -101,7 +111,7 @@ def contrato_mostrar(request,pk):
 	except:
 		action = None
 	if request.method == 'POST':
-		return redirect('con:contrato')
+		return redirect('con:contrato_listar')
 
 	w3 = Web3(HTTPProvider(settings.PROVEDOR))
 	cona = ContratActions.objects.get(id_contrato = contrato.pk)
@@ -124,7 +134,7 @@ def contrato_puclicar(request,pk):
 	contrato = Contrato.objects.get(pk=pk)
 	if contrato.ativo == True:
 		messages.success(request,"Este contrato ja esta publicado",extra_tags='text-danger')
-		return redirect('con:contrato')
+		return redirect('con:contrato_listar')
 	cliente = Cliente.objects.filter(id_usuario = request.user.pk)
 	form = PublicarContrato(instance=contrato)
 	if request.method == 'POST':
@@ -189,17 +199,27 @@ def recibo(request,pk):
 	
 	cliente = Cliente.objects.filter(id_usuario = request.user.pk)
 
-
+	'''
 	cona = ContratActions.objects.get(id_contrato = contrato.pk)
 	conadress = cona.contract_address	
 	myContract = w3.eth.contract(address=conadress, abi=contrato.abi)
-	one = myContract.functions.getCount().call()
-	print(one)
+	#one = myContract.functions.getCount().call()
 
+	acct = Account.privateKeyToAccount(contrato.wallet_private_key);
+	construct_txn = myContract.functions.incrementCounter().buildTransaction({
+		'nonce': w3.eth.getTransactionCount(acct.address),
+		'gas': 1728712,
+		'chainId': 3
+	})
+	signed = acct.signTransaction(construct_txn)
+	one = w3.eth.sendRawTransaction(signed.rawTransaction)
+	print(one)
+	'''
 	context = {
 		'contrato': contrato,
 		'cliente':cliente,
 		'recibo': recibo,
+
 	}
 	return render(request, template_name, context)
 
@@ -209,9 +229,22 @@ def valrecibo(request,pk):
 	contrato = Contrato.objects.get(pk=pk)
 	if contrato.ativo == None:
 		messages.success(request,"Voce precisa Publicar o Comtrato antes",extra_tags='text-danger')
-		return redirect('con:contrato')
+		return redirect('con:contrato_listar')
 	template_name = 'valida_recibo.html'
 	context = {
 		'pk': pk
 	}
+	return render(request, template_name, context)
+
+@login_required
+@permition_conrequired
+def contrato_interar(request,pk):
+	contrato = Contrato.objects.get(pk=pk)
+	action = ContratActions.objects.all().filter(id_contrato = contrato.id)
+	template_name = 'contrato_interar.html'
+	context = {
+		'contrato': contrato,
+		'action': action
+	}
+	print(action)
 	return render(request, template_name, context)

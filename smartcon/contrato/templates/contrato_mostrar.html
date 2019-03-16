@@ -32,7 +32,8 @@
                         <th >{{ contrato.solidity_version}}</th>  
                     </thead><thead>
                         <th >Publicação</th>
-                        <th >{{ recibo.create_at }}</th>                    </thead><thead>
+                        <th >{{ recibo.create_at }}</th>                
+                    </thead><thead>
                         <th >Contagem</th>
                         <th >{{ conta }}</th>                     
                     </thead><thead>
@@ -46,9 +47,11 @@
                 </table>
 
                 <div class="text-center login">
-                    <button  class="btn btn-lg btn-secondary">
+                <a href="{% url 'con:intercon'  contrato.id %}">
+                    <button type="button" class="btn btn-lg btn-secondary">
                             Fechar
                     </button>
+                </a>
                 </div>
             </fieldset>
         </form>  
