@@ -2,7 +2,7 @@
 {% block content %}
 <div class="row">
     <div  class="col-md-12">
-        <ul class="breadcrumb">
+        <ul class="breadcrumb redondo">
             {% block breadcrumb %}
             <li><a href="{% url 'cli:cliente' %}">Painel Clientes</a></li>
             <!--<li>&nbsp; / &nbsp;</li>-->
@@ -12,7 +12,7 @@
 	<div class="col-sm-3">
         <div class="col-md-12">
             {% block menu_options %}
-            <ul class="breadcrumb">Contas de Clientes</ul>
+            <ul class="breadcrumb redondo">Contas de Clientes</ul>
             <ul>
                <li><a href="{% url 'cli:cliente' %}">
                     <i class="fa fa-address-book"></i>
@@ -24,7 +24,7 @@
                     </a>
                 </li>
             </ul>
-            <ul class="breadcrumb">Carteira</ul>
+            <ul class="breadcrumb redondo">Carteira</ul>
             <ul>
                <li><a href="{% url 'cli:carteira' %}">
                     <i class="fa fa-address-book"></i>

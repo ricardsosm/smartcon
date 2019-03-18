@@ -3,7 +3,7 @@
 {% block content %}
 <div class="row">
     <div class="col-md-12">
-        <ul class="breadcrumb">
+        <ul class="breadcrumb redondo">
             {% block breadcrumb %}
             <li><a href="{% url 'con:contrato' %}">Contrato Painel</a></li>
             <li>&nbsp; / &nbsp;</li>
@@ -13,7 +13,7 @@
     <div class="col-sm-3">
         <div class="col-md-12">
             {% block menu_options %}
-            <ul class="breadcrumb">Painel de Contratos</ul>
+            <ul class="breadcrumb redondo">Painel de Contratos</ul>
             <ul>
                <li><a href="{% url 'con:contrato_listar' %}">
                     <i class="fa fa-address-book"></i>
@@ -25,7 +25,7 @@
                     </a>
                 </li>
             </ul>
-            <ul class="breadcrumb">Contas de Clientes</ul>
+            <ul class="breadcrumb redondo">Contas de Clientes</ul>
             <ul><li>
                 {% for cli in cliente %}
                <a href="{% url 'cli:cliente_mostrar' cli.pk  %}">
@@ -37,7 +37,7 @@
                 </li>
                 {% endfor %}
             </ul>
-            <ul class="breadcrumb"></ul>
+            <ul class="breadcrumb redondo"></ul>
             <ul>
                 <li class="text-success">Ultimo IP {{ user.ip_last }}</li>
             </ul> 
@@ -46,31 +46,35 @@
     </div>
     <div class="col-sm-9 float-right">
        {% block dash_content %}
-       <div class="row ">
-          <h2 style="width:100%">Modelos de Contratos</h2>
+       <div class="row text-center sem">
+          <h2 style="width:100%">Escolha seu Contratos</h2>
           <div class="col ">
-            <div class=" modelscon account-wall">
-              1 Criação de Tokens<br>
-              <figure class="foto">                   
-                <div id="consultoria">
-                    <figcaption>
-                        
-                         <p>Você mesmo pode criar sua moeda pessoal atravez deste contrato e distribui-lo como quizer</p>
-                    </figcaption>
-                </div>    
-              </figure>
-            
-              
+            <a href="{% url 'con:contrato' %}">
+            <div class="modelscon account-wall ">
+               Criação de Tokens<br>
+               <img src="{% static 'img/eth.png' %}" >
+               <p>Você mesmo pode criar sua moeda pessoal atravez deste contrato e distribui-lo como quizer</p>  
             </div>
-            <div class="modelscon account-wall">4</div>
+            </a>
+            <a href="{% url 'con:contrato' %}">
+              <div class="modelscon account-wall">4</div>
+            </a>
           </div>
           <div class="col " >
-           <div class="modelscon account-wall">2 Votação</div>
-           <div class="modelscon account-wall">5</div>
+            <a href="{% url 'con:contrato' %}">
+              <div class="modelscon account-wall">2 Votação</div>
+            </a>
+            <a href="{% url 'con:contrato' %}">
+              <div class="modelscon account-wall">5</div>
+            </a>
           </div> 
           <div class="col" >
-           <div class="modelscon account-wall">3 Pagamento</div>
-           <div class="modelscon account-wall">6</div>
+            <a href="{% url 'con:contrato' %}">
+              <div class="modelscon account-wall">3 Pagamento</div>
+            </a>
+            <a href="{% url 'con:contrato' %}">
+              <div class="modelscon account-wall">6</div>
+            </a>
           </div> 
         </div>         
         {% endblock %}

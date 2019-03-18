@@ -2,7 +2,7 @@
 {% block content %}
 <div class="row">
     <div class="col-md-12">
-        <ul class="breadcrumb">
+        <ul class="breadcrumb redondo">
             {% block breadcrumb %}
             <li><a href="{% url 'con:contrato' %}">Contrato Painel</a></li>
             <li>&nbsp; / &nbsp;</li>
@@ -12,7 +12,7 @@
     <div class="col-sm-3">
         <div class="col-md-12">
             {% block menu_options %}
-            <ul class="breadcrumb">Painel de Contratos</ul>
+            <ul class="breadcrumb redondo">Painel de Contratos</ul>
             <ul>
                <li><a href="{% url 'con:contrato' %}">
                     <i class="fa fa-address-book"></i>
@@ -24,7 +24,7 @@
                     </a>
                 </li>
             </ul>
-            <ul class="breadcrumb">Contas de Clientes</ul>
+            <ul class="breadcrumb redondo">Contas de Clientes</ul>
             <ul><li>
                 {% for cli in cliente %}
                <a href="{% url 'cli:cliente_mostrar' cli.pk  %}">
@@ -36,7 +36,7 @@
                 </li>
                 {% endfor %}
             </ul>
-            <ul class="breadcrumb"></ul>
+            <ul class="breadcrumb redondo"></ul>
             <ul>
                 <li class="text-success">Ultimo IP {{ user.ip_last }}</li>
             </ul> 

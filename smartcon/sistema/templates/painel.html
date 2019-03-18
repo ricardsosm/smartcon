@@ -3,7 +3,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <ul class="breadcrumb">
+        <ul class="breadcrumb redondo">
             {% block breadcrumb %}
             <li><a href="{% url 'sis:painel' %}">Meu Painel</a></li>
             <li>&nbsp; / &nbsp;</li>
@@ -13,7 +13,7 @@
     <div class="col-sm-3">
         <div class="col-md-12">
             {% block menu_options %}
-                <ul class="breadcrumb">Minhas Contas de Clientes</ul>
+                <ul class="breadcrumb redondo">Minhas Contas de Clientes</ul>
                 <ul>
                     {% for cli in cliente %}
                    <li><a href="{% url 'cli:cliente_mostrar' cli.pk %}">
@@ -25,7 +25,7 @@
                     </li>
                     {% endfor %}
                 </ul>
-                <ul class="breadcrumb">Meus Contratos</ul>
+                <ul class="breadcrumb redondo">Meus Contratos</ul>
                 <ul>
                     {% for con in contrato %}
                    <li><a href="{% url 'con:moscon' con.id %}">
@@ -37,7 +37,7 @@
                     </li>
                     {% endfor %}
                 </ul> 
-                <ul class="breadcrumb">Minha Conta de Usuario</ul>
+                <ul class="breadcrumb redondo">Minha Conta de Usuario</ul>
                 <ul>
                     <li class="text-success">Ultimo IP {{ user.ip_last }}</li>
                     <li><a href="{% url 'usuario:editar' %}">
