@@ -3,11 +3,11 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .decorators import permition_conrequired
 from cliente.models import Cliente
-from .models import Contrato, ContratActions
+from .models import Contrato, ContratActions,ContratToken
 from carteira.models import Carteira
 from .forms import ContratoNovoForm, EditarContrato,MostrarContrato,PublicarContrato
 from itertools import chain 
-from .arquivo import Grava, Apaga, GravaAbi
+from .arquivo import Token, Apaga, GravaAbi
 from .fabrica import Fabrica
 from web3 import Web3, HTTPProvider
 from eth_account import Account
@@ -41,29 +41,6 @@ def contrato_listar(request):
 	}
 	return render(request, template_name,context)
 
-@login_required
-def contrato_novo(request):
-	template_name = 'contrato_register.html'
-	cliente = Cliente.objects.filter(id_usuario = request.user.id)
-	carteira = []
-	for cli in cliente:
-		carteira = list(chain(carteira, Carteira.objects.all().filter(id_cliente = cli.id)))
-
-	if request.method == 'POST':
-		form = ContratoNovoForm(request.POST,user=request.user.id)
-		if form.is_valid():
-			Grava(request)
-			form.save()
-			messages.success(request,"Contrato criado com sucesso",extra_tags='text-success')
-			return redirect('con:contrato_listar')
-	else:
-		form = ContratoNovoForm(user=request.user.id)	
-	context = {
-		'form':form,
-		'cliente': cliente,
-		'carteira': carteira
-	}
-	return render(request, template_name, context)
 
 @login_required
 def contrato_pesquisa(request):
@@ -117,7 +94,8 @@ def contrato_mostrar(request,pk):
 	cona = ContratActions.objects.get(id_contrato = contrato.pk)
 	conadress = cona.contract_address
 	myContract = w3.eth.contract(address=conadress, abi=contrato.abi)
-	one = myContract.functions.getCount().call()
+	#one = myContract.functions.getCount().call()
+	one = 'none'
 
 	context = {
 		'contrato':contrato,
@@ -142,14 +120,16 @@ def contrato_puclicar(request,pk):
 		path = 'contract/'+str(contrato.id_cliente.id) +'/'+contrato.name+'.sol'
 		fab = Fabrica(path,contrato.wallet_private_key)
 		numcontrato = fab.enviar()	
+		print(numcontrato)
 		g = str(numcontrato)
 		if g[0] == 'b':
 			contratonum = Web3.toHex(numcontrato)
-			GravaAbi(contrato)	
-			request.POST.update({'hash_address':contratonum})			
+			#GravaAbi(contrato)	
+			#request.POST.update({'hash_address':contratonum})			
 			form = PublicarContrato(request.POST or None, instance=contrato)	
 			if form.is_valid():							
-				form.save()
+				#form.save()
+				contrato.hash_address = contratonum 
 				contrato.abi = json.dumps(fab.abi)
 				contrato.ativo = False
 				contrato.save()
@@ -247,4 +227,35 @@ def contrato_interar(request,pk):
 		'action': action
 	}
 	print(action)
+	return render(request, template_name, context)
+
+@login_required
+def contrato_token(request):
+	template_name = 'contrato_token.html'
+	cliente = Cliente.objects.filter(id_usuario = request.user.id)
+	carteira = []
+	for cli in cliente:
+		carteira = list(chain(carteira, Carteira.objects.all().filter(id_cliente = cli.id)))
+
+	if request.method == 'POST':
+		form = ContratoNovoForm(request.POST,user=request.user.id)
+		if form.is_valid():
+			Token(request)
+			form.save()
+			token = ContratToken()
+			token.token = request.POST.get("token")
+			token.simbolo = request.POST.get("simbolo")
+			token.quantidade = request.POST.get("qtde")
+			token.digitos = request.POST.get("digitos")
+			token.id_contrato = Contrato.objects.get(pk=form.instance.id)
+			token.save()
+			messages.success(request,"Contrato criado com sucesso",extra_tags='text-success')
+			return redirect('con:contrato_listar')
+	else:
+		form = ContratoNovoForm(user=request.user.id)	
+	context = {
+		'form':form,
+		'cliente': cliente,
+		'carteira': carteira
+	}
 	return render(request, template_name, context)

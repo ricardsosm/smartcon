@@ -32,6 +32,7 @@ function ver(){
 }
 
 $('.close').alert();
+
 /**
  * jquery.mask.js
  * @version: v1.14.15

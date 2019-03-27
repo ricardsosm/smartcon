@@ -6,7 +6,6 @@ app_name = 'con'
 urlpatterns = [
 	path('contrato/',views.contrato ,name='contrato'),
 	path('contrato-listar/',views.contrato_listar ,name='contrato_listar'),
-	path('contrato-novo/',views.contrato_novo ,name='contrato_novo'),
 	path('contrato-pesquisa/',views.contrato_pesquisa ,name='pescon'),
 	path('contrato-apagar/<int:pk>',views.contrato_apaga ,name='delcon'),
 	path('contrato-editar/<int:pk>',views.contrato_editar ,name='edicon'),
@@ -15,4 +14,5 @@ urlpatterns = [
 	path('contrato-recibo/<int:pk>',views.recibo,name='recibo'),
 	path('contrato-valrecibo/<int:pk>',views.valrecibo,name='valrecibo'),
 	path('contrato-interar/<int:pk>',views.contrato_interar,name='intercon'),
+	path('contrato-token/',views.contrato_token ,name='contrato_token'),
 ]

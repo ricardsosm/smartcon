@@ -22,6 +22,9 @@
                         </div>
                         <div class="car_field">
                             {{ field }}
+                            {% if field.html_name   == "private_key" %}
+                                <span id ='show' action="hide"><i class="fa fa-eye"></i></span>
+                            {% endif %}
                         </div>
                     </div>
                 <div class="erro_login">

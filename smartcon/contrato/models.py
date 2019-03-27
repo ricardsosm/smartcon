@@ -34,3 +34,17 @@ class ContratActions(models.Model):
 		'Atualizado em',auto_now=True
 	)
 	id_contrato = models.ForeignKey(Contrato,on_delete=models.CASCADE)
+
+class ContratToken(models.Model):
+
+	token = models.CharField(blank=True, max_length=15, null=True)
+	simbolo = models.CharField(blank=True, max_length=5, null=True)
+	quantidade = models.CharField(blank=True, max_length=5, null=True)
+	digitos = models.CharField(blank=True, max_length=5, null=True)
+	create_at = models.DateTimeField(
+		'Criando em',auto_now_add=True
+	)
+	update_at = models.DateTimeField(
+		'Atualizado em',auto_now=True
+	)
+	id_contrato = models.ForeignKey(Contrato,on_delete=models.CASCADE)

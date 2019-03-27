@@ -18,7 +18,7 @@ class ContratoNovoForm(forms.ModelForm):
 	wallet_private_key = forms.CharField(widget=forms.HiddenInput(),label='')
 	wallet_address.widget.attrs.update({'size':'43'}) 
 	solidity_version = forms.CharField(widget=forms.HiddenInput(),label='')
-	solidity_version.widget.attrs.update({'value':'>=0.4.21 <0.6.0'})  
+	solidity_version.widget.attrs.update({'value':'>=0.4.24 <0.6.0'})  
 
 	class Meta:
 		model = Contrato
@@ -61,11 +61,11 @@ class PublicarContrato(forms.ModelForm):
 	wallet_address = forms.CharField(label='Carteira')
 	wallet_address.widget.attrs.update({'size':'43'}) 
 	solidity_version = forms.CharField(widget=forms.HiddenInput(),label='')
-	abi = forms.CharField(widget=forms.HiddenInput(),label='')
-	hash_address = forms.CharField(widget=forms.HiddenInput(),label='')
+	#abi = forms.CharField(widget=forms.HiddenInput(),label='')
+	#hash_address = forms.CharField(widget=forms.HiddenInput(),label='')
 
 	class Meta:
 		model = Contrato
 		
-		fields = ['name','id_cliente','wallet_address','hash_address','solidity_version','abi']
+		fields = ['name','id_cliente','wallet_address','solidity_version']
 		
