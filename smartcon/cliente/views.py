@@ -128,14 +128,16 @@ def carteira_apagar(request,pk):
 def carteira_amostra(request,pk):
 	template_name = 'carteira_amostra.html'
 	carteira = Carteira.objects.get(pk=pk)
-	tokens = CarteiraToken.objects.filter(id_carteira=carteira.id)
-
-	#contrato = Contrato.objects.get(pk=tokens.id_contrato)
-
+	tok = CarteiraToken.objects.filter(id_carteira=carteira.id)
+	if tok:
+		for tk in tok:
+			tokens = ContratToken.objects.filter(pk = tk.id_token)
+	else:
+		tokens = []
 	w3 = Web3(HTTPProvider(settings.PROVEDOR))
 	bal = w3.eth.getBalance(carteira.public_key)
 	for token in tokens:
-		print(token.contract_address)
+		print(token.id)
 		#erc20 = w3.eth.contract(address=address,abi=abi)
 	carteira.saldo = bal
 	form = MostrarCarteira(instance=carteira)

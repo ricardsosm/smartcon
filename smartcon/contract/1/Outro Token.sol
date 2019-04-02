@@ -1,4 +1,4 @@
-pragma solidity >=0.4.24 <0.6.0;
+pragma solidity >=0.4.25 <0.6.0;
 
 contract ERC20Interface {
 	function totalSupply() public constant returns (uint);
@@ -15,14 +15,28 @@ contract ApproveAndCallFallBack {
 	function receiveApproval(address from, uint256 tokens, address token, bytes data) public;
 }
 
-contract Owned {
+contract Outrotoken is ERC20Interface{
+
+
 	address public owner;
 	address public newOwner;
+	string public symbol;
+	string public  name;
+	uint8 public decimals;
+	uint public _totalSupply;
 
+	mapping(address => uint) balances;
+	mapping(address => mapping(address => uint)) allowed;
 	event OwnershipTransferred(address indexed _from, address indexed _to);
 
 	constructor() public {
 		owner = msg.sender;
+		symbol = "otk";
+		name = "Outrotoken";
+		decimals = 18;
+		_totalSupply = 180000000000000000;
+		balances[0x97Ee5e0D75C635A56011567a8056b8B5B54D6829] = _totalSupply;
+		emit Transfer(address(0), 0x97Ee5e0D75C635A56011567a8056b8B5B54D6829, _totalSupply);
 	}
 
 	modifier onlyOwner {
@@ -39,25 +53,6 @@ contract Owned {
 		emit OwnershipTransferred(owner, newOwner);
 		owner = newOwner;
 		newOwner = address(0);
-	}
-}
-
-contract Outrotoken is ERC20Interface, Owned {
-
-	string public symbol;
-	string public  name;
-	uint8 public decimals;
-	uint public _totalSupply;
-	mapping(address => uint) balances;
-	mapping(address => mapping(address => uint)) allowed;
-
-	constructor() public {
-		symbol = "otk";
-		name = "Outrotoken";
-		decimals = 18;
-		_totalSupply = 3240000000000000000;
-		balances[0x01f00A899A307F02e9A0BD2cA2f3ee2c1Cc4D0C1] = _totalSupply;
-		emit Transfer(address(0), 0x01f00A899A307F02e9A0BD2cA2f3ee2c1Cc4D0C1, _totalSupply);
 	}
 
 	function safeAdd(uint a, uint b) public pure returns (uint c) {

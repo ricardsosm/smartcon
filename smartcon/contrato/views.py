@@ -124,15 +124,14 @@ def contrato_puclicar(request,pk):
 		request.POST = request.POST.copy()
 		path = 'contract/'+str(contrato.id_cliente.id) +'/'+contrato.name+'.sol'
 		fab = Fabrica(path,carteira.private_key)
-		#numcontrato = fab.enviar()	
-		numcontrato = 'bx01234234'
+		numcontrato = fab.enviar()	
 		g = str(numcontrato)
 		if g[0] == 'b':
 			contratonum = Web3.toHex(numcontrato)		
 			form = PublicarContrato(request.POST or None, instance=contrato)	
 			if form.is_valid():							
 				contrato.hash_address = contratonum 
-				contrato.abi = json.dumps(fab.abi)
+				contrato.abi = json.dumps(fab.myabi)
 				contrato.ativo = False
 				contrato.save()
 

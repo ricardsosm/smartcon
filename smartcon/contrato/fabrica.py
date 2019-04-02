@@ -24,9 +24,7 @@ class Fabrica:
       bytecode=contract_interface['bin']
     )
     acct = Account.privateKeyToAccount(key);
-    self.abi = (contract_.abi)
-    #print(type(self.abi))
-    #print(self.abi)
+
     
     construct_txn = contract_.constructor().buildTransaction({
       'from': acct.address,

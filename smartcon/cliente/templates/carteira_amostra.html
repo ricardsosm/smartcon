@@ -40,15 +40,19 @@
                     </div>
                 </div> 
                 <table class="table">
+                    {% if tokens %}
                     <thead class="thead-light">
                           <th >Nome</th>
                           <th >simbolo</th>
                           <th >Saldo</th>
                     </thead><thead>
+                    {% endif %}
                     {% for token in tokens %}
                         <th >{{ token.token }}</th>
                         <th >{{ token.simbolo }}</th>
                         <th ></th>
+                    {% empty %}
+                    Nunhum Token encontrado
                     {% endfor %}
                     </thead>
                 </table>
