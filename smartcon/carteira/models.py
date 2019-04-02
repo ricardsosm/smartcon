@@ -15,4 +15,10 @@ class Carteira(models.Model):
 	)
 	id_cliente = models.ForeignKey(Cliente,on_delete=models.CASCADE)
 
+	def __str__(self):
+		return self.name
 
+class CarteiraToken(models.Model):
+
+	id_token = models.IntegerField(null=True, blank=True)
+	id_carteira = models.ForeignKey(Carteira,on_delete=models.CASCADE)

@@ -7,12 +7,15 @@ body {
     margin: 0 auto 0 auto;
     padding:0;
 }
+.redondo {
+  border-radius: 10px;
+}
 .mainbody {
     background-color: white;
-    height: auto;
     min-height: 550px;
+    min-width: 200px;
     margin: 0 20 0 20;
-    padding: 25px;
+    padding: 20px;
     opacity: 0.93;
 }
 .mainbody img{
@@ -22,8 +25,8 @@ body {
     padding:10;
 }
 .mr-3 {
-	float: left;
-    max-width:300px;
+	  float: left;
+    max-width:200px;
     max-height:250px;
     width: auto;
     height: auto;
@@ -31,7 +34,7 @@ body {
 }
 .mr-4 {
 	float: right;
-    max-width:300px;
+    max-width:200px;
     max-height:250px;
     width: auto;
     height: auto;
@@ -47,11 +50,19 @@ body {
 
 .painel-editar {
 	width: 420px;
+  min-width: 200px;
 	float: right;
 }
 .resset {
   color: blue;
 	width: 670px;
+}
+.token {
+  padding-left:100px;
+
+  color: green;
+  width: 600px;
+
 }
 .obs {
   position: relative;
@@ -283,19 +294,36 @@ body {
 /* modelos de contratos  */
 
 .modelscon{
+  border-radius: 10px;
   font-size: 23px;
   height: 330px;
   width: 100%;
   padding: 5px;
 }
 .modelscon:hover {
-
+  background-color: #E0F8E0;
+  -moz-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.02);
   box-shadow:1px 1px 8px green;
-  opacity:0.8; 
+  opacity:0.9; 
 }
 .modelscon p{
   font-size: 18px;
   text-align: justify;
   color: blue; 
   padding: 15px;
+}
+.sem a:hover{
+  text-decoration:none; 
+}
+.media-dois{
+  margin: 0 auto 0 auto;
+  padding:0;
+  border-radius: 30px;
+  padding: 15px;
+  background-color:#E0F8E0;
+}
+.media-dois img{
+  width: 80px;
 }

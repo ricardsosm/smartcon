@@ -55,8 +55,8 @@ class MostrarCarteira(forms.ModelForm):
 	saldo = forms.FloatField(widget=forms.TextInput(attrs={'readonly':'True','id':'id_saldo_carteira'}))
 	public_key = forms.CharField(label='Chave Pública',widget=forms.TextInput(attrs={'readonly':'True'}))
 	public_key.widget.attrs.update({'size':'42'})  
-	private_key = forms.CharField(label='Chave Privada',widget=forms.TextInput(attrs={'readonly':'True'}))
-	private_key.widget.attrs.update({'size':'56'}) 
+	private_key = forms.CharField(label='Chave Privada',widget=forms.TextInput(attrs={'readonly':'True','type':'password'}))
+	private_key.widget.attrs.update({'size':'56','action':'hide'}) 
 
 	class Meta:
 		model = Carteira

@@ -5,6 +5,19 @@ $(document).ready(function(){
     var val = id_saldo_carteira.value / 1000000000000000000
     document.getElementById('id_saldo_carteira').value = val;
 });
+
+function mostrar() {
+ 
+    var current = $('#id_private_key').attr('action');
+      
+    if(current == 'hide'){
+        $('#id_private_key').attr('type','text').attr('action','show');
+    }
+    if(current == 'show'){
+        $('#id_private_key').attr('type','password').attr('action','hide');
+    }
+}
+
 function Enviar() {
     var cpf = id_cpf.value
     var tel = id_tel.value
@@ -19,19 +32,28 @@ function Enviar() {
     $('#id_tel').mask(tel, { reverse : true}); 
 }
 function vercli(cli){
-    num =cli.id_id_cliente
-    $("#id_car option[value2='' " + num + "']").remove();
-}
 
+    var num = cli.value;
+    //alert(num);
+    var myOpts = document.getElementById('id_car').options;
+
+    for (i = 1;i < myOpts.length; i++){
+
+        if(myOpts[i].value != num) {
+
+            $("#id_car option[value='"+i+"']").remove();
+        }
+    }
+}
 function ver(){ 
 
-    cha = $('#id_car option:selected').attr('value1');
-    document.getElementById('id_wallet_private_key').value = cha;
-    var num = document.getElementById('id_car').value;
-    document.getElementById('id_wallet_address').value = num;
+    cha = $('#id_car option:selected').attr('value2');
+    document.getElementById('id_id_carteira').value = cha;
+
 }
 
 $('.close').alert();
+
 /**
  * jquery.mask.js
  * @version: v1.14.15
