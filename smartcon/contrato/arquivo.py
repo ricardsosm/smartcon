@@ -13,7 +13,7 @@ def Token(form,key):
 	dig = form.POST.get("digitos")
 	qtde = form.POST.get("qtde")
 	valor = int(qtde)
-	qtde = str(valor)
+	qtde = qtde * int(dig)
 	caminho = 'contract/'+id_cliente
 	if not os.path.exists(caminho):
 		os.mkdir(caminho)
