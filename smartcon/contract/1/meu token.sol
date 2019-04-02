@@ -55,9 +55,9 @@ contract Mytoken is ERC20Interface, Owned {
 		symbol = "mtk";
 		name = "Mytoken";
 		decimals = 18;
-		_totalSupply = 18000000;
-		balances[0x01f00A899A307F02e9A0BD2cA2f3ee2c1Cc4D0C1] = _totalSupply;
-		emit Transfer(address(0), 0x01f00A899A307F02e9A0BD2cA2f3ee2c1Cc4D0C1, _totalSupply);
+		_totalSupply = 3240000000000000;
+		balances[None] = _totalSupply;
+		emit Transfer(address(0), None, _totalSupply);
 	}
 
 	function safeAdd(uint a, uint b) public pure returns (uint c) {

@@ -23,22 +23,35 @@
                         <div class="car_field">
                             {{ field }}
                             {% if field.html_name   == "private_key" %}
-                                <span id ='show' action="hide"><i class="fa fa-eye"></i></span>
+                                <a onclick = "mostrar()"><span id ='show'  action="hide"><i class="fa fa-eye"></i></span> </a>
                             {% endif %}
                         </div>
                     </div>
                 <div class="erro_login">
                         {{ field.errors }}
                 </div>
-                    {% endfor %}
-                    {% if form.field is not empty %}
-                    <br />
-                    <div class="text-center login">
-                        <button  class="btn btn-lg btn-secondary">
-                            Fechar
-                        </button>
+                    {% endfor %}<br>
+                <div class="col breadcrumb redondo">
+                    <div class="col ">
+                        <h2>Tokens</h2>
                     </div>
-                    {% else %}
+                    <div class="col ">
+                        <button type="button" class="btn btn-secondary">Adicionar token</button>
+                    </div>
+                </div> 
+                <table class="table">
+                    <thead class="thead-light">
+                          <th >Nome</th>
+                          <th >simbolo</th>
+                          <th >Saldo</th>
+                    </thead><thead>
+                    {% for token in tokens %}
+                        <th >{{ token.token }}</th>
+                        <th >{{ token.simbolo }}</th>
+                        <th ></th>
+                    {% endfor %}
+                    </thead>
+                </table>
                     <br />
                     <div class="text-center login">
                         <a href="{% url 'cli:carteira' %}">
@@ -46,7 +59,7 @@
                             Fechar
                         </button></a>
                     </div>                 
-                    {% endif %}
+
             </fieldset>
         </form>  
 

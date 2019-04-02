@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import ClienteNovoForm, EditarCliente, MostrarCliente, MostrarCarteira,CarteiraNovaForm
 from .models  import Cliente
-from carteira.models import Carteira
+from contrato.models import ContratActions, ContratToken
+from carteira.models import Carteira, CarteiraToken
 from .decorators import permition_required
 from django.contrib import messages
 from eth_account import Account
@@ -126,12 +127,20 @@ def carteira_apagar(request,pk):
 @login_required
 def carteira_amostra(request,pk):
 	template_name = 'carteira_amostra.html'
-	carteira = Carteira .objects.get(pk=pk)
+	carteira = Carteira.objects.get(pk=pk)
+	tokens = CarteiraToken.objects.filter(id_carteira=carteira.id)
+
+	#contrato = Contrato.objects.get(pk=tokens.id_contrato)
+
 	w3 = Web3(HTTPProvider(settings.PROVEDOR))
 	bal = w3.eth.getBalance(carteira.public_key)
-	print(bal)
+	for token in tokens:
+		print(token.contract_address)
+		#erc20 = w3.eth.contract(address=address,abi=abi)
 	carteira.saldo = bal
 	form = MostrarCarteira(instance=carteira)
-	context = {}
-	context['form'] = form
+	context = {
+		'form': form,
+		'tokens': tokens
+	}
 	return render(request, template_name, context)

@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .decorators import permition_conrequired
 from cliente.models import Cliente
 from .models import Contrato, ContratActions,ContratToken
-from carteira.models import Carteira
+from carteira.models import Carteira, CarteiraToken
 from .forms import ContratoNovoForm, EditarContrato,MostrarContrato,PublicarContrato
 from itertools import chain 
 from .arquivo import Token, Apaga, GravaAbi
@@ -51,8 +51,11 @@ def contrato_pesquisa(request):
 @permition_conrequired
 def contrato_apaga(request,pk):
 	contrato = Contrato.objects.get(pk=pk)
+	contrato_token = ContratToken.objects.filter(id_contrato_id = contrato.id)
 	Apaga(contrato)
+	contrato_token.delete()
 	contrato.delete()
+
 	messages.success(request,"Contrato apagado com sucesso",extra_tags='text-success')
 	return redirect('con:contrato_listar')
 
@@ -115,24 +118,29 @@ def contrato_puclicar(request,pk):
 		return redirect('con:contrato_listar')
 	cliente = Cliente.objects.filter(id_usuario = request.user.pk)
 	form = PublicarContrato(instance=contrato)
+	carteira = Carteira.objects.get(pk=contrato.id_carteira)
+	token = ContratToken.objects.get(id_contrato_id=contrato.id)
 	if request.method == 'POST':
 		request.POST = request.POST.copy()
 		path = 'contract/'+str(contrato.id_cliente.id) +'/'+contrato.name+'.sol'
-		fab = Fabrica(path,contrato.wallet_private_key)
-		numcontrato = fab.enviar()	
-		print(numcontrato)
+		fab = Fabrica(path,carteira.private_key)
+		#numcontrato = fab.enviar()	
+		numcontrato = 'bx01234234'
 		g = str(numcontrato)
 		if g[0] == 'b':
-			contratonum = Web3.toHex(numcontrato)
-			#GravaAbi(contrato)	
-			#request.POST.update({'hash_address':contratonum})			
+			contratonum = Web3.toHex(numcontrato)		
 			form = PublicarContrato(request.POST or None, instance=contrato)	
 			if form.is_valid():							
-				#form.save()
 				contrato.hash_address = contratonum 
 				contrato.abi = json.dumps(fab.abi)
 				contrato.ativo = False
 				contrato.save()
+
+				carToken = CarteiraToken()
+				carToken.id_token = token.id
+				carToken.id_carteira = Carteira.objects.get(pk=carteira.id)
+				carToken.save()
+
 				return redirect('con:valrecibo', pk)
 			else:
 				messages.success(request,"Erro de validação",extra_tags='text-danger')		
@@ -226,7 +234,6 @@ def contrato_interar(request,pk):
 		'contrato': contrato,
 		'action': action
 	}
-	print(action)
 	return render(request, template_name, context)
 
 @login_required
@@ -240,15 +247,24 @@ def contrato_token(request):
 	if request.method == 'POST':
 		form = ContratoNovoForm(request.POST,user=request.user.id)
 		if form.is_valid():
-			Token(request)
+			cart = request.POST.get("id_carteira")
+			carte = Carteira.objects.get(pk=cart)
+			Token(request, carte.public_key)
 			form.save()
-			token = ContratToken()
+			token = ContratToken()		
 			token.token = request.POST.get("token")
 			token.simbolo = request.POST.get("simbolo")
 			token.quantidade = request.POST.get("qtde")
 			token.digitos = request.POST.get("digitos")
 			token.id_contrato = Contrato.objects.get(pk=form.instance.id)
 			token.save()
+			'''
+			carToken = CarteiraToken()
+			carToken.id_token = token.id
+			cart = request.POST.get("id_carteira")
+			carToken.id_carteira = Carteira.objects.get(pk=cart)
+			carToken.save()
+			'''
 			messages.success(request,"Contrato criado com sucesso",extra_tags='text-success')
 			return redirect('con:contrato_listar')
 	else:

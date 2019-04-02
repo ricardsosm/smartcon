@@ -28,14 +28,18 @@
         		  		{{ field }}
                         {% if field.html_name == 'id_cliente' %}
                     </div></div>
+                        <div class="car_label" >
+                            Carteira:
+                        </div>
                         <div class="geral_lin">
                             <div class="car_field">
-                             <select  name="id_car" onchange="javascript:ver();" required id="id_car"> 
+                             <select  name="id_car" onchange="javascript:ver();"  required id="id_car"> 
                              <option value="" selected>---------</option>
                             {% for car in carteira %}
-                              <option value="{{ car.public_key }}" value1="{{ car.private_key }}" value2="{{ car.id_cliente.id }}">{{ car.name }}</option>
+                              <option value="{{ car.id_cliente.id}}" value2="{{ car.id }}">{{ car.name }}</option>
                             {% endfor %}
                             </select>
+
                         {% endif %}
 
                     </div>

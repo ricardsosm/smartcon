@@ -25,18 +25,18 @@
                     </a>
                 </li>
             </ul>
-            <ul class="breadcrumb redondo">Contas de Clientes</ul>
-            <ul><li>
-                {% for cli in cliente %}
-               <a href="{% url 'cli:cliente_mostrar' cli.pk  %}">
-                    <i class="fa fa-address-book"></i>
-                    {{ cli.name }}
-                    </a>
-                 {% empty %}
-                 <p>Nenhuma conta</p>
-                </li>
-                {% endfor %}
-            </ul>
+              <ul class="breadcrumb redondo">Minhas Contas de Clientes</ul>
+                <ul>
+                    {% for cli in cliente %}
+                   <li><a href="{% url 'cli:cliente_mostrar' cli.pk %}">
+                        <i class="fa fa-address-book"></i>
+                        {{ cli.name }}
+                        </a>
+                     {% empty %}
+                     <p>Nenhuma conta</p>
+                    </li>
+                    {% endfor %}
+                </ul>
             <ul class="breadcrumb redondo"></ul>
             <ul>
                 <li class="text-success">Ultimo IP {{ user.ip_last }}</li>

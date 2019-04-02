@@ -40,29 +40,30 @@ def wait_for_receipt(w3, tx_hash, poll_interval):
       return tx_receipt
     time.sleep(poll_interval)
 
-path = '/home/ric/Programas/smartcon/smartcon/contract/1/token.sol'
+path = '/home/ric/Programas/smartcon/smartcon/contract/1/Outro Token.sol'
 contract_source_path = path
 compiled_sol = compile_source_file(path)
 
 contract_id, contract_interface = compiled_sol.popitem()
 abi=contract_interface['abi']
-#print(abi)
+print(abi)
 
-address = w3.toChecksumAddress('0xd1182d5ae336df3e349ee36715833facb046e4fb')
+# contract address
+address = w3.toChecksumAddress('0x9e01588E12434c938fBe5954093f6fD353c8663E')
 erc20 = w3.eth.contract(address=address,abi=abi)
-name = erc20.functions.name().call()
-print(name)
+#name = erc20.functions.payable().call()
+#print(name)
 simbolo = erc20.functions.symbol().call()
 print(simbolo)
 decimal = erc20.functions.decimals().call()
 print(decimal)
 total = erc20.functions.totalSupply().call()
 print(total)
-conta_saldo = erc20.functions.balanceOf('0x60659eFcDb53C0232642497ddFC88bd7e2EFEC36').call()
+conta_saldo = erc20.functions.balanceOf('0x01f00a899a307f02e9a0bd2ca2f3ee2c1cc4d0c1').call()
 print(conta_saldo)
 
 '''
-https://api-ropsten.etherscan.io/api?module=contract&action=getabi&address=0xd1182d5ae336df3e349ee36715833facb046e4fb&apikey=16D33MUUWFSXYJAVBCGJ5SGZ7N497PRIRX
+https://api-ropsten.etherscan.io/api?module=contract&action=getabi&address=0xB8c77482e45F1F44dE1745F52C74426C631bDD52&apikey=16D33MUUWFSXYJAVBCGJ5SGZ7N497PRIRX
 contract_ = w3.eth.contract(
     abi=contract_interface['abi'],
     bytecode=contract_interface['bin'])
