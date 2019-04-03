@@ -29,7 +29,7 @@ class Fabrica:
     construct_txn = contract_.constructor().buildTransaction({
       'from': acct.address,
       'nonce': self.w3.eth.getTransactionCount(acct.address),
-      'gas': 1728712,
+      'gas': 2728712,
       'gasPrice': self.w3.toWei('21', 'gwei')}
     )
     self.signed = acct.signTransaction(construct_txn)

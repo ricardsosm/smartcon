@@ -1,105 +1,58 @@
-{% extends "base.html" %} 
-{% block content %}
-<div class="row">
-    <div class="col-md-12">
-        <ul class="breadcrumb redondo">
-            {% block breadcrumb %}
-            <li><a href="{% url 'con:contrato' %}">Contrato Painel</a></li>
-            <li>&nbsp; / &nbsp;</li>
-            {% endblock %}
-        </ul>
-    </div>
-    <div class="col-sm-3">
-        <div class="col-md-12">
-            {% block menu_options %}
-            <ul class="breadcrumb redondo">Painel de Contratos</ul>
-            <ul>
-               <li><a href="{% url 'con:contrato' %}">
-                    <i class="fa fa-address-book"></i>
-                    Listar Contratos
-                    </a></li>
-               <li><a href="{% url 'con:contrato' %}">
-                    <i class="fa fa-lock"></i>
-                    Novo Contrato
+{% extends "contrato.html" %} 
+
+{% block dash_content %}
+<div class="inner">
+   <h2>Meus Contratos</h2>
+    <form class="" method="POST">
+        {% csrf_token %}
+        <input name="pescli" type="">
+      
+        <button method="POST" class="btn btn-primary"> 
+        Pesquizar</button>
+    </form>
+        <div class="well">       
+            <table class="table">
+                <thead class="thead-light">
+                  <th ></th>
+                  <th >Nome</th>
+                  <th >Cliente</th>
+                  <th ></th>
+                  <th ></th>
+                  <th ></th>
+                  <th ></th>
+                </thead>
+                 {% for con in contrato %}
+                <thead>
+                  <th>
+                    <div class="{% if con.ativo %}led-green{% else %}led-red{% endif %}"></div></th>
+                  <th >   
+                    <a href="{% url 'con:intercon' con.id %}">{{ con.name }}</a></th>
+                  <th><input style="border:0;" type="" class="id_con" value="{{ con.id_cliente.name }}"></th>
+                  <th ><a href="{% url 'con:valrecibo' con.id %}">
+                    <i class="fa fa-dice-six"></i>
+                        Recibo
+                    </a></th>
+                  <th ><a href="{% url 'con:pubcon' con.id %}">
+                    <i class="fa fa-book"></i>
+                        Publicar
+                    </a></th>
+                  <th><a href="{% url 'con:edicon' con.id %}">
+                    <i class="fa fa-cog"></i>
+                        Editar
                     </a>
-                </li>
-            </ul>
-            <ul class="breadcrumb redondo">Contas de Clientes</ul>
-            <ul><li>
-                {% for cli in cliente %}
-               <a href="{% url 'cli:cliente_mostrar' cli.pk  %}">
-                    <i class="fa fa-address-book"></i>
-                    {{ cli.name }}
+                </th>
+                <th><a onclick = "if (! confirm('Excluir Contrato ?')) { return false; }"class="confirmation" href="{% url 'con:delcon' con.id %}">
+                    <i class="fa fa-times-circle"></i>
+                        Excluir
                     </a>
-                 {% empty %}
-                 <p>Nenhuma conta</p>
-                </li>
-                {% endfor %}
-            </ul>
-            <ul class="breadcrumb redondo"></ul>
-            <ul>
-                <li class="text-success">Ultimo IP {{ user.ip_last }}</li>
-            </ul> 
-            {% endblock %}          
-        </div>
-    </div>
-    <div class="col-sm-9 float-right">
-       {% block dash_content %}
-       <div class="inner">
-           <h2>Meus Contratos</h2>
-            <form class="" method="POST">
-                {% csrf_token %}
-                <input name="pescli" type="">
-              
-                <button method="POST" class="btn btn-primary"> 
-                Pesquizar</button>
-            </form>
-                <div class="well">       
-                    <table class="table">
-                        <thead class="thead-light">
-                          <th ></th>
-                          <th >Nome</th>
-                          <th >Cliente</th>
-                          <th ></th>
-                          <th ></th>
-                          <th ></th>
-                          <th ></th>
-                        </thead>
-                         {% for con in contrato %}
-                        <thead>
-                          <th>
-                            <div class="{% if con.ativo %}led-green{% else %}led-red{% endif %}"></div></th>
-                          <th >   
-                            <a href="{% url 'con:intercon' con.id %}">{{ con.name }}</a></th>
-                          <th><input style="border:0;" type="" class="id_con" value="{{ con.id_cliente.name }}"></th>
-                          <th ><a href="{% url 'con:valrecibo' con.id %}">
-                            <i class="fa fa-dice-six"></i>
-                                Recibo
-                            </a></th>
-                          <th ><a href="{% url 'con:pubcon' con.id %}">
-                            <i class="fa fa-book"></i>
-                                Publicar
-                            </a></th>
-                          <th><a href="{% url 'con:edicon' con.id %}">
-                            <i class="fa fa-cog"></i>
-                                Editar
-                            </a>
-                        </th>
-                        <th><a onclick = "if (! confirm('Excluir Contrato ?')) { return false; }"class="confirmation" href="{% url 'con:delcon' con.id %}">
-                            <i class="fa fa-times-circle"></i>
-                                Excluir
-                            </a>
-                        </th>
-                        </thead>
-                        {% empty %} 
-                        <thead>            
-                        <th><p>Nenhum contrato encontrado</p></th>
-                        {% endfor %} 
-                        </thead>
-                    </table>              
-               </div>
-        </div>         
-        {% endblock %}
-    </div>
-</div>
+                </th>
+                </thead>
+                {% empty %} 
+                <thead>            
+                <th><p>Nenhum contrato encontrado</p></th>
+                {% endfor %} 
+                </thead>
+            </table>              
+       </div>
+</div>         
 {% endblock %}

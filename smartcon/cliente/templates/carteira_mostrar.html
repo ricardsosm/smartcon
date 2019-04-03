@@ -1,41 +1,41 @@
 {% extends "cliente.html" %}
 
-       {% block dash_content %}
-       <div class="inner">
-           <h2>Minhas Carteiras</h2>
-            <form class="" method="POST">
-                {% csrf_token %}
-                <input name="pescli" type=""></th>
-              
-                <button method="POST" class="btn btn-primary"> 
-                Pesquizar</button>
-            </form>
-                <div class="well">       
-                    <table class="table">
-                        <thead class="thead-light">
-                          <th >Nome</th>
-                          <th >Cliente</th>
-                          <th ></th>
-                          <th ></th>
-                        </thead>
-                         {% for con in carteiras %}
-                        <thead>
-                          <th><a href="{% url 'cli:carteira_amostra' con.id %}">{{ con.name }}</a></th>
-                          <th><input style="border:0;" type="" class="id_con" value="{{ con.id_cliente.name }}"></th>
-                          <th>
-                        </th>
-                        <th><a onclick = "if (! confirm('Excluir Carteira ?')) { return false; }"class="confirmation" href="{% url 'cli:carteira_apagar' con.id %}">
-                        <i class="fa fa-times-circle"></i>
-                        Excluir
-                        </a>
-                        </th>
-                        </thead>
-                        {% empty %} 
-                        <thead>            
-                        <th><p>Nenhuma carteira encontrada</p></th>
-                        {% endfor %} 
-                        </thead>
-                    </table>              
-               </div>
-        </div>         
-        {% endblock %}
+{% block dash_content %}
+<div class="inner">
+   <h2>Minhas Carteiras</h2>
+    <form class="" method="POST">
+        {% csrf_token %}
+        <input name="pescli" type=""></th>
+      
+        <button method="POST" class="btn btn-primary"> 
+        Pesquizar</button>
+    </form>
+        <div class="well">       
+            <table class="table">
+                <thead class="thead-light">
+                  <th >Nome</th>
+                  <th >Cliente</th>
+                  <th ></th>
+                  <th ></th>
+                </thead>
+                 {% for con in carteiras %}
+                <thead>
+                  <th><a href="{% url 'cli:carteira_amostra' con.id %}">{{ con.name }}</a></th>
+                  <th><input style="border:0;" type="" class="id_con" value="{{ con.id_cliente.name }}"></th>
+                  <th>
+                </th>
+                <th><a onclick = "if (! confirm('Excluir Carteira ?')) { return false; }"class="confirmation" href="{% url 'cli:carteira_apagar' con.id %}">
+                <i class="fa fa-times-circle"></i>
+                Excluir
+                </a>
+                </th>
+                </thead>
+                {% empty %} 
+                <thead>            
+                <th><p>Nenhuma carteira encontrada</p></th>
+                {% endfor %} 
+                </thead>
+            </table>              
+       </div>
+</div>         
+{% endblock %}

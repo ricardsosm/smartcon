@@ -40,28 +40,31 @@ def wait_for_receipt(w3, tx_hash, poll_interval):
       return tx_receipt
     time.sleep(poll_interval)
 
-path = '/home/ric/Programas/smartcon/smartcon/contract/1/Outro Token.sol'
+path = '/home/ric/Programas/smartcon/smartcon/contract/1/Outro2 Token.sol'
 contract_source_path = path
 compiled_sol = compile_source_file(path)
 
 contract_id, contract_interface = compiled_sol.popitem()
 abi=contract_interface['abi']
-print(abi)
+#print(abi)
 
 # contract address
-address = w3.toChecksumAddress('0x9e01588E12434c938fBe5954093f6fD353c8663E')
+address = w3.toChecksumAddress('0xD37160f1f077F82125093A313E004778165628f5')
 erc20 = w3.eth.contract(address=address,abi=abi)
 #name = erc20.functions.payable().call()
-#print(name)
+name = simbolo = erc20.functions.name().call()
+print(name)
 simbolo = erc20.functions.symbol().call()
 print(simbolo)
-decimal = erc20.functions.decimals().call()
+decimal = erc20.functions.approve('0x97Ee5e0D75C635A56011567a8056b8B5B54D6829',1).call()
 print(decimal)
-total = erc20.functions.totalSupply().call()
-print(total)
-conta_saldo = erc20.functions.balanceOf('0x01f00a899a307f02e9a0bd2ca2f3ee2c1cc4d0c1').call()
+total = erc20.all_functions()
+for a in total:
+  print(a)
+conta_saldo = erc20.functions.balanceOf('0x97Ee5e0D75C635A56011567a8056b8B5B54D6829').call()
 print(conta_saldo)
-
+teste = simbolo = erc20.functions.transferFrom('0x97Ee5e0D75C635A56011567a8056b8B5B54D6829','0x60659eFcDb53C0232642497ddFC88bd7e2EFEC36',10).transact()
+print(teste)
 '''
 https://api-ropsten.etherscan.io/api?module=contract&action=getabi&address=0xB8c77482e45F1F44dE1745F52C74426C631bDD52&apikey=16D33MUUWFSXYJAVBCGJ5SGZ7N497PRIRX
 contract_ = w3.eth.contract(
