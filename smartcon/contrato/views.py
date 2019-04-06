@@ -139,6 +139,8 @@ def contrato_puclicar(request,pk):
 
 				carToken = CarteiraToken()
 				carToken.id_token = token.id
+				carToken.token = token.token
+				carToken.simbolo = token.simbolo
 				carToken.id_carteira = Carteira.objects.get(pk=carteira.id)
 				carToken.save()
 
@@ -179,6 +181,7 @@ def recibo(request,pk):
 				action.gasUsed = recibo["gasUsed"]
 				action.id_contrato = Contrato.objects.get(pk=pk)
 				action.save()
+				contrato.contract_address = recibo["contractAddress"]
 				contrato.ativo = True
 				contrato.save()
 				messages.success(request,"Contrato Publicado com sucesso",extra_tags='text-success')

@@ -21,4 +21,7 @@ class Carteira(models.Model):
 class CarteiraToken(models.Model):
 
 	id_token = models.IntegerField(null=True, blank=True)
+	token = models.CharField(blank=True, max_length=15, null=True)
+	simbolo = models.CharField(blank=True, max_length=5, null=True)
+	saldo = models.FloatField(null=True, blank=True)
 	id_carteira = models.ForeignKey(Carteira,on_delete=models.CASCADE)

@@ -63,7 +63,7 @@ for a in total:
   print(a)
 conta_saldo = erc20.functions.balanceOf('0x97Ee5e0D75C635A56011567a8056b8B5B54D6829').call()
 print(conta_saldo)
-teste = simbolo = erc20.functions.transferFrom('0x97Ee5e0D75C635A56011567a8056b8B5B54D6829','0x60659eFcDb53C0232642497ddFC88bd7e2EFEC36',10).transact()
+teste = simbolo = erc20.functions.allowance('0x60659eFcDb53C0232642497ddFC88bd7e2EFEC36','0x60659eFcDb53C0232642497ddFC88bd7e2EFEC36').call()
 print(teste)
 '''
 https://api-ropsten.etherscan.io/api?module=contract&action=getabi&address=0xB8c77482e45F1F44dE1745F52C74426C631bDD52&apikey=16D33MUUWFSXYJAVBCGJ5SGZ7N497PRIRX

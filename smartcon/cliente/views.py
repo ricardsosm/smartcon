@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import ClienteNovoForm, EditarCliente, MostrarCliente, MostrarCarteira,CarteiraNovaForm
+from .forms import ClienteNovoForm, EditarCliente, MostrarCliente
 from .models  import Cliente
-from contrato.models import ContratActions, ContratToken
+from contrato.models import Contrato, ContratActions, ContratToken
 from carteira.models import Carteira, CarteiraToken
 from .decorators import permition_required
 from django.contrib import messages
@@ -85,64 +85,3 @@ def cliente_pesquisa(request):
 	context = {}
 	cliente = Cliente.objects.filter(id_usuario=request.user.pk)
 
-@login_required
-def carteira_mostrar(request):
-	template_name = 'carteira_mostrar.html'
-	cliente = Cliente.objects.filter(id_usuario = request.user.pk)
-	carteira  = []
-	for cli in cliente:
-		carteira = list(chain(carteira , Carteira .objects.all().filter(id_cliente = cli.id)))
-
-	context = {}
-	form = MostrarCarteira()
-	if request.method == 'POST':
-		pesquisa = request.POST.get("pescli")
-		carteira = Carteira.objects.all().filter(name__icontains=pesquisa)
-	context['carteiras'] = carteira
-	return render(request, template_name, context)
-
-@login_required
-def carteira_gerar(request):
-	template_name = 'carteira_gerar.html'
-	context = {}
-	if request.method == 'POST':
-		form = CarteiraNovaForm(request.POST,user=request.user.id)
-		if form.is_valid():
-			form.save()
-			messages.success(request,"Carteira gerada com sucesso",extra_tags='text-success')
-			return redirect('cli:carteira')	
-		else:messages.success(request,"Erro ao gerar carteira",extra_tags='text-danger')
-
-	form = CarteiraNovaForm(user=request.user.id)
-	context['form'] = form
-	return render(request, template_name, context)
-
-@login_required
-def carteira_apagar(request,pk):
-	carteira = Carteira.objects.get(pk=pk)
-	carteira.delete()
-	messages.success(request,"Carteira apagado com sucesso",extra_tags='text-success')
-	return redirect('cli:carteira')
-
-@login_required
-def carteira_amostra(request,pk):
-	template_name = 'carteira_amostra.html'
-	carteira = Carteira.objects.get(pk=pk)
-	tok = CarteiraToken.objects.filter(id_carteira=carteira.id)
-	if tok:
-		for tk in tok:
-			tokens = ContratToken.objects.filter(pk = tk.id_token)
-	else:
-		tokens = []
-	w3 = Web3(HTTPProvider(settings.PROVEDOR))
-	bal = w3.eth.getBalance(carteira.public_key)
-	for token in tokens:
-		print(token.id)
-		#erc20 = w3.eth.contract(address=address,abi=abi)
-	carteira.saldo = bal
-	form = MostrarCarteira(instance=carteira)
-	context = {
-		'form': form,
-		'tokens': tokens
-	}
-	return render(request, template_name, context)
