@@ -7,6 +7,7 @@ class Contrato(models.Model):
 	name = models.CharField(blank=True, max_length=20, null=True)
 	hash_address = models.CharField(blank=True, max_length=100, null=True, unique=True)
 	abi = models.TextField(null=True, max_length=2000)
+	contract_address = models.CharField(blank=True, max_length=100, null=True)
 	solidity_version  = models.CharField(blank=True, default='>=0.4.25 <0.6.0', max_length=20, null=True)
 	ativo = models.BooleanField(null=True,blank=True)
 	create_at = models.DateTimeField(
@@ -39,7 +40,6 @@ class ContratToken(models.Model):
 
 	token = models.CharField(blank=True, max_length=15, null=True)
 	simbolo = models.CharField(blank=True, max_length=5, null=True)
-	contract_address = models.CharField(blank=True, max_length=100, null=True)
 	quantidade = models.CharField(blank=True, max_length=5, null=True)
 	digitos = models.CharField(blank=True, max_length=5, null=True)
 	create_at = models.DateTimeField(

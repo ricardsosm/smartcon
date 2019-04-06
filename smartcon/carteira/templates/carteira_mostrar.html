@@ -20,11 +20,11 @@
                 </thead>
                  {% for con in carteiras %}
                 <thead>
-                  <th><a href="{% url 'cli:carteira_amostra' con.id %}">{{ con.name }}</a></th>
+                  <th><a href="{% url 'car:carteira_amostra' con.id %}">{{ con.name }}</a></th>
                   <th><input style="border:0;" type="" class="id_con" value="{{ con.id_cliente.name }}"></th>
                   <th>
                 </th>
-                <th><a onclick = "if (! confirm('Excluir Carteira ?')) { return false; }"class="confirmation" href="{% url 'cli:carteira_apagar' con.id %}">
+                <th><a onclick = "if (! confirm('Excluir Carteira ?')) { return false; }"class="confirmation" href="{% url 'car:carteira_apagar' con.id %}">
                 <i class="fa fa-times-circle"></i>
                 Excluir
                 </a>

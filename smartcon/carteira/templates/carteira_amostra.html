@@ -40,25 +40,28 @@
                     </div>
                 </div> 
                 <table class="table">
-                    {% if tokens %}
+                    {% if tok %}
                     <thead class="thead-light">
                           <th >Nome</th>
                           <th >simbolo</th>
                           <th >Saldo</th>
-                    </thead><thead>
+                    </thead>
                     {% endif %}
-                    {% for token in tokens %}
+                    
+                    {% for token in tok %}
+                    <thead>
                         <th >{{ token.token }}</th>
                         <th >{{ token.simbolo }}</th>
-                        <th ></th>
+                        <th >{{ token.saldo }}</th>
+                    </thead>
                     {% empty %}
                     Nunhum Token encontrado
                     {% endfor %}
-                    </thead>
+                    
                 </table>
                     <br />
                     <div class="text-center login">
-                        <a href="{% url 'cli:carteira' %}">
+                        <a href="{% url 'car:carteira' %}">
                         <button type="button"  class="btn btn-lg btn-secondary">
                             Fechar
                         </button></a>
