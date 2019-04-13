@@ -10,6 +10,7 @@ class Contrato(models.Model):
 	contract_address = models.CharField(blank=True, max_length=100, null=True)
 	solidity_version  = models.CharField(blank=True, default='>=0.4.25 <0.6.0', max_length=20, null=True)
 	ativo = models.BooleanField(null=True,blank=True)
+	tipo = models.IntegerField()
 	create_at = models.DateTimeField(
 		'Criando em',auto_now_add=True
 	)

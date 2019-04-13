@@ -46,7 +46,7 @@ def carteira_gerar(request):
 def carteira_apagar(request,pk):
 	carteira = Carteira.objects.get(pk=pk)
 	carteira.delete()
-	messages.success(request,"Carteira apagado com sucesso",extra_tags='text-success')
+	messages.success(request,"Carteira apagada com sucesso",extra_tags='text-success')
 	return redirect('car:carteira')
 
 @login_required
@@ -77,3 +77,4 @@ def carteira_amostra(request,pk):
 		'tok': tok
 	}
 	return render(request, template_name, context)
+

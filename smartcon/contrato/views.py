@@ -1,14 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .decorators import permition_conrequired
+from .decorators import permition_conrequired, permition_tokenrequired
 from cliente.models import Cliente
 from .models import Contrato, ContratActions,ContratToken
 from carteira.models import Carteira, CarteiraToken
-from .forms import ContratoNovoForm, EditarContrato,MostrarContrato,PublicarContrato
+from .forms import ContratoNovoForm, EditarContrato,MostrarContrato,PublicarContrato,DistribuirToken
 from itertools import chain 
 from .arquivo import Token, Apaga, GravaAbi
-from .fabrica import Fabrica
+from .fabrica import Fabrica, EnviarToken
 from web3 import Web3, HTTPProvider
 from eth_account import Account
 from django.conf import settings
@@ -82,30 +82,27 @@ def contrato_editar(request,pk):
 	return render(request, template_name, context)
 
 @login_required
-@permition_conrequired
 def contrato_mostrar(request,pk):
 	template_name = 'contrato_mostrar.html'
 	cliente = Cliente.objects.filter(id_usuario = request.user.pk)
-	contrato = Contrato.objects.get(pk=pk)
+
 	try:
-		action = ContratActions.objects.get(id_contrato = pk)
+		action = ContratActions.objects.get(pk = pk)
+		contrato = Contrato.objects.get(pk=action.id_contrato_id)
 	except:
 		action = None
+		contrato = None
+	
 	if request.method == 'POST':
 		return redirect('con:contrato_listar')
-
-	w3 = Web3(HTTPProvider(settings.PROVEDOR))
-	cona = ContratActions.objects.get(id_contrato = contrato.pk)
-	conadress = cona.contract_address
-	myContract = w3.eth.contract(address=conadress, abi=contrato.abi)
-	#one = myContract.functions.getCount().call()
-	one = 'none'
-
+	if contrato.contract_address == None:
+		print(action.contract_address)
+		print(action.to_adress)
+		contrato.contract_address =	action.to_adress	
 	context = {
 		'cliente':cliente,
 		'contrato':contrato,
 		'recibo': action,
-		'conta': one
 	}
 
 	return render(request, template_name, context)
@@ -173,7 +170,12 @@ def recibo(request,pk):
 				action = ContratActions()
 				action.blocknumber = recibo["blockNumber"]
 				action.status = recibo["status"]
-				action.contract_address = recibo["contractAddress"]
+				if contrato.contract_address == None:
+					action.contract_address = recibo["contractAddress"]
+					contrato.contract_address = recibo["contractAddress"]
+				else:
+					action.contract_address = recibo["to"]
+					
 				action.from_adress = recibo["from"]
 				action.to_adress = recibo["to"]
 				transhash = recibo["transactionHash"]
@@ -181,7 +183,7 @@ def recibo(request,pk):
 				action.gasUsed = recibo["gasUsed"]
 				action.id_contrato = Contrato.objects.get(pk=pk)
 				action.save()
-				contrato.contract_address = recibo["contractAddress"]
+				
 				contrato.ativo = True
 				contrato.save()
 				messages.success(request,"Contrato Publicado com sucesso",extra_tags='text-success')
@@ -212,20 +214,6 @@ def valrecibo(request,pk):
 	context = {
 		'pk': pk,
 		'cliente': cliente
-	}
-	return render(request, template_name, context)
-
-@login_required
-@permition_conrequired
-def contrato_interar(request,pk):
-	cliente = Cliente.objects.filter(id_usuario = request.user.pk)
-	contrato = Contrato.objects.get(pk=pk)
-	action = ContratActions.objects.all().filter(id_contrato = contrato.id)
-	template_name = 'contrato_interar.html'
-	context = {
-		'contrato': contrato,
-		'action': action,
-		'cliente':cliente
 	}
 	return render(request, template_name, context)
 
@@ -261,4 +249,57 @@ def contrato_token(request):
 		'cliente': cliente,
 		'carteira': carteira
 	}
+	return render(request, template_name, context)
+
+@login_required
+@permition_conrequired
+def contrato_interar(request,pk):
+	cliente = Cliente.objects.filter(id_usuario = request.user.pk)
+	contrato = Contrato.objects.get(pk=pk)
+	tipo = contrato.tipo
+	if tipo == 1:
+		link = ContratToken.objects.get(id_contrato=contrato.id)
+		link = link.id		
+	else:
+		link = 0
+	action = ContratActions.objects.all().filter(id_contrato_id = contrato.id)
+	print(action)
+	template_name = 'contrato_interar.html'
+	context = {
+		'contrato': contrato,
+		'action': action,
+		'cliente':cliente,
+		'tipo':tipo,
+		'link': link
+	}
+	return render(request, template_name, context)
+
+@login_required
+@permition_tokenrequired
+def contrato_distribuir(request,pk):
+
+	template_name = 'contrato_distribuir.html'
+	token = ContratToken.objects.get(pk=pk)	
+	contrato = Contrato.objects.get(pk=token.id_contrato.id)
+	carteira = Carteira.objects.get(pk=contrato.id_carteira)
+
+	if request.method == 'POST':
+		if not contrato.contract_address is None:
+			valor = request.POST.get("valor")
+			to_address = request.POST.get("to_address")
+			dist = EnviarToken(contrato.contract_address,contrato.abi,carteira.private_key,valor,to_address)
+			tkdist = dist.enviar()
+			contrato.hash_address = Web3.toHex(tkdist)
+			contrato.ativo = False
+			contrato.save()
+			return redirect('con:valrecibo',contrato.id)
+
+	form = DistribuirToken()
+	context = {
+		'form':form,
+		'contrato': contrato,
+		'token': token,
+		'carteira': carteira
+		#'cliente':cliente
+	}	
 	return render(request, template_name, context)
