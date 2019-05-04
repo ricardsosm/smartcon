@@ -1,0 +1,53 @@
+{% extends "contrato.html" %}
+{% block dash_content  %}
+<div class="container">
+    <div class="account-wall col">
+    	<div class="text-center">
+    	Transferencia de Token: <h2 >{{ token.token}}</h2>
+    	</div>
+        <form class="form-signin text-center" method="POST" >
+            {% csrf_token %}
+            <fieldset class="resset" >
+            
+                <div class="erro_login">
+                    {{ form.non_field_errors }}
+                </div>
+                    {% for field in form %}
+                <dir class="geral_lin">
+                    <div class="car_label" >
+                        {{ field.label_tag }}
+                    </div>
+                    <div class="car_field">
+                            {{ field }}
+                    </div>
+                </dir>
+                <div class="erro_login">
+                        {{ field.errors }}
+                </div>
+                    {% endfor %}
+                <dir class="geral_lin">
+                    <div class="car_label" >
+                        Valor
+                    </div>
+                    <div class="car_field">
+                           <input type="text" name="valor" requered>
+                    </div>
+                </dir>
+                    <br />
+            </fieldset>
+                <div class="text-center login">
+                <a href="{% url 'con:intercon'  contrato.id %}">
+                    <button type="button" class="btn btn-lg btn-secondary">
+                            Fechar
+                    </button>
+                </a>
+                    <button class="btn btn-lg btn-secondary">
+                            Enviar
+                    </button>
+                </div>
+            
+
+        </form> 
+    </div>
+</div>
+{% endblock %}

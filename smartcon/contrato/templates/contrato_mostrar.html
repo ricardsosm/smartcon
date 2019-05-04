@@ -16,6 +16,9 @@
                         <th >Block Number</th>
                         <th >{{ recibo.blocknumber }}</th>
                     </thead><thead>
+                        <th >Transaction Hash</th>
+                        <th ><a href="https://ropsten.etherscan.io/tx/{{ recibo.transactionHash}}" target="_blank">{{ recibo.transactionHash }}</a></th>
+                    </thead><thead>
                         <th >Contract Address</th>
                         <th ><a href="https://ropsten.etherscan.io/address/{{ recibo.contract_address}}" target="_blank">
                         {{ recibo.contract_address}}</a>
@@ -32,10 +35,7 @@
                         <th >{{ contrato.solidity_version}}</th>  
                     </thead><thead>
                         <th >Publicação</th>
-                        <th >{{ recibo.create_at }}</th>                
-                    </thead><thead>
-                        <th >Contagem</th>
-                        <th >{{ conta }}</th>                     
+                        <th >{{ recibo.create_at }}</th>                    
                     </thead><thead>
                         <th >Status</th>
                         <th ><center><div class="{% if recibo.status %}led-green{% else %}led-red{% endif %}"></div></center></th>                                     
@@ -47,7 +47,7 @@
                 </table>
 
                 <div class="text-center login">
-                <a href="{% url 'con:intercon'  contrato.id %}">
+                <a href="{% url 'con:intercon' 66 %}">
                     <button type="button" class="btn btn-lg btn-secondary">
                             Fechar
                     </button>

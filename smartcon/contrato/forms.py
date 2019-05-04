@@ -16,10 +16,12 @@ class ContratoNovoForm(forms.ModelForm):
 	solidity_version = forms.CharField(widget=forms.HiddenInput(),label='')
 	solidity_version.widget.attrs.update({'value':'>=0.4.25 <0.6.0'})  
 	id_carteira = forms.CharField(widget=forms.HiddenInput(),label='')
+	tipo = forms.IntegerField(widget=forms.HiddenInput(),label='')
+	tipo.widget.attrs.update({'value':'1'}) 
 
 	class Meta:
 		model = Contrato
-		fields = ['id_carteira','name','id_cliente','solidity_version']
+		fields = ['id_carteira','name','id_cliente','solidity_version','tipo']
 
 	def __init__(self, *args, **kwargs):
 		user = kwargs.pop('user','')
@@ -57,13 +59,20 @@ class MostrarContrato(forms.ModelForm):
 
 class PublicarContrato(forms.ModelForm):
 
-
 	solidity_version = forms.CharField(widget=forms.HiddenInput(),label='')
-	#abi = forms.CharField(widget=forms.HiddenInput(),label='')
-	#hash_address = forms.CharField(widget=forms.HiddenInput(),label='')
 
 	class Meta:
-		model = Contrato
-		
+		model = Contrato	
 		fields = ['name','id_cliente','solidity_version']
-		
+
+class DistribuirToken(forms.ModelForm):
+
+	to_address = forms.CharField(
+		label='Carteira',
+		min_length = 57,
+		widget=forms.TextInput(attrs={'size':'57'})
+	)
+
+	class Meta:
+		model = ContratActions
+		fields = ['to_address']
