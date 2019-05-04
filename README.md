@@ -4,8 +4,14 @@ com Django e Mysql(MariaDB)
 - [Git](https://git-scm.com)
 - Python 3.7.1
 ```
-Para debian 9.7 é necessário instalar antes
+
+Para Linux debian 9.7 é necessário instalar antes
 sudo apt-get install build-essential checkinstall python-dev python-setuptools python-pip python-smbus zlib1g-dev libffi-dev libncursesw5-dev libgdbm-dev libc6-dev libsqlite3-dev tk-dev libssl-dev openssl default-libmysqlclient-dev
+
+```
+```
+Para Windows é necessário instalar antes
+Visual studio >= 2014
 ```
 - Virtualenv
 - Django 2.1
