@@ -1,2 +1,4 @@
 *.pyc
 staticfiles
+contract
+__pycache__
