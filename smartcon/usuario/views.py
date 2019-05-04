@@ -3,8 +3,6 @@ from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm, SetP
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from cliente.models import Cliente
-from contrato.models import Contrato
-from itertools import chain
 from .forms import EditarConta, PasswordResetForm, ApagarConta
 from .models import PasswordReset
 from .decorators import user_permition_required
@@ -15,9 +13,6 @@ User = get_user_model()
 def editar(request):
 	template_name = 'editar.html'
 	cliente = Cliente.objects.filter(id_usuario = request.user.pk)
-	contrato = []
-	for cli in cliente:
-		contrato = list(chain(contrato, Contrato.objects.all().filter(id_cliente = cli.id)))
 
 	context = {}
 	if request.method == 'POST':
@@ -29,11 +24,13 @@ def editar(request):
 	else:
 		form = EditarConta(instance=request.user)
 	context['form'] = form
+	context['cliente'] = cliente
 	return render(request, template_name,context)
 
 @login_required
 def edit_password(request):
 	template_name = 'edit_password.html'
+	cliente = Cliente.objects.filter(id_usuario = request.user.pk)
 	context = {}
 	if request.method ==  'POST':
 		form = PasswordChangeForm(data=request.POST, user=request.user)
@@ -43,6 +40,7 @@ def edit_password(request):
 	else:
 		form = PasswordChangeForm(user=request.user)
 	context['form'] = form
+	context['cliente'] = cliente
 	return render(request,template_name,context)
 
 def password_reset(request):
