@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm, SetPasswordForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
+from cliente.models import Cliente
+from contrato.models import Contrato
+from itertools import chain
 from .forms import EditarConta, PasswordResetForm, ApagarConta
 from .models import PasswordReset
 from .decorators import user_permition_required
@@ -11,6 +14,11 @@ User = get_user_model()
 @login_required
 def editar(request):
 	template_name = 'editar.html'
+	cliente = Cliente.objects.filter(id_usuario = request.user.pk)
+	contrato = []
+	for cli in cliente:
+		contrato = list(chain(contrato, Contrato.objects.all().filter(id_cliente = cli.id)))
+
 	context = {}
 	if request.method == 'POST':
 		form = EditarConta(request.POST, instance=request.user)
