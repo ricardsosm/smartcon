@@ -1,5 +1,5 @@
 from django import forms
-from .models import Carteira
+from .models import Carteira, CarteiraToken
 from cliente.models import Cliente
 from eth_account import Account
 from web3 import Web3
@@ -42,6 +42,8 @@ class CarteiraNovaForm(forms.ModelForm):
 		model = Carteira
 		fields = ['name','id_cliente','public_key','private_key']
 
+class NovoTokenForm(forms.ModelForm):
 
-
-
+	class Meta:
+		model = CarteiraToken
+		fields = ['token','simbolo','saldo','id_carteira']

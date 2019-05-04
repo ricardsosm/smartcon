@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from contrato.models import Contrato, ContratActions, ContratToken
-from .forms import MostrarCarteira,CarteiraNovaForm
+from .forms import MostrarCarteira,CarteiraNovaForm, NovoTokenForm
 from .models import Carteira, CarteiraToken
 from cliente.models import Cliente
 from django.contrib import messages
@@ -53,28 +53,39 @@ def carteira_apagar(request,pk):
 def carteira_amostra(request,pk):
 	template_name = 'carteira_amostra.html'
 	carteira = Carteira.objects.get(pk=pk)
-	tokens = []
-	contrato = []
-	saldo = []
-	tok = CarteiraToken.objects.filter(id_carteira=carteira.id)
+	tk = []
+	lista = []
+	tokining = CarteiraToken.objects.filter(id_carteira=carteira.id)
 	w3 = Web3(HTTPProvider(settings.PROVEDOR))
 	bal = w3.eth.getBalance(carteira.public_key)	
-	if tok:
-		for tk in tok:
-			tokens = ContratToken.objects.filter(pk = tk.id_token)
-			for token in tokens:
-				contrato = Contrato.objects.filter(id = token.id_contrato_id)
-				for con in contrato:
-					if con.contract_address:
-						erc20 = w3.eth.contract(address=con.contract_address,abi=con.abi)
-						tk.saldo = erc20.functions.balanceOf(carteira.public_key).call()
-
+	if tokining:
+		for tk in tokining:
+			tok = ContratToken.objects.get(pk = tk.id_token)
+			if tok.id_contrato.contract_address:
+				erc20 = w3.eth.contract(address=tok.id_contrato.contract_address,abi=tok.id_contrato.abi)
+				tk.saldo = erc20.functions.balanceOf(carteira.public_key).call()
+				tk.save()
 
 	carteira.saldo = bal
 	form = MostrarCarteira(instance=carteira)
 	context = {
 		'form': form,
-		'tok': tok
+		'tok':tokining
 	}
 	return render(request, template_name, context)
 
+@login_required
+def token_novo(request):
+	template_name = 'token_novo.html'
+	form = NovoTokenForm()
+	context = {
+		'form':form
+	}
+	return render(request, template_name, context)
+
+@login_required
+def token_apagar(request,pk):
+	carteira = CarteiraToken.objects.get(pk=pk)
+	carteira.delete()
+	messages.success(request,"Token apagada com sucesso",extra_tags='text-success')
+	return redirect('car:carteira')

@@ -5,18 +5,22 @@ com Django e Mysql(MariaDB)
 - Python 3.7.1
 ```
 Para debian 9.7 é necessário instalar antes
-sudo apt-get install build-essential checkinstall python-dev python-setuptools python-pip python-smbus
-sudo apt-get install zlib1g-dev libffi-dev 
-sudo apt-get install libncursesw5-dev libgdbm-dev libc6-dev libsqlite3-dev tk-dev libssl-dev openssl
-sudo apt install default-libmysqlclient-dev
+sudo apt-get install build-essential checkinstall python-dev python-setuptools python-pip python-smbus zlib1g-dev libffi-dev libncursesw5-dev libgdbm-dev libc6-dev libsqlite3-dev tk-dev libssl-dev openssl default-libmysqlclient-dev
 ```
 - Virtualenv
 - Django 2.1
 - Maria db 10.1
 
+# Instalando o MariaDB
+```
+apt-get install mariadb-server
+
 # Instalando o virtualenv
 ```
 sudo pip install virtualenv
+ou
+curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | bash
+
 ```
 # Criando o ambiente virtual
 ```

@@ -36,15 +36,16 @@
                         <h2>Tokens</h2>
                     </div>
                     <div class="col ">
-                        <button type="button" class="btn btn-secondary">Adicionar token</button>
+                        <a href="{% url 'car:token_novo' %}"><button type="button" class="btn btn-secondary">Adicionar token</button></a>
                     </div>
                 </div> 
                 <table class="table">
                     {% if tok %}
                     <thead class="thead-light">
-                          <th >Nome</th>
-                          <th >simbolo</th>
-                          <th >Saldo</th>
+                        <th >Nome</th>
+                        <th >simbolo</th>
+                        <th >Saldo</th>
+                        <th ></th>
                     </thead>
                     {% endif %}
                     
@@ -52,7 +53,12 @@
                     <thead>
                         <th >{{ token.token }}</th>
                         <th >{{ token.simbolo }}</th>
+
                         <th >{{ token.saldo }}</th>
+                        <th ><a onclick = "if (! confirm('Excluir Token ?')) { return false; }"class="confirmation" href="{% url 'car:token_apagar' token.pk %}">
+                        <i class="fa fa-times-circle"></i>
+                        Excluir
+                        </a></th>
                     </thead>
                     {% empty %}
                     Nunhum Token encontrado

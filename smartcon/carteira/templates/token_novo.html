@@ -1,0 +1,37 @@
+{% extends "cliente.html" %}
+
+{% block dash_content  %}
+<div class="container">
+    <div class="account-wall col">
+        <h2 class="text-center">Adicionar Token</h2>
+        <form class="form-signin text-center" method="POST">
+            {% csrf_token %}
+            {% if success %}
+                <div class="text-success">
+                    <h5> Dados alterados com sucesso</h5>
+                </div>
+            {% endif %}
+            <fieldset class="carteira" >
+                <div class="erro_login">
+                    {{ form.non_field_errors }}
+                </div>
+                    {% for field in form %}
+                <div class="geral_lin">
+                    <div class="car_label">
+                        {{ field.label_tag }}
+                    </div>
+                    <div class="car_field">
+                        {{ field }}
+                    </div>
+                </div>
+                <div class="erro_login">
+                        {{ field.errors }}
+                </div>
+                    {% endfor %}
+
+            </fieldset>
+        </form>  
+    </div>
+    <br>
+</div>
+{% endblock %}
