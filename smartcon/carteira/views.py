@@ -111,6 +111,7 @@ def token_novo(request,tk):
 				digitos = erc20.functions.decimals().call()
 				token = CarteiraToken()
 				token.id_carteira_id = carteira.id
+				token.contract = address
 				token.saldo = saldo
 				token.simbolo = simbolo
 				token.digitos = digitos
