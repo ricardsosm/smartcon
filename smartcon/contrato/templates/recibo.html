@@ -15,10 +15,19 @@
                     <thead>
                         <th >Block Number</th>
                         <th >{{ recibo.blockNumber }}</th>
-                    </thead><thead>
+                    </thead>
+                    {% if recibo.contractAddress %}
+                    <thead>
                         <th >Contract Address</th>
                         <th ><a href="https://ropsten.etherscan.io/address/{{ recibo.contractAddress}}" target="blank">{{ recibo.contractAddress}}</a></th>
-                    </thead><thead>
+                    </thead>
+                    {% else %}
+                    <thead>
+                        <th >Contract Address</th>
+                        <th ><a href="https://ropsten.etherscan.io/address/{{ recibo.to}}" target="blank">{{ recibo.to}}</a></th>
+                    </thead>
+                    {% endif %}
+                    <thead>              
                         <th >Carteira</th>
                         <th ><a href="https://ropsten.etherscan.io/address/{{ recibo.from}}" target="blank">{{ recibo.from}}</a></th>
                     </thead><thead>

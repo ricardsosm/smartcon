@@ -96,8 +96,6 @@ def contrato_mostrar(request,pk):
 	if request.method == 'POST':
 		return redirect('con:contrato_listar')
 	if contrato.contract_address == None:
-		print(action.contract_address)
-		print(action.to_adress)
 		contrato.contract_address =	action.to_adress	
 	context = {
 		'cliente':cliente,
@@ -138,6 +136,7 @@ def contrato_puclicar(request,pk):
 				carToken.id_token = token.id
 				carToken.token = token.token
 				carToken.simbolo = token.simbolo
+				carToken.digitos = token.digitos
 				carToken.id_carteira = Carteira.objects.get(pk=carteira.id)
 				carToken.save()
 
@@ -165,6 +164,7 @@ def recibo(request,pk):
 	w3 = Web3(HTTPProvider(settings.PROVEDOR))
 	while True:
 		recibo = w3.eth.getTransactionReceipt(contrato.hash_address)
+
 		if recibo:
 			if contrato.ativo == False:
 				action = ContratActions()
@@ -190,6 +190,7 @@ def recibo(request,pk):
 				break
 			else:
 				break
+
 		time.sleep(1)
 	
 	cliente = Cliente.objects.filter(id_usuario = request.user.pk)

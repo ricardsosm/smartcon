@@ -44,6 +44,8 @@ class CarteiraNovaForm(forms.ModelForm):
 
 class NovoTokenForm(forms.ModelForm):
 
+	token = forms.CharField(label='Token',widget=forms.TextInput(attrs={'size':'50','placeholder':'Digite o numero do Contrato'}))	
+
 	class Meta:
 		model = CarteiraToken
-		fields = ['token','simbolo','saldo','id_carteira']
+		fields = ['token']
