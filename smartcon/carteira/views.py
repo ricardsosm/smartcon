@@ -9,6 +9,8 @@ from eth_account import Account
 from itertools import chain
 from web3 import Web3, HTTPProvider
 from django.conf import settings
+from contrato.arquivo import AbiToken
+from sistema.utils import saldo_token
 
 @login_required
 def carteira_mostrar(request):
@@ -60,24 +62,64 @@ def carteira_amostra(request,pk):
 	bal = w3.eth.getBalance(carteira.public_key)	
 	if tokining:
 		for tk in tokining:
-			tok = ContratToken.objects.get(pk = tk.id_token)
-			if tok.id_contrato.contract_address:
-				erc20 = w3.eth.contract(address=tok.id_contrato.contract_address,abi=tok.id_contrato.abi)
-				tk.saldo = erc20.functions.balanceOf(carteira.public_key).call()
-				tk.save()
+			if tk.id_token:
+				tok = ContratToken.objects.get(pk = tk.id_token)
+				#abi = tok.id_contrato.abi
+				abi = AbiToken()
+				adr = tok.id_contrato.contract_address
+			else:
+				abi = AbiToken()
+				adr = w3.toChecksumAddress(tk.contract)
 
-	carteira.saldo = bal
+			try:
+				erc20 = w3.eth.contract(address=adr,abi=abi)
+				tk.saldo = erc20.functions.balanceOf(carteira.public_key).call()
+				tk.saldo = saldo_token(str(tk.saldo),tk.digitos)
+				tk.save()				
+			except:
+				print('Erro na requisição de saldo')
+				continue
+
+	carteira.saldo = saldo_token(str(bal),18)
+
 	form = MostrarCarteira(instance=carteira)
 	context = {
-		'form': form,
-		'tok':tokining
+		'form':form,
+		'tok':tokining,
+		'tk':carteira.id
 	}
 	return render(request, template_name, context)
 
 @login_required
-def token_novo(request):
+def token_novo(request,tk):
 	template_name = 'token_novo.html'
+	carteira = Carteira.objects.get(pk=tk)
 	form = NovoTokenForm()
+	if request.method == 'POST':
+		add = request.POST.get("token")
+		temtoken = CarteiraToken.objects.filter()
+		abi = AbiToken()
+		w3 = Web3(HTTPProvider(settings.PROVEDOR))		
+		car = carteira.public_key
+		try:
+			address = w3.toChecksumAddress(add)
+			if address:
+				erc20 = w3.eth.contract(address=address,abi=abi)
+				saldo = erc20.functions.balanceOf(car).call()
+				simbolo = erc20.functions.symbol().call()
+				nome = erc20.functions.name().call()
+				digitos = erc20.functions.decimals().call()
+				token = CarteiraToken()
+				token.id_carteira_id = carteira.id
+				token.saldo = saldo
+				token.simbolo = simbolo
+				token.digitos = digitos
+				token.token = nome
+				token.save()
+		except:
+			messages.success(request,"Numero de Contrato não aceito",extra_tags='text-danger')
+
+		
 	context = {
 		'form':form
 	}

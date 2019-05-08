@@ -28,7 +28,16 @@
                         {{ field.errors }}
                 </div>
                     {% endfor %}
-
+                <br>
+                <div class="text-center login">
+                    <a href="{% url 'car:carteira' %}">
+                    <button type="button"  class="btn btn-lg btn-danger">
+                        Cancela
+                    </button></a>
+                    <button  class="btn btn-lg btn-primary">
+                        Salvar
+                    </button>
+                </div>
             </fieldset>
         </form>  
     </div>
