@@ -141,7 +141,7 @@ body {
 }
 
 .justificado {
-	font-size: 20;
+	font-size: 22;
 	text-align: justify;
 }
 
@@ -320,10 +320,13 @@ body {
 .media-dois{
   margin: 0 auto 0 auto;
   padding:0;
-  border-radius: 30px;
+  border-radius: 60px;
   padding: 15px;
-  background-color:#E0F8E0;
+  
 }
 .media-dois img{
-  width: 80px;
+  width: 100px;
+}
+.media-body img{
+  padding: 15px;
 }
