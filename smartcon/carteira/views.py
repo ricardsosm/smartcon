@@ -119,7 +119,7 @@ def token_novo(request,tk):
 				token.save()
 		except:
 			messages.success(request,"Numero de Contrato não aceito",extra_tags='text-danger')
-
+		return redirect('car:carteira_amostra', carteira.id)
 		
 	context = {
 		'form':form
