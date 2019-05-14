@@ -11,9 +11,10 @@ def Token(form,key):
 	token = form.POST.get("token")
 	simbolo = form.POST.get("simbolo")
 	dig = form.POST.get("digitos")
+	dig = int(dig)
 	qtde = form.POST.get("qtde")
-	valor = int(qtde)
-	qtde = qtde * int(dig)
+	qtde = int(qtde)
+	valor  = qtde * (10 ** dig)
 	caminho = 'contract/'+id_cliente
 	if not os.path.exists(caminho):
 		os.mkdir(caminho)
@@ -30,7 +31,7 @@ def Token(form,key):
 	arq.write(main)
 	arq.write('\n\taddress public owner;\n\taddress public newOwner;\n\tstring public symbol;\n\tstring public  name;\n\tuint8 public decimals;\n\tuint public _totalSupply;\n\n')
 	arq.write('\tmapping(address => uint) balances;\n\tmapping(address => mapping(address => uint)) allowed;\n\tevent OwnershipTransferred(address indexed _from, address indexed _to);\n\n')
-	arq.write('\tconstructor() public {\n\t\towner = msg.sender;\n\t\tsymbol = "'+str(simbolo)+'";\n\t\tname = "'+str(token)+'";\n\t\tdecimals = '+str(dig)+';\n\t\t_totalSupply = '+str(qtde)+';\n\t\tbalances['+str(carteira)+'] = _totalSupply;\n\t\temit Transfer(address(0), '+str(carteira)+', _totalSupply);\n\t}\n\n')
+	arq.write('\tconstructor() public {\n\t\towner = msg.sender;\n\t\tsymbol = "'+str(simbolo)+'";\n\t\tname = "'+str(token)+'";\n\t\tdecimals = '+str(dig)+';\n\t\t_totalSupply = '+str(valor)+';\n\t\tbalances['+str(carteira)+'] = _totalSupply;\n\t\temit Transfer(address(0), '+str(carteira)+', _totalSupply);\n\t}\n\n')
 	arq.write('\tmodifier onlyOwner {\n\t\trequire(msg.sender == owner);\n\t\t_;\n\t}\n\n')
 	arq.write('\tfunction transferOwnership(address _newOwner) public onlyOwner {\n\t\tnewOwner = _newOwner;\n\t}\n\n')
 	arq.write('\tfunction acceptOwnership() public {\n\t\trequire(msg.sender == newOwner);\n\t\temit OwnershipTransferred(owner, newOwner);\n\t\towner = newOwner;\n\t\tnewOwner = address(0);\n\t}\n\n')

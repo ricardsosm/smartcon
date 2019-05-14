@@ -5,10 +5,10 @@ from .decorators import permition_conrequired, permition_tokenrequired
 from cliente.models import Cliente
 from .models import Contrato, ContratActions,ContratToken
 from carteira.models import Carteira, CarteiraToken
-from .forms import ContratoNovoForm, EditarContrato,MostrarContrato,PublicarContrato,DistribuirToken
+from .forms import ContratoNovoForm, EditarContrato,MostrarContrato,PublicarContrato,DistribuirToken,PagamentoToken
 from itertools import chain 
 from .arquivo import Token, Apaga, GravaAbi
-from .fabrica import Fabrica, EnviarToken
+from .fabrica import Fabrica, EnviarToken,TransferirEther
 from web3 import Web3, HTTPProvider
 from eth_account import Account
 from django.conf import settings
@@ -303,4 +303,21 @@ def contrato_distribuir(request,pk):
 		'carteira': carteira
 		#'cliente':cliente
 	}	
+	return render(request, template_name, context)
+
+@login_required
+def contrato_pagamento(request):
+
+	template_name = 'contrato_pagamento.html'
+	cliente = Cliente.objects.filter(id_usuario = request.user.id)
+	carteira = []
+	for cli in cliente:
+		carteira = list(chain(carteira, Carteira.objects.all().filter(id_cliente = cli.id)))
+
+	form = PagamentoToken(user=request.user.id)	
+	context = {
+		'form':form,
+		'cliente': cliente,
+		'carteira': carteira
+	}
 	return render(request, template_name, context)

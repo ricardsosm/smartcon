@@ -76,3 +76,26 @@ class DistribuirToken(forms.ModelForm):
 	class Meta:
 		model = ContratActions
 		fields = ['to_address']
+
+class PagamentoToken(forms.ModelForm):
+
+	name = forms.CharField(label='Nome',widget=forms.TextInput(attrs={'size':'40'}))
+	solidity_version = forms.CharField(widget=forms.HiddenInput(),label='')
+	solidity_version.widget.attrs.update({'value':'>=0.4.25 <0.6.0'})  
+	id_carteira = forms.CharField(widget=forms.HiddenInput(),label='')
+	tipo = forms.IntegerField(widget=forms.HiddenInput(),label='')
+	tipo.widget.attrs.update({'value':'1'}) 
+
+	class Meta:
+		model = Contrato
+		fields = ['id_carteira','name','id_cliente','solidity_version','tipo']
+
+	def __init__(self, *args, **kwargs):
+		user = kwargs.pop('user','')
+		super(PagamentoToken, self).__init__(*args, **kwargs)
+		clientes = Cliente.objects.filter(id_usuario=user)
+		self.fields['id_cliente']=forms.ModelChoiceField(
+			label='Cliente',
+			queryset=clientes ,
+			widget=forms.Select(attrs={'onchange':'javascript:vercli(this);'})
+		)
