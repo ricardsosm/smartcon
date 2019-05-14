@@ -88,3 +88,26 @@ class EnviarToken(Contra):
       return self.address
     except Exception as e:
       return e
+
+class TransferirEther(Contra):
+
+  def __init__(self,address,key,val,to_add):
+
+    address = Web3.toChecksumAddress(address)
+    to_add = web3.toChecksumAddress(to_add)  
+    transaction = {
+      'to':to_add,
+      'value':val,
+      'gas': 2728712,
+      'gasPrice': self.w3.toWei('41', 'gwei'),
+      'nonce':self.w3.eth.getTransactionCount(address),
+      'chainId':3
+    }
+    self.signed = Account.signTransaction(transaction, key)
+
+  def enviar(self):
+    try:
+      self.address_h = self.w3.eth.sendRawTransaction(self.signed.rawTransaction)
+      return self.address_h
+    except Exception as e:
+      return e
