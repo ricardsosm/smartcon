@@ -63,8 +63,9 @@
             </a>
           </div>
           <div class="col " >
-            <a href="{% url 'con:contrato_pagamento' %}">
-              <div class="modelscon account-wall">2 Pagamento<br>
+            <a href="{% url 'con:contrato_pagtoken' %}">
+              <div class="modelscon account-wall">
+                2 Transferência de Token<br>
                 <img width="150" height="155"  src="{% static 'img/peso-ether.png' %}" >
                 <p>Transfira sua moeda virtual atravez deste contrato para quem você quizer</p>
               </div>
@@ -74,8 +75,12 @@
             </a>
           </div> 
           <div class="col" >
-            <a href="{% url 'con:contrato' %}">
-              <div class="modelscon account-wall">3 </div>
+            <a href="{% url 'con:contrato_pagamento' %}">
+              <div class="modelscon account-wall">
+                3 Pagamento<br>
+                <img width="150" height="155"  src="{% static 'img/peso-ether.png' %}" >
+                <p>Faça pagamentos em Ether para quem você quizer</p>
+              </div>
             </a>
             <a href="{% url 'con:contrato' %}">
               <div class="modelscon account-wall">6</div>

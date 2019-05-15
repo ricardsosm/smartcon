@@ -69,7 +69,7 @@ class DistribuirToken(forms.ModelForm):
 
 	to_address = forms.CharField(
 		label='Carteira',
-		min_length = 57,
+		min_length = 42,
 		widget=forms.TextInput(attrs={'size':'57'})
 	)
 
@@ -84,7 +84,7 @@ class PagamentoToken(forms.ModelForm):
 	solidity_version.widget.attrs.update({'value':'>=0.4.25 <0.6.0'})  
 	id_carteira = forms.CharField(widget=forms.HiddenInput(),label='')
 	tipo = forms.IntegerField(widget=forms.HiddenInput(),label='')
-	tipo.widget.attrs.update({'value':'1'}) 
+	tipo.widget.attrs.update({'value':'4'}) 
 
 	class Meta:
 		model = Contrato

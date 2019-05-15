@@ -91,10 +91,10 @@ class EnviarToken(Contra):
 
 class TransferirEther(Contra):
 
-  def __init__(self,address,key,val,to_add):
-
-    address = Web3.toChecksumAddress(address)
-    to_add = web3.toChecksumAddress(to_add)  
+  def __init__(self,address,key,valor,to_add):
+    val = int(valor)
+    address = self.w3.toChecksumAddress(address)
+    to_add = self.w3.toChecksumAddress(to_add)  
     transaction = {
       'to':to_add,
       'value':val,
