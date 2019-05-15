@@ -17,36 +17,43 @@ Visual studio >= 2014
 - Django 2.1
 - Maria db 10.1
 
-# Instalando o MariaDB
+
+## Instalando o MariaDB
 ```
 apt-get install mariadb-server
+```
 
-# Instalando o virtualenv
+## Instalando o virtualenv
 ```
 sudo pip install virtualenv
 ou
 curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | bash
 
 ```
-# Criando o ambiente virtual
+## Criando o ambiente virtual
 ```
 pyenv install 3.7.1 
 pyenv virtualenv 3.7.1 smart 
 pyenv activate smart
 ```
-# Instalando Django 2.1
+## Instalando Django 2.1
 ```
 pip install django==2.1
 ```
-# Instalando mysqlclient
+## Instalando mysqlclient
 ```
 pip install mysqlclient
 ```
-# Instalando web3.py
+## Instalando web3.py
 ```
 pip install web3 
 pip install eth_account
 pip install py-solc
 python -m solc.install v0.4.25
 ```
-# baixe o projeto
+## Instalando o Compilador Solc
+```
+sudo apt-get install snapd
+sudo snap install solc 
+```
+## baixe o projeto

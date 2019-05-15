@@ -314,10 +314,75 @@ def contrato_pagamento(request):
 	for cli in cliente:
 		carteira = list(chain(carteira, Carteira.objects.all().filter(id_cliente = cli.id)))
 
-	form = PagamentoToken(user=request.user.id)	
+	if request.method == 'POST':
+		form = PagamentoToken(request.POST,user=request.user.id)
+		cart = request.POST.get("id_carteira")
+		destino = request.POST.get("carteira")
+		carte = Carteira.objects.get(pk=cart)
+		valor = request.POST.get("valor")
+		try:
+			transfer = TransferirEther(carte.public_key,carte.private_key,valor,destino)
+			numcontrato = transfer.enviar()
+		except:
+			messages.success(request,"A Carteira do Tomador não é válida",extra_tags='text-danger')
+			return redirect('con:contrato_pagamento')
+		contratonum = Web3.toHex(numcontrato)
+		if form.is_valid():
+			form.instance.hash_address = contratonum
+			form.instance.ativo = True
+			form.save()
+
+		return redirect('con:valrecibo',form.instance.id)
+	else:
+		form = PagamentoToken(user=request.user.id)
+		
 	context = {
 		'form':form,
 		'cliente': cliente,
 		'carteira': carteira
+	}
+	return render(request, template_name, context)
+
+@login_required
+def contrato_pagtoken(request):
+	template_name = 'contrato_pagamento_token.html'
+	token = []
+	contrato = Contrato.objects.filter(id_cliente = request.user.id)
+	for cont in contrato:
+		token = list(chain(token, ContratToken.objects.all().filter(id_contrato = cont.id)))
+
+	cliente = Cliente.objects.filter(id_usuario = request.user.id)
+	carteira = []
+	for cli in cliente:
+		carteira = list(chain(carteira, Carteira.objects.all().filter(id_cliente = cli.id)))
+
+	if request.method == 'POST':
+		form = DistribuirToken(request.POST)
+		id_token = request.POST.get("token")
+		token = ContratToken.objects.get(id = id_token)
+		print(token.id_contrato.id)
+		contrato = Contrato.objects.get(id = token.id_contrato.id)
+		carteira = Carteira.objects.get(id = contrato.id_carteira)
+		if form.is_valid():
+			valor = request.POST.get("valor")
+			to_address = request.POST.get("to_address")
+			try:
+				dist = EnviarToken(contrato.contract_address,contrato.abi,carteira.private_key,valor,to_address)
+				tkdist = dist.enviar()
+			except Exception as e:
+				messages.success(request,"Token não diponivel",extra_tags='text-danger')
+				return redirect('con:contrato_pagtoken')				
+			contrato.hash_address = Web3.toHex(tkdist)
+			contrato.ativo = False
+			contrato.save()		
+			return redirect('con:valrecibo',contrato.id)
+	else:
+		form = DistribuirToken()
+		
+	context = {
+		'form':form,
+		'cliente': cliente,
+		'carteira': carteira,
+		'token':token
 	}
 	return render(request, template_name, context)

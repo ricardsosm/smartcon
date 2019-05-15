@@ -17,4 +17,6 @@ urlpatterns = [
 	path('contrato-token/',views.contrato_token ,name='contrato_token'),
 	path('contrato-distribuir/<int:pk>',views.contrato_distribuir,name='disttoken'),
 	path('contrato-pagamento/',views.contrato_pagamento ,name='contrato_pagamento'),
+	path('contrato-pagtoken/',views.contrato_pagtoken ,name='contrato_pagtoken'),
+
 ]

@@ -8,14 +8,33 @@
                 <img src="{% static 'img/eth.png' %}">
             </div>
             <div class="col-sm-6">
-                <h1 class="text-center">Pagamentos</h1>
+                <h1 class="text-center">Transferencia de Token</h1>
             </div>
             <div class="col-sm"></div>
         </div>
-        <h2 class="text-center">Informe os dados do Pagador</h2>
+        <div>
+            <br>
+            <h2 class="text-center" style="color: black;">Escolha o Token</h2><br>
+
         <form class="form-signin text-center" method="POST">
         	{% csrf_token %}
         	<fieldset class="resset" >
+                <div class="geral_lin">
+                    <div class="car_label" >
+                        Token
+                    </div>
+                    <div class="car_field">
+                         <select  name="token" required id="id_token"> 
+                         <option value="" selected>---------</option>
+                        {% for car in token %}
+                          <option value="{{ car.id}}" >{{ car.token }}</option>
+                        {% endfor %}
+                        </select> 
+                    </div> 
+                </div>
+                <div ><br>
+                    <h2 class="text-center" style="color: black">Dados do Tomador</h2><br>
+                </div>
                 <div class="erro_login">
         		  	{{ form.non_field_errors }}
                 </div>
@@ -26,42 +45,13 @@
                     </div>
                     <div class="car_field">
         		  		{{ field }}
-                        {% if field.html_name == 'id_cliente' %}
-                    </div></div>
-                        <div class="car_label" >
-                            Carteira:
-                        </div>
-                        <div class="geral_lin">
-                            <div class="car_field">
-                             <select  name="id_car" onchange="javascript:ver();"  required id="id_car"> 
-                             <option value="" selected>---------</option>
-                            {% for car in carteira %}
-                              <option value="{{ car.id_cliente.id}}" value2="{{ car.id }}">{{ car.name }}</option>
-                            {% endfor %}
-                            </select>
-
-                        {% endif %}
-
                     </div>
                 </div>
                 <div class="erro_login">
     		  		{{ field.errors }}
                 </div>
         		  	{% endfor %}
-    		  	<div>
 
-            
-                <div >
-                    <h2 class="text-center" style="color: black">Dados do Tomador</h2>
-                </div>
-                <div class="geral_lin">
-                    <div class="car_label" >
-                        <label>Carteira</label>
-                    </div>
-                    <div class="car_field">
-                        <input type="text" name="carteira" size = "48">
-                    </div>
-                </div>
                 <div class="geral_lin">
                     <div class="car_label">
                         <label>Valor</label>
