@@ -264,7 +264,7 @@ def contrato_interar(request,pk):
 	else:
 		link = 0
 	action = ContratActions.objects.all().filter(id_contrato_id = contrato.id)
-	print(action)
+
 	template_name = 'contrato_interar.html'
 	context = {
 		'contrato': contrato,
