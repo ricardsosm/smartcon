@@ -326,13 +326,22 @@ def contrato_pagamento(request):
 		except:
 			messages.success(request,"A Carteira do Tomador não é válida",extra_tags='text-danger')
 			return redirect('con:contrato_pagamento')
-		contratonum = Web3.toHex(numcontrato)
-		if form.is_valid():
-			form.instance.hash_address = contratonum
-			form.instance.ativo = True
-			form.save()
+		g = str(numcontrato)
+		if g[0] == 'b':
+			contratonum = Web3.toHex(numcontrato)
+			if form.is_valid():
+				form.instance.hash_address = contratonum
+				form.instance.ativo = True
+				form.save()
 
-		return redirect('con:valrecibo',form.instance.id)
+			return redirect('con:valrecibo',form.instance.id)
+		else:
+			g = g.replace("\'", "\"")
+			j = json.loads(g)
+			if (j.get("code")) == -32000:
+				messages.success(request,"Voce não tem saldo suficiente",extra_tags='text-danger')
+
+
 	else:
 		form = PagamentoToken(user=request.user.id)
 		
