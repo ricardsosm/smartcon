@@ -12,10 +12,11 @@ body {
 }
 .mainbody {
     background-color: white;
-    min-height: 550px;
+    min-height: 700px;
     min-width: 200px;
     margin: 0 20 0 20;
-    padding: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     opacity: 0.93;
 }
 .mainbody img{
@@ -26,16 +27,16 @@ body {
 }
 .mr-3 {
 	  float: left;
-    max-width:200px;
-    max-height:250px;
+    max-width:250px;
+    max-height:300px;
     width: auto;
     height: auto;
 
 }
 .mr-4 {
 	float: right;
-    max-width:200px;
-    max-height:250px;
+    max-width:250px;
+    max-height:300px;
     width: auto;
     height: auto;
 }
@@ -53,6 +54,64 @@ body {
   min-width: 200px;
 	float: right;
 }
+.chain{
+  text-align: center;
+  font-size: 40px;
+  font-family: Comic Sans MS;
+}
+.chainum{
+  background-color: white;
+  background-image: url("../img/distribuido.jpg");
+  background-repeat: no-repeat;
+  background-size:contain;
+  background-position: center;
+  padding: 10px;
+  border-radius: 50%;
+  margin: 10px;
+  height: 400px;
+
+}
+.chaindois{
+  background-color: white;
+  background-image: url("../img/Blockchain.jpg");
+  background-repeat: no-repeat;
+  background-size:cover;
+  background-position: center;
+  padding: 10px;
+  border-radius: 50%;
+  height: 400px;
+  margin: 10px;
+  color: yellow;
+
+}
+
+.chaintres{
+  background-color: white;
+  background-image: url("../img/revolucao.png");
+  background-repeat: no-repeat;
+  background-size:contain;
+  background-position: center;
+  padding: 10px;
+  border-radius: 50%;
+  height: 400px;
+  margin: 10px;
+
+}
+.primeiro {
+  padding: 20px;
+
+}
+.segundo {
+  background-color: lightblue;
+  position: relative;
+  padding: 20px;
+  height: 100%;
+}
+.segundo img{
+  width: 100px;
+  height: 100px;
+}
+
 .resset {
   color: blue;
 	width: 670px;
@@ -148,7 +207,7 @@ body {
 }
 
 .justificado {
-	font-size: 22;
+	font-size: 28;
 	text-align: justify;
 }
 
