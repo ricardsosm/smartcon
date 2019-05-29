@@ -1,6 +1,6 @@
 {% extends "base.html" %} 
 {% block content %}
-<div class="row">
+<div class="row col-md-12">
     <div  class="col-md-12">
         <ul class="breadcrumb redondo">
             {% block breadcrumb %}
@@ -59,7 +59,7 @@
                           <th ></th>
                         </thead>
                         {% for cliente in clientes %} 
-                        <thead>
+                        <tbody>
                           <th><a href="{% url 'cli:cliente_mostrar' cliente.pk  %}">{{ cliente.name }}</a></th>
                           <th><input style="border:0;" type="" class="id_cpf" value="{{ cliente.cpf }}"></th>
                           <th><a href="{% url 'cli:cliente_editar' cliente.pk %}">
@@ -72,7 +72,7 @@
                         Excluir
                         </a>
                         </th>
-                        </thead>
+                        </tbody>
                         {% empty %} 
                         <thead>            
                         <th><p>Nenhum cliente encontrado</p></th>
