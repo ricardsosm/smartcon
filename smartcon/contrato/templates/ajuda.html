@@ -1,0 +1,41 @@
+{% extends "base.html" %} 
+{% load static %}
+{% block content %}
+<div class="row col-md-12 ladoe">
+<div class="justificado">
+  <ul class="list-unstyled">
+    <div class="primeiro">
+      <li class="media-um">
+        <img src="{% static 'img/mao.png' %}" class="mr-3" alt="...">
+        <div class="media-body">
+          <br /><br /><br />
+          <h1 class="d-flex justify-content-start">Smartcon</h1>
+          <p class="lead">Para o uso do Smartcon é necessário alguns passos, para que o contrato que você deseja possa satisfazer as informações mínimas nescessárias para a crição dos Smart Contracts</p>
+        </div>
+      </li>
+      <li class="media center">
+        <div class="media">
+
+        <img src="{% static 'img/clic_cliente.png' %}"class="mr-4" alt="...">
+          <p class="lead">Para o uso do Smartcon a primeira coisa a ser feito é cadastrar um Cliente, clicando no Menu Clientes, aparecerá um novo menu lateral, onde voce pode clicar em Novo Cliente</p>
+        </div>
+      </div>
+      </li>
+      <li class="media-body">
+        <img src="{% static 'img/clic_carteira.png' %}" class="mr-4" alt="...">
+        <div class="media-body">
+
+        
+        <p class="lead">Após o cadastro de um Cliente é preciso vincular uma Carteira para esse Cliente</p>
+          <p class="lead">Isso pode ser feito clicando no menu esquerdo em Gerar Carteira, onde aparecerão as chaves públicas e privadas.</p>
+          <p class="lead">OBS: caso queira usar uma Carteira já existente você pode simplesmente substituir as chaves públicas e privadas que aparecem na tela</p>
+          <p class="lead">Você pode por saldo, para testes, em sua conta no site
+            <a href="https://faucet.ropsten.be/" target="blank">https://faucet.ropsten.be</a></p>
+        </div>
+      </li>
+      </div>
+
+  </ul> 
+</div>
+</div>
+{% endblock %}

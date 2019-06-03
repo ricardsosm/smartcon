@@ -3,7 +3,6 @@ from web3 import Web3, HTTPProvider
 from django.conf import settings
 from solc import compile_source
 from eth_account import Account
-from .models import Contrato
 import string
 
 class Contra:
