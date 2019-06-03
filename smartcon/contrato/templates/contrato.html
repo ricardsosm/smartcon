@@ -1,7 +1,7 @@
 {% extends "base.html" %} 
 {% load static %}
 {% block content %}
-<div class="row col-md-12">
+<div class="row col-md-12 ladoe">
     <div class="col-md-12">
         <ul class="breadcrumb redondo">
             {% block breadcrumb %}
@@ -41,6 +41,11 @@
             <ul>
                 <li class="text-success">Ultimo IP {{ user.ip_last }}</li>
             </ul> 
+            </ul> 
+            <ul class="breadcrumb redondo"></ul>
+            <ul>
+                <li><a href="{% url 'con:ajuda' %}">Ajuda</a></li>
+            </ul>
             {% endblock %}          
         </div>
     </div>
@@ -58,7 +63,9 @@
             </a>
             <a href="{% url 'con:contrato' %}">
               <div class="modelscon account-wall">
-                4               
+                <h2 style="width:100%">4 Cartorio Digital</h2>
+                <p>Aqui voce assina um documento e ele se torna público e confivel</p>
+                               
             </div>
             </a>
           </div>

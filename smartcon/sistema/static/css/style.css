@@ -14,11 +14,12 @@ body {
     background-color: white;
     min-height: 700px;
     min-width: 200px;
-    margin: 0 20 0 0;
     padding-top: 20px;
-    padding-left: 20px;
     padding-bottom: 20px;
     opacity: 0.93;
+}
+.ladoe {
+  padding-left: 40px;
 }
 .mainbody img{
     opacity: 1;

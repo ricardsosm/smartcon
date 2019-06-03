@@ -395,3 +395,11 @@ def contrato_pagtoken(request):
 		'token':token
 	}
 	return render(request, template_name, context)
+
+def ajuda(request):
+	template_name = 'ajuda.html'
+	user = request.user
+	context = {
+		user: user
+	}
+	return render(request, template_name, context)
