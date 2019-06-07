@@ -101,6 +101,7 @@ def contrato_mostrar(request,pk):
 		'cliente':cliente,
 		'contrato':contrato,
 		'recibo': action,
+		'link':contrato.id
 	}
 
 	return render(request, template_name, context)
