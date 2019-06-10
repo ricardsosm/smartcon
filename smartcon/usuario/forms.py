@@ -26,6 +26,7 @@ class PasswordResetForm(forms.Form):
 		subject = 'Criar nova senha'
 		context = {
 			'reset': reset,
+			'user':user,
 		}
 		send_mail_template(subject,template_name,context,[user.email])
 
