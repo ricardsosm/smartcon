@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="container">
+<div class="container content-login">
     <div class="account-wall col">
         <h2 class="text-center">Informe seus dados</h2>
         <form class="form-signin text-center" method="POST">
@@ -11,20 +11,20 @@
         		  	{{ form.non_field_errors }}
                 </div>
         		  	{% for field in form %}
-        		<dir class="geral_lin">
-                    <div class="geral_label" >
+        		<div class="geral_lin">
+                    <div class="geral_label_log" >
     		  	      {{ field.label_tag }}
                     </div>
-                    <div class="geral_field">
+                    <div class="geral_field_log">
     		  		  {{ field }}
                     </div>
-                </dir>
-                <div class="erro_login">
+                </div>
+                 {% endfor %}
+                <div class="erro_login geral_lin">
         		  	  {{ field.errors }}
-                </div>	
-        		  	{% endfor %}
+                </div>     		  	
     		  	<div class="login">
-                    <br>
+           
     		  		<button onclick="Enviar()" class="btn btn-lg btn-secondary">
     		  			Cadastrar
     		  		</button>
