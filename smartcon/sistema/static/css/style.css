@@ -1,5 +1,5 @@
 @charset "UTF-8";
-
+/* Personal css */
 body {
     background-image: url("../img/contract.jpg");
     background-position: center;
@@ -13,10 +13,13 @@ body {
 .mainbody {
     background-color: white;
     min-height: 700px;
-    min-width: 200px;
+    min-width: 740px;
     padding-top: 20px;
     padding-bottom: 20px;
     opacity: 0.93;
+}
+.footer{
+    min-width: 740px;
 }
 .ladoe {
   padding-left: 40px;
@@ -141,6 +144,12 @@ body {
   font-size: 20px;
   height: 60px;
 }
+.login{
+
+  margin: 0 auto 0 auto;
+  width: 20px;
+  width: 250px;
+}
 .login button{
 
 	width: 120px;
@@ -156,18 +165,12 @@ body {
     width: 120px;
     float: left;
 }
-.geral_lin{
-    
-    margin: 0 auto;   
-    height: 34px;
-}
-.geral_edit_lin{
-   
+.geral_lin{  
     margin: 0 auto;   
     height: 40px;
 }
+
 .geral_field{
- 
     float: right;
     text-align: left;
     width: 64%;
@@ -178,6 +181,19 @@ body {
     text-align:right;
     float: left;
     width: 36%;
+}
+
+.geral_field_log{
+    float: right;
+    text-align: left;
+    width: 60%;
+}
+.geral_label_log{
+
+    padding-right:10px;
+    text-align:right;
+    float: left;
+    width: 40%;
 }
 .car_field{
 
@@ -219,7 +235,10 @@ body {
     padding:0;
 	text-align: center;
 }
-/* Personal css */
+
+.minimo-login{
+  min-width: 240px;
+}
 .form-signin
 {   
     max-width: 710px;
@@ -357,7 +376,7 @@ body {
 .modelscon{
   border-radius: 10px;
   font-size: 23px;
-  height: 330px;
+  height: 100%;
   width: 100%;
   padding: 5px;
 }

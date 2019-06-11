@@ -6,31 +6,33 @@
           <div class="col-sm-4"></div>
           <div class="col-sm-4 col-md-4 col-md-offset-6 content-login">
             
-            <div class="account-wall col">
-              <h2 class="text-center">Smartcon</h2>
-              <form class="form-signin text-center" method="POST">
-              	{% csrf_token %}
-                <div class="erro_login">
-         		  	{{ form.non_field_errors }}
-              </div>
-         		  	{% for field in form %}                 
-                <div class="form-group"> 
-                  {{ field.label_tag}}<br />
-                  {{ field }}
-                  {{ field.errors }}
+            <div class="account-wall col minimo-login">
+              
+                <h2 class="text-center">Smartcon</h2>
+                <form class="form-signin text-center" method="POST">
+                	{% csrf_token %}
+                  <div class="erro_login">
+           		  	{{ form.non_field_errors }}
                 </div>
-           		  	{% endfor %}
-                  <div class="text-center login">
-          		  		<button type="" class="btn btn-lg btn-secondary">
-          		  			Entrar
-          		  		</button>   
+           		  	{% for field in form %}                 
+                  <div class="form-group"> 
+                    {{ field.label_tag}}<br />
+                    {{ field }}
+                    {{ field.errors }}
                   </div>
-                <p>
-                  <a href="{% url 'sis:registrar' %}">Cadastre-se</a>
-                <br>
-                  <a href="{% url 'usuario:nova_senha' %}">Nova Senha</a>
-                </p>
-              </form> 
+             		  	{% endfor %}
+                    <div class="text-center login">
+            		  		<button type="" class="btn btn-lg btn-secondary">
+            		  			Entrar
+            		  		</button>   
+                    </div>
+                  <p>
+                    <a href="{% url 'sis:registrar' %}">Cadastre-se</a>
+                  <br>
+                    <a href="{% url 'usuario:nova_senha' %}">Nova Senha</a>
+                  </p>
+                </form> 
+             
             </div>
           </div>
       </div>  
