@@ -367,14 +367,13 @@ def contrato_pagtoken(request):
 	for cont in contrato:
 		token = list(chain(token, ContratToken.objects.all().filter(id_contrato = cont.id)))
 
-
 	if request.method == 'POST':
 		form = DistribuirToken(request.POST)
 		id_token = request.POST.get("token")
-		token = ContratToken.objects.get(id = id_token)
-		print(token.id_contrato.id)
-		contrato = Contrato.objects.get(id = token.id_contrato.id)
+		tokening = ContratToken.objects.get(id = id_token)
+		contrato = Contrato.objects.get(id = tokening.id_contrato.id)
 		carteira = Carteira.objects.get(id = contrato.id_carteira)
+
 		if form.is_valid():
 			valor = request.POST.get("valor")
 			to_address = request.POST.get("to_address")
@@ -388,6 +387,7 @@ def contrato_pagtoken(request):
 			contrato.ativo = False
 			contrato.save()		
 			return redirect('con:valrecibo',contrato.id)
+
 	else:
 		form = DistribuirToken()
 		
