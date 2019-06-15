@@ -357,14 +357,16 @@ def contrato_pagamento(request):
 def contrato_pagtoken(request):
 	template_name = 'contrato_pagamento_token.html'
 	token = []
-	contrato = Contrato.objects.filter(id_cliente = request.user.id)
+	contrato = []
+	carteira = []
+	cliente = Cliente.objects.filter(id_usuario = request.user.id)
+	for cli in cliente:
+		contrato = list(chain(contrato, Contrato.objects.all().filter(id_cliente = cli.id)))
+		carteira = list(chain(carteira, Carteira.objects.all().filter(id_cliente = cli.id)))
+
 	for cont in contrato:
 		token = list(chain(token, ContratToken.objects.all().filter(id_contrato = cont.id)))
 
-	cliente = Cliente.objects.filter(id_usuario = request.user.id)
-	carteira = []
-	for cli in cliente:
-		carteira = list(chain(carteira, Carteira.objects.all().filter(id_cliente = cli.id)))
 
 	if request.method == 'POST':
 		form = DistribuirToken(request.POST)
