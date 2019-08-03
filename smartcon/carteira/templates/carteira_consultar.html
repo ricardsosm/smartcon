@@ -1,0 +1,28 @@
+{% extends "cliente.html" %}
+
+{% block dash_content %}
+<div class="inner">
+   <h2>Carteira pra conuslta</h2>
+    <form class="" method="POST">
+        {% csrf_token %}
+        <input name="pescart" size="45" type=""></th>
+      
+        <button method="POST" class="btn btn-primary">Consultar</button>
+    </form>
+        <div class="well">          
+          <table class="table">
+            <thead class="thead-light"> 
+              <th ></th>
+              <th ></th>
+              <th ></th>
+              <th ></th>
+              <th ></th>
+              <th ></th>
+            </thead>
+            <thead>
+              <th >Saldo: </th><th ><input type="text" name="saldo" value="{{ bal }}" size="42" readonly="true"></th>
+            </thead>
+          </table>                     
+       </div>
+</div>         
+{% endblock %}

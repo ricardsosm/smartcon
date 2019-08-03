@@ -11,5 +11,6 @@ urlpatterns = [
 	path('cliente-carteira-mostrar/<int:pk>',views.carteira_amostra,name='carteira_amostra'),
 	path('cliente-token-novo/<int:tk>',views.token_novo ,name='token_novo'),
 	path('cliente-token-apagar/<int:pk>',views.token_apagar ,name='token_apagar'),
+	path('cliente-consulta/',views.consultar ,name='consultar'),
 
 ]

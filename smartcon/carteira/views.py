@@ -132,3 +132,21 @@ def token_apagar(request,pk):
 	carteira.delete()
 	messages.success(request,"Token apagada com sucesso",extra_tags='text-success')
 	return redirect('car:carteira')
+
+@login_required
+def consultar(request):
+	template_name = 'carteira_consultar.html'
+	context = {}
+	if request.method == 'POST':
+		pesquisa = request.POST.get("pescart")
+		w3 = Web3(HTTPProvider(settings.PROVEDOR))
+		try:
+			bal = w3.eth.getBalance(pesquisa)
+		except Exception as e:
+			messages.success(request,e,extra_tags='text-danger')
+			return redirect('car:consultar')
+
+		print(bal)
+		context['bal'] = saldo_token(str(bal),18)
+		return render(request, template_name, context)	
+	return render(request, template_name, context)
