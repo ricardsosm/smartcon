@@ -21,10 +21,15 @@ def register(request):
 	template_name = 'register.html'
 	if request.method == 'POST':
 		form = RegisterForm(request.POST)
+
 		if form.is_valid():
 			form.save()
 			messages.success(request,"Codastro realizado com sucesso",extra_tags='text-success')
 			return redirect(settings.LOGIN_URL)
+		else:
+			messages.success(request,form.errors,extra_tags='text-danger')
+			print (form.errors) 
+			return redirect('sis:registrar')
 	else:
 		form = RegisterForm()		
 	context = {

@@ -151,5 +151,5 @@ EMAIL_HOST_PASSWORD = 'ricardo2402'
 EMAIL_PORT = 587
 
 #configuração do provedor Blockchain
-
-PROVEDOR = 'https://ropsten.infura.io/v3/5b15a8a0ea6f4ba28356608cbac65c35'
+PROVEDOR = 'https://mainnet.infura.io/v3/8b513449d98a49f6a0564206842b672f'
+#PROVEDOR = 'https://ropsten.infura.io/v3/5b15a8a0ea6f4ba28356608cbac65c35'
